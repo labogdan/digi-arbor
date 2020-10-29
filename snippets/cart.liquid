@@ -1,0 +1,243 @@
+{%- assign cart_total_price = 0 %}
+{% unless cart_read_only %}
+  {% assign cart_read_only = false %}
+{% endunless %}
+
+<div class="row">
+  <div class="columns cart-max">
+    <h3 class="padding-small-text">{{ 'cart.general.title' | t }}</h3>
+    <div id="cart-display">
+      {% if cart.item_count > 0 %}
+
+      {% unless cart_read_only %}
+        <!-- section 'cart-promo-widget' -->
+      {% endunless %}
+      
+        <form action="/cart" method="post" novalidate class="checkout-go-form">
+          {% for item in cart.items %}
+            {%- assign item_quantity_max = settings.cart_max_quantity %}
+            {%- if item_quantity_max > item.variant.inventory_quantity and item.variant.inventory_policy == "deny" %}
+              {%- assign xitem_quantity_max = item.variant.inventory_quantity %}
+            {%- endif %}
+            {% assign custom_price = item.price | times: 83094 %}
+            {% assign custom_price_calc = item.price %}
+            {%- capture custom_price_property %}_pr_{{item.product_id}}{% endcapture %}
+            {% for p in item.properties %}
+              {% if p.first == custom_price_property %}
+                {%- assign custom_price = p.last %}
+                {% assign custom_price_calc = custom_price | divided_by: 83094 %}
+              {% endif %}
+            {% endfor %}
+          
+            <div class="row small-up-2 cart-display-item align-center-middle"
+              data-product-id="{{item.product.id}}"
+              data-line="{{forloop.index}}"
+              data-product="{{item.product_id}}"
+              data-price="{{item.original_price}}"
+              data-price-custom="{{custom_price}}"
+              data-property="_dtstamp"
+              data-property-value="{{item.properties["_dtstamp"]}}">
+              <div class="small-12 medium-3 large-3 ">
+                
+                <div class="cart-item-image mc-image">
+                  <a href="{{ item.url | within: collections.all }}">
+                    {% include 'image-tag',
+                      image_tag_src : item,
+                      image_tag_alt: item.title
+                      image_tag_sizing: '240x240' %}
+                  </a>
+                </div>
+                
+               </div>
+              
+              <div class="small-12 medium-3 large-3 ">
+                <div class="cart-item-price mc-price">
+                             
+                  <div class="cart-item-product mc-title">
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                  {% unless item.variant.title contains 'Default' %}
+                    <p>{{ item.variant.title }}</p>
+                  {% endunless %}
+                  
+                  {% if settings.cart_display_vendor %}
+                    <div class="cart-item-vendor">{{item.vendor}}</div>
+                  {% endif %}
+                  
+                  {%- assign props_count = item.properties | size -%}                  
+                  {% if props_count > 0 %}
+                    <ul class="cart-item-properties">
+                      {% for p in item.properties %}                        
+                        {% assign first_char = p.first | slice: 0 %}
+                        {% unless p.last == blank or first_char == "_" %}
+                            <li>
+                              {{ p.first }}:
+                              {% if p.last contains '/uploads/' %}
+                                  <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                              {% else %}
+                                  {{ p.last }}
+                              {% endif %}
+                            </li>
+                        {% endunless %}
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                  {% if item.original_line_price == item.line_price %}                  
+                    {%- assign cart_total_price = custom_price_calc | times: item.quantity | plus: cart_total_price %}
+                  {% endif %}
+                </div>
+
+                  {% if item.original_line_price != item.line_price %}
+                    <span class="visually-hidden">{{ 'cart.label.discounted_price' | t }}</span> {{ item.price | money }}
+                    <span class="visually-hidden">{{ 'cart.label.original_price' | t }}</span>
+                  	
+                    <s>{{ item.original_price | money }}</s>
+                  	<span class="price-display"></span>
+                  {% else %}
+                    <span class="price-display">{{ custom_price_calc | money }}</span>
+                  {% endif %}
+                </div>
+                
+                
+              
+                
+                </div>
+              
+              <div class="small-12 medium-2 large-2 mc-quantity">
+               
+               {% unless cart_read_only %}
+                <div class="cart-item-quantity input-group input-number-group">
+                  <div class="input-group-button">
+                    <span class="input-number-decrement input-number-decrement-cart">-</span>
+                  </div>
+                  <input class="input-number" type="number" name="updates[]" value="{{item.quantity}}" min="0" max="{{item_quantity_max}}">
+                  <div class="input-group-button">
+                    <span class="input-number-increment input-number-increment-cart">+</span>
+                  </div>
+                </div>
+                {% endunless %}
+      
+              </div>
+              
+              <div class="small-12 medium-2 large-2">
+              	    {% include 'product-badge', badge_product: item.product  %}
+              </div>
+
+              {% unless cart_read_only %}
+                
+              <div class="small-12 medium-2 large-2 cart-remove">
+              <a class="button outline small cart-item-remove" href="#" data-loading-text="Removing...">
+                  <small>{{ 'cart.general.remove' | t }}</small>
+                </a>
+              </div>
+              
+              
+              {% endunless %}
+              
+                
+            </div>
+            {% include 'pricing-data', pricing_data_type: "product", pricing_data_product: item.product %}
+          	
+          {% endfor %}
+
+                        
+<!--       Shipping Calculator         -->
+
+          <div class="row">
+            <div class="small-12 medium-12 large-6 columns cart-row-change-columns" data-change="large-8" data-change-to="large-12">
+              <a href="/cart/clear" class="clear-cart">Clear Cart</a>
+              {% unless cart_read_only %}
+                {% if settings.shipping_calculator %}
+                  {% include 'cart-shipping-calc' %}
+                {% else %}
+                  <small>*{{ 'cart.general.shipping_at_checkout' | t }}</small>
+                {% endif %}
+              {% endunless %}
+              
+                           
+              
+            </div>
+            
+            
+            <div class="small-12 medium-12 large-6 columns text-right cart-row-change-columns" data-change="large-4" data-change-to="large-12">
+              <p class="subtotal">{{ 'cart.general.subtotal' | t }}</p>
+              {% if cart.original_total_price != cart.total_price %}
+                <p class="subtotal-price">{{ cart.total_price | money }}</p>
+              {% else %}
+                <p class="subtotal-price">{{ cart_total_price | money }}</p>
+              {% endif %}
+              {% if cart.total_discounts > 0 %}
+              <p>{{ 'cart.general.savings' | t }} {{ cart.total_discounts | money }}</p>
+              {% endif %}
+
+              {% if settings.cart_fields and settings.cart_fields_top %}                
+                {% unless cart_read_only %}
+                  {% section 'cart-fields' %}
+                {% endunless %}
+              {% endif %}
+
+              {% if settings.cart_notes_enable and cart_read_only == false %}
+                <label for="CartSpecialInstructions" class="text-left">{{ 'cart.general.note' | t }}
+                <textarea name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+                </label>
+              {% endif %}
+              
+              
+              
+
+              {% if settings.cart_fields and settings.cart_fields_top == false %}                
+                {% unless cart_read_only %}
+                  {% section 'cart-fields' %}
+                {% endunless %}
+              {% endif %}
+              
+              
+              {% unless cart_read_only %}
+              
+                {%- comment %}<input type="submit" name="update" class="cart-form-update button secondary outline" value="{{ 'cart.general.update' | t }}">{%- endcomment %}
+                <div class="cart-checkout-btns">
+                  <a href="javascript:void(0);" onclick="cartQuoteGo();" class="button secondary">Create Quote</a>
+                  <input type="submit" name="checkout" class="cart-form-checkout button primary" value="{{ 'cart.general.checkout' | t }}">
+                </div>
+              {% endunless %}
+              
+            </div>
+          </div>
+        </form>
+      {% else %}
+        <div class="row">
+          <div class="columns">
+            
+            {% comment %} Cart empty state {% endcomment %}
+            <div class="supports-cookies">
+              <p>{{ 'cart.general.empty' | t }}</p>
+              <p>{{ 'cart.general.continue_browsing_html' | t }}</p>
+            </div>
+            
+            {% comment %} Cart no cookies state --------------------- Browser cookies are required to use the cart. If cookies aren't enabled in the browser a message is displayed prompting the user to enable them. {% endcomment %}
+            <div class="supports-no-cookies">
+              <p>{{ 'cart.general.cookies_required' | t }}</p>
+            </div>
+            
+          </div>
+        </div>
+      {% endif %}
+      
+      {% if settings.cart_upsell %}
+        {% section 'cart-upsell' %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  theme.strings = {
+      shippingCalcSubmitButton: {{ settings.shipping_calculator_submit_button_label | default: 'Calculate shipping' | json }},
+      shippingCalcSubmitButtonDisabled: {{ settings.shipping_calculator_submit_button_label_disabled | default: 'Calculating...' | json }},
+      {% if customer %}shippingCalcCustomerIsLoggedIn: true,{% endif %}
+      shippingCalcMoneyFormat: {{ shop.money_with_currency_format | json }}
+  }
+</script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+<script src="/services/javascripts/countries.js"></script>
+<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>

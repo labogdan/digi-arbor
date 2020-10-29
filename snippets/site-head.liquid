@@ -1,0 +1,85 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Disables auto-zoom on input fields on mobile devices * NEED TO DOUBLE CHECK TO SEE IF THIS DISABLES THE STANDARD PINCH ZOOM FUNCTIONALITY --> 
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0"/>
+<meta name="theme-color" content="{{ settings.color_primary }}">
+<link rel="canonical" href="{{ canonical_url }}">
+{%- if settings.logo_shortcut != blank -%}
+  <link rel="shortcut icon" href="{{ settings.logo_shortcut | img_url: '32x32' }}" type="image/png">
+{%- endif -%}
+{%- capture seo_title %}
+  {{ page_title }} 
+  {%- if current_tags -%}
+    {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}
+  {%- endif -%}
+  {%- if current_page != 1 -%}
+    &ndash; {{ 'general.meta.page' | t: page: current_page }}
+  {%- endif -%}
+  {%- unless page_title contains shop.name -%}
+    &ndash; {{ shop.name }}
+  {%- endunless -%}
+{% endcapture %}
+<title>{{ seo_title | strip | strip_newlines }}</title>
+
+{%- if page_description %}
+  <meta name="description" content="{{ page_description | escape }}">
+{%- endif %}
+
+{%- include 'social-meta-tags' %}
+{%- include 'style-tags', layout: 'theme' %}
+{%- include 'css-variables' %}
+
+
+<script
+src="https://code.jquery.com/jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+
+  window.theme = {
+    strings: {
+      addToCart: {{ 'products.product.add_to_cart' | t | json }},
+      soldOut: {{ 'products.product.sold_out' | t | json }},
+      unavailable: {{ 'products.product.unavailable' | t | json }}
+    },
+    currency: "{{ shop.currency }}",
+    money_with_currency_format: {{ shop.money_with_currency_format | strip_html | json }},
+    moneyFormat: {{ shop.money_format | json }},
+    customer: {
+      id: "{{customer.id}}",
+      tags: [
+        {% for ctag in customer.tags %}"{{ctag}}"{% unless forloop.last %},{% endunless %}{% endfor %}
+      ]
+    },
+    shopSettings: {
+      cart_ribbon_delay: {{settings.cart_ribbon_delay}},
+      cart_type: "{{settings.cart_type}}",
+      mobile_width_max: {{settings.display_breakpoint_medium}},
+      tablet_width_max: {{settings.display_breakpoint_large}},
+      mobile_display: (window.innerWidth < {{settings.display_breakpoint_medium}}),
+      admin_bar: {{settings.admin_bar}},
+      currency_format: '{{ settings.currency_format | default: 'money_with_currency_format' }}',
+      default_currency: '{{ settings.default_currency | default: shop.currency }}',
+      show_multiple_currencies: {{ settings.show_multiple_currencies }},
+      quote_app_url: "https://gs-arbor.herokuapp.com/quotes/new",
+      xquote_app_url: "https://localarbor.com/quotes/new"
+    }
+    {% if settings.pricing_rules %}
+    ,pSettings: {
+      fetched: false,
+      global: {rules: []},
+      products: {}
+    }
+    {% endif %}    
+  };
+</script>
+
+{% if settings.show_multiple_currencies %}
+  {{ "//cdn.shopify.com/s/javascripts/currencies.js" | script_tag }}
+{% endif %}
+
+{%- include 'script-tags', layout: 'theme' %}
+
+<script type="text/javascript" src="{{'customer.js' | asset_url}}" defer="defer"></script>

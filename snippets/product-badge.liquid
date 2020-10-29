@@ -1,0 +1,42 @@
+{% if section.settings.badge_bis_field and section.settings.badge_bis_field != "" %}
+    {% assign bis_parts = section.settings.badge_bis_field | split: "." %}
+    {% assign bis_ns = bis_parts[0] %}
+    {% assign bis_ns_replace = bis_ns | append: "." %}
+    {% assign bis_key = section.settings.badge_bis_field | replace: bis_ns_replace, "" %}
+    {% assign bis_date = badge_product.metafields[bis_ns][bis_key] %}
+    {% if bis_date and bis_date != blank %}
+        {% assign bis_date = bis_date | date: "%D" %}
+    {% endif %}    
+{% else %}
+	{% assign bis_parts = 'arbor.ExpectedInStockDate' | split: "." %}
+    {% assign bis_ns = bis_parts[0] %}
+    {% assign bis_ns_replace = bis_ns | append: "." %}
+    {% assign bis_key = 'arbor.ExpectedInStockDate' | replace: bis_ns_replace, "" %}
+    {% assign bis_date = badge_product.metafields[bis_ns][bis_key] %}
+    {% if bis_date and bis_date != blank %}
+        {% assign bis_date = bis_date | date: "%D" %}
+    {% endif %}    
+{% endif %}
+<div class="product-badge-wrapper">
+    {% if badge_product.available == false %} 
+  		<span class="badge outofstock">Sold Out</span>{% if bis_date %}<div class="restock_date">{{ 'products.product.restock_date' | t }}: {{bis_date}}</div>{% endif %}
+    {% elsif badge_product.compare_at_price_min > badge_product.price_min and badge_product.available %}        
+        <span class="badge onsale">On Sale</span>    
+    {% elsif badge_product.tags contains "data--badge:best-seller" %}        
+        <span class="badge bestseller">Best Seller</span>    
+    {% elsif badge_product.tags contains "data--badge:coming-soon" %}        
+        <span class="badge comingsoon">Coming Soon</span>    
+    {% elsif badge_product.tags contains "data--badge:preorder" %}        
+        <span class="badge preorder">Pre Order</span>
+    {% elsif bis_date and badge_product.selected_or_first_available_variant.inventory_policy == "continue" and badge_product.selected_or_first_available_variant.inventory_quantity <= 0 %}        
+	    <span class="badge outofstock">Sold Out</span>{% if bis_date %}<div class="restock_date">{{ 'products.product.restock_date' | t }}: {{bis_date}}</div>{% endif %}
+  		<p class="outofstock-text">Item can be ordered</p>
+  	{% elsif badge_product.available %}
+  		{% if badge_product.selected_or_first_available_variant.inventory_quantity > 0 %}
+  		<div class="pdp-badge instock">In Stock</div>
+  		{% else %}
+			<span class="badge outofstock">Sold Out</span>{% if bis_date %}<div class="restock_date">{{ 'products.product.restock_date' | t }}: {{bis_date}}</div>{% endif %}
+  			<p class="outofstock-text">Item can be ordered</p>
+  		{% endif %}
+    {% endif %}
+</div>

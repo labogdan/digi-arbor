@@ -1,0 +1,65 @@
+{% layout none %}{% paginate collection.products by 10000 %}
+[
+{% for product in collection.products%}
+{% if forloop.index > 1%},{% endif %}
+{
+"id": {{product.id}},
+"handle": "{{product.handle}}",
+"price" :"{{product.price}}",
+"rules" : [
+    {
+        "type": "none",
+        "quantity_min": "0",
+        "percentage": 0,
+        "dollars": 0
+    }
+    {% for mf in product.metafields.pricing %}
+        {% assign key_parts = mf.first | split : "-" %}
+        {% assign val_parts = mf.last | split : "-" %}
+        {% if customer and customer.tags contains key_parts[0] %}
+        ,{
+            "type": "customer",
+            "quantity_min": "{{key_parts[1]}}",
+            "percentage": {% if val_parts[0] == "percent" %}{{val_parts[1]}}{% else %}0{% endif %},
+            "dollars": {% if val_parts[0] == "dollar" %}{{val_parts[1]}}{% else %}0{% endif %}
+        }
+        {% endif %}
+    {% endfor %}
+],
+"variants": [
+{% for i in (0..99) %}
+{% assign iplus = i | plus: 1 %}
+{% assign this_var = product.variants[i] %}
+{% if product.variants.size < iplus %}{% break %}{% endif %}
+{% if forloop.index > 1%},{% endif %}
+{
+"id":{{this_var.id}},
+"sku":"{{this_var.sku}}",
+"price":"{{this_var.price}}",
+"rules" : [
+    {
+        "type": "none",
+        "quantity_min": "0",
+        "percentage": 0,
+        "dollars": 0
+    }
+    {% for mf in this_var.metafields.pricing %}
+        {% assign key_parts = mf.first | split : "-" %}
+        {% assign val_parts = mf.last | split : "-" %}
+        {% if customer and customer.tags contains key_parts[0] %}
+        ,{
+            "type": "customer",
+            "quantity_min": "{{key_parts[1]}}",
+            "percentage": {% if val_parts[0] == "percent" %}{{val_parts[1]}}{% else %}0{% endif %},
+            "dollars": {% if val_parts[0] == "dollar" %}{{val_parts[1]}}{% else %}0{% endif %}
+        }
+        {% endif %}
+    {% endfor %}
+]
+}
+{% endfor %}
+]
+}
+{% endfor %}
+]
+{% endpaginate %}

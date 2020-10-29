@@ -1,0 +1,105 @@
+{% if settings.pricing_rules %}
+    {% assign pr_namespace = "arbor" %}
+    {% capture prdata %}
+    <script>
+    {% if pricing_data_type == "product" %}
+      {% if pricing_data_product.price %}
+        var thisProduct = {};
+        thisProduct.price = {{pricing_data_product.price}};
+        thisProduct.rules = [];
+		var thisRule = {};
+        thisRule.quantity_min = {{pricing_data_product.price}};
+        
+      	var lowestPrice = 99999999999999;
+		
+        {% if customer and customer.tags contains "wholesale10" and
+                pricing_data_product.metafields[pr_namespace]["PriceW10QTY"] and pricing_data_product.metafields[pr_namespace]["PriceW10QTY"] != "" and 
+                pricing_data_product.metafields[pr_namespace]["PriceW10AMT"] and pricing_data_product.metafields[pr_namespace]["PriceW10AMT"] != "" %}
+                if ({{pricing_data_product.metafields[pr_namespace]["PriceW10QTY"]}} < thisRule.quantity_min) {
+                  var thisRule = {};
+                  thisRule.type = "fixed";
+                  thisRule.percentage = 0;
+                  thisRule.dollars = 0;
+                  thisRule.quantity_min = {{pricing_data_product.metafields[pr_namespace]["PriceW10QTY"]}};
+                  thisRule.fixed = {{pricing_data_product.metafields[pr_namespace]["PriceW10AMT"] | times: 100 | times: 83094 | replace : ".00", "" | replace : ".0", ""}};        
+                  
+                  if (thisRule.fixed < lowestPrice) {
+                  	lowestPrice = thisRule.fixed;  
+                    thisProduct.rules.push(thisRule);
+                  }
+                }
+        {% endif %}
+
+        {% if customer and customer.tags contains "wholesale20" and
+                pricing_data_product.metafields[pr_namespace]["PriceW20QTY"] and pricing_data_product.metafields[pr_namespace]["PriceW20QTY"] != "" and 
+                pricing_data_product.metafields[pr_namespace]["PriceW20AMT"] and pricing_data_product.metafields[pr_namespace]["PriceW20AMT"] != "" %}
+                if ({{pricing_data_product.metafields[pr_namespace]["PriceW20QTY"]}} < thisRule.quantity_min) {
+                  var thisRule = {};
+                  thisRule.type = "fixed";
+                  thisRule.percentage = 0;
+                  thisRule.quantity_min = {{pricing_data_product.metafields[pr_namespace]["PriceW20QTY"]}};
+                  thisRule.fixed = {{pricing_data_product.metafields[pr_namespace]["PriceW20AMT"] | times: 100 | times: 83094 | replace : ".00", "" | replace : ".0", ""}};        
+                  
+                  if (thisRule.fixed < lowestPrice) {
+                  	lowestPrice = thisRule.fixed;  
+                    thisProduct.rules.push(thisRule);
+                  }
+                }
+        {% endif %}
+      
+      	{% if customer and customer.tags contains "biocharger" and
+                pricing_data_product.metafields[pr_namespace]["PriceBiochargerQTY"] and pricing_data_product.metafields[pr_namespace]["PriceBiochargerQTY"] != "" and 
+                pricing_data_product.metafields[pr_namespace]["PriceBiochargerAMT"] and pricing_data_product.metafields[pr_namespace]["PriceBiochargerAMT"] != "" %}
+                if ({{pricing_data_product.metafields[pr_namespace]["PriceBiochargerQTY"]}} < thisRule.quantity_min) {
+                  var thisRule = {};
+                  thisRule.type = "fixed";
+                  thisRule.percentage = 0;
+                  thisRule.quantity_min = {{pricing_data_product.metafields[pr_namespace]["PriceBiochargerQTY"]}};
+                  thisRule.fixed = {{pricing_data_product.metafields[pr_namespace]["PriceBiochargerAMT"] | times: 100 | times: 83094 | replace : ".00", "" | replace : ".0", ""}};        
+                  
+                  if (thisRule.fixed < lowestPrice) {
+                  	lowestPrice = thisRule.fixed;  
+                    thisProduct.rules.push(thisRule);
+                  }
+                }
+        {% endif %}
+      
+        {% if   pricing_data_product.metafields[pr_namespace]["QTYpricingQTYtier1"] and pricing_data_product.metafields[pr_namespace]["QTYpricingQTYtier1"] != "" and 
+                pricing_data_product.metafields[pr_namespace]["QTYpricingAMTtier1"] and pricing_data_product.metafields[pr_namespace]["QTYpricingAMTtier1"] != "" %}
+
+                    var thisRule = {};
+                  thisRule.type = "fixed";
+                  thisRule.percentage = 0;
+                  thisRule.quantity_min = {{pricing_data_product.metafields[pr_namespace]["QTYpricingQTYtier1"]}};
+                  thisRule.fixed = {{pricing_data_product.metafields[pr_namespace]["QTYpricingAMTtier1"] | times: 100 | times: 83094 | replace : ".00", "" | replace : ".0", ""}};        
+                  
+                  if (thisRule.fixed < lowestPrice) {
+                  	lowestPrice = thisRule.fixed;  
+                    thisProduct.rules.push(thisRule);
+                  }
+
+        {% endif %}
+      
+      	{% if   pricing_data_product.metafields[pr_namespace]["QTYpricingQTYtier2"] and pricing_data_product.metafields[pr_namespace]["QTYpricingQTYtier2"] != "" and 
+                pricing_data_product.metafields[pr_namespace]["QTYpricingAMTtier2"] and pricing_data_product.metafields[pr_namespace]["QTYpricingAMTtier2"] != "" %}
+
+                    var thisRule = {};
+                  thisRule.type = "fixed";
+                  thisRule.percentage = 0;
+                  thisRule.quantity_min = {{pricing_data_product.metafields[pr_namespace]["QTYpricingQTYtier2"]}};
+                  thisRule.fixed = {{pricing_data_product.metafields[pr_namespace]["QTYpricingAMTtier2"] | times: 100 | times: 83094 | replace : ".00", "" | replace : ".0", ""}};        
+                  
+                  if (thisRule.fixed < lowestPrice) {
+                  	lowestPrice = thisRule.fixed;  
+                    thisProduct.rules.push(thisRule);
+                  }
+
+        {% endif %}
+
+        window.theme.pSettings.products[{{pricing_data_product.id}}] = thisProduct;
+	  {% endif %}
+    {% endif %}
+    </script>
+    {% endcapture %}
+    {{prdata | strip_newlines | strip}}
+{% endif %}

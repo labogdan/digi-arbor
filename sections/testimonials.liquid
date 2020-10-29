@@ -1,0 +1,307 @@
+{% comment %}
+- Testimonials section
+- Each block is a message
+- Slick Slider here
+{% endcomment %}
+
+{% assign default = '1400x' %}
+{% assign size1 = '480x' %}
+{% assign size2 = '765x' %}
+{% assign size3 = '900x' %}
+{% assign size4 = '1000x' %}
+{% assign size5 = '1100x' %}
+{% assign size6 = '1300x' %}
+{% assign size7 = '1500x' %}
+{% assign size8 = '1700x' %}
+{% assign size9 = '1900x' %}
+{% assign size10 = '2000x' %}
+
+{% if section.blocks.size > 0 %}
+    <div class="row" data-section-type="dyno" id="testimonials-{{section.id}}" data-section-id="{{section.id}}">
+        <div
+            class="dyno-slider"
+            data-slider-arrows="{{section.settings.arrows}}"
+            data-slider-dots="{{section.settings.dots}}"
+            data-slider-infinite="{{section.settings.infinite}}"
+            data-slider-slides-to-show="{{section.settings.slides_to_show}}"
+            data-slider-slides-to-show-small="{{section.settings.slides_to_show_small}}"
+            data-slider-slides-to-show-medium="{{section.settings.slides_to_show_medium}}"
+            data-slider-slides-to-scroll="{{section.settings.slides_to_scroll}}"
+            data-slider-autoplay="{{section.settings.slider_autoplay}}"
+            data-slider-autoplay-secs="{{section.settings.slider_autoplay_secs}}">
+            {% for block in section.blocks %}
+              {% include 'section-tile' tile_settings: block.settings, section_type: "testimonials", is_block: true, in_slider: true %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "class": "section-testimonials",
+  "settings": [    
+    {
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "Show Navigation Arrows?",
+        "default":true
+    },
+    {
+        "type": "checkbox",
+        "id": "dots",
+        "label": "Show Navigation Dots?"
+    },
+    {
+        "type": "checkbox",
+        "id": "infinite",
+        "label": "Infinite Scrolling?"
+    },
+    {
+        "type": "number",
+        "id": "slides_to_show",
+        "label": "Slides To Show",
+        "default": 1
+    },
+    {
+        "type": "number",
+        "id": "slides_to_show_small",
+        "label": "Slides To Show On Mobile",
+        "default": 1
+    },
+    {
+        "type": "number",
+        "id": "slides_to_show_medium",
+        "label": "Slides To Show On Tablet",
+        "default": 2
+    },
+    {
+        "type": "number",
+        "id": "slides_to_scroll",
+        "label": "Slides To Scroll",
+        "default":1
+    },
+    {
+        "type": "checkbox",
+        "id": "slider_autoplay",
+        "label": "Auto Play",
+        "default":false
+    },   
+    {
+      "type": "range",
+      "id": "slider_autoplay_secs",
+      "label": "Change slides every",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 6,
+      "unit": "sec"        
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+            "type": "header",
+            "content": "Background Settings"
+        },
+        {
+            "type": "image_picker",
+            "id": "bgimage",
+            "label": "Background Image"
+        },
+        {
+            "type": "select",
+            "id": "image_position",
+            "label": "Background Image Position",
+            "default": "background",
+            "options": [
+                {
+                "value": "background",
+                "label": "Background"
+                },
+                {
+                "value": "inline",
+                "label": "Inline"
+                }
+            ],
+            "info":"Use 'Inline' for better performance and height determined by image vs 'Background' for better quality and height determined by content."
+        },
+        {
+            "type": "color",
+            "id": "bgcolor",
+            "label": "Background Color",
+            "default": "#EEEEEE"              
+        },
+        {
+            "type": "range",
+            "id": "opacity",
+            "label": "Background Transparency",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30,
+            "unit": "%"        
+        },   
+        {
+            "type": "header",
+            "content": "Testimonial Content"          
+        },
+        {
+            "type": "text",
+            "id": "preheader",
+            "label": "Testimonial Title"          
+        },        
+        {
+            "type": "html",
+            "id": "content",
+            "label": "Testiomnial Content",
+            "default": "Lorem ipsum..."
+        },
+        {
+          "type": "text",
+          "id": "source_name",
+          "label": "Source name"
+        },
+        {
+          "type": "text",
+          "id": "source_company",
+          "label": "Source company"
+        },
+        {
+          "type": "url",
+          "id": "source_link",
+          "label": "Source Company link"
+        },        
+        {
+            "type": "header",
+            "content": "Display Settings"          
+        },        
+        {
+            "type": "select",
+            "id": "height",
+            "label": "Height",
+            "default": "height-small",
+            "options": [
+                {
+                    "value": "height-small",
+                    "label": "Small"
+                },
+                {
+                    "value": "height-medium",
+                    "label": "Medium"
+                },
+                {
+                    "value": "height-large",
+                    "label": "Large"
+                }
+            ]
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Text Color"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Text Size",                
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 1
+        }, 
+        {
+            "type": "select",
+            "id": "text_align",
+            "label": "Text alignment",
+            "default":"text-center",
+            "options": [
+                {
+                    "value": "text-left",
+                    "label": "Left"
+                },
+                {
+                    "value": "text-center",
+                    "label": "Center"
+                },
+                {
+                    "value": "text-right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "text_position",
+            "label": "Text position",
+            "default":"content-center-center",
+            "options": [
+                {
+                    "value": "content-top-left",
+                    "label": "Top Left"
+                },
+                {
+                    "value": "content-top-center",
+                    "label": "Top Center"
+                },
+                {
+                    "value": "content-top-right",
+                    "label": "Top Right"
+                },
+                {
+                    "value": "content-center-left",
+                    "label": "Center Left"
+                },
+                {
+                    "value": "content-center-center",
+                    "label": "Center Center"
+                },
+                {
+                    "value": "content-center-right",
+                    "label": "Center Right"
+                },
+                {
+                    "value": "content-bottom-left",
+                    "label": "Bottom Left"
+                },
+                {
+                    "value": "content-bottom-center",
+                    "label": "Bottom Center"
+                },
+                {
+                    "value": "content-bottom-right",
+                    "label": "Bottom Right"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "id": "classes",
+            "label": "CSS Classes",
+            "info": "Advanced"
+        }        
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "category": "Text",
+      "blocks": [
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

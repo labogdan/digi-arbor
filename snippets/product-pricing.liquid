@@ -1,0 +1,33 @@
+{% comment %}
+- Centralized logic for displaying a product item's price
+{% endcomment %}
+
+{% unless add2Cart %}
+    {% assign add2Cart = false %}
+{% endunless %}
+
+{% comment %}special input field to be populated by pricing rules{% endcomment %}
+<input type="hidden" data-property="_pr_{{price_product.id}}" class="qo-property pr-property pr-property-{{price_product.id}}" id="pr-property-{{price_product.id}}" name="properties[_pr_{{price_product.id}}]" disabled>
+
+<p class="prod-price" data-product-id="{{price_product.id}}">
+    {% if price_data.compare_at_price > price_data.price %}
+        {% if price_product.price_varies %}
+            {%- capture sale_price %}<span class="{% unless grid_prduct.tags contains "price-static" %}price-display{% endunless %}">{{ price_data.price | money}}</span>{% endcapture %}
+            {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+        {% else %}
+            {{ 'products.product.on_sale' | t }}
+            <span class="{% unless price_product.tags contains "price-static" %}price-display{% endunless %}">{{ price_data.price | money }}</span>
+        {% endif %}
+    {% else %}
+        {% if price_product.price_varies and add2Cart == false %}
+            {%- capture price %}<span class="{% unless price_product.tags contains "price-static" %}price-display{% endunless %}">{{ price_data.price | money}}</span>{% endcapture %}
+            {{ 'products.product.from_text_html' | t: price: price }}
+        {% else %}
+            <span class="{% unless price_product.tags contains "price-static" %}price-display{% endunless %}">{% if grid_variant %}{{grid_variant.price | money}}{% else %}{{ price_product.selected_or_first_available_variant.price | money }}{% endif %}</span>
+        {% endif %}
+    {% endif %}
+    {% if price_data.compare_at_price > price_data.price %}
+        <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+        <s class="{% unless price_product.tags contains "price-static" %}price-display{% endunless %}">{{ price_data.compare_at_price | money }}</s>
+    {% endif %}    
+</p>

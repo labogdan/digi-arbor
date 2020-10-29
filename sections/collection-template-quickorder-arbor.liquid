@@ -1,0 +1,381 @@
+{% include 'content-transformations', content_transform: collection.description %}
+{% if template.name == "collection" and template contains "unpack_0" %}
+  {% assign unpack_option = 0 %}
+{% elsif template.name == "collection" and template contains "unpack_1" %}
+  {% assign unpack_option = 1 %}
+{% elsif template.name == "collection" and template contains "unpack_2" %}
+  {% assign unpack_option = 2 %}
+{% elsif template.name == "collection" and template contains "unpack_3" %}
+  {% assign unpack_option = 3 %}
+{% else %}
+  {% assign unpack_option = section.settings.unpack | plus: 0 %}
+{% endif %}
+
+{% include 'opacity-inverse', transparency: section.settings.banner_opacity %}
+
+
+<div class="row" data-section-id="{{ section.id }}" data-section-type="collection">
+  
+  <div class="large-9 ts small-12 columns text-left" style="margin: 0 auto;">
+    <h1>{{collection.title}}</h1>    
+    <p>{{long_content}}</p>
+  </div>
+  <div class="small-12 qu-wrap {{section.settings.collection_canvas_classes}} columns {%- if settings.nxt_clent_id != blank %}nxt-content{% endif %}">
+  
+    
+    <div class="row quickorder-container">
+
+      {% comment %} Product Items Header {% endcomment %}
+      	<div class="columns blueboy small-3 xsmall-0 medium-3 text-center">
+          SEARCH
+        </div>
+       <div class="columns blueboy small-2 medium-2 xsmall-0">
+          PHOTO
+        </div> 
+        <div class="columns blueboy small-5 medium-3">
+          PRODUCT
+        </div>        
+        <div class="columns blueboy small-4 medium-2">
+          QTY
+        </div>
+      	<div class="columns blueboy small-3 medium-2">
+          PRICE
+        </div>
+
+      <div class="small-12 large-12">
+        <div class="qo-product-items"></div>
+        <div class="row quickorder">
+          <div class="small-10 medium-4" style="padding-left:5px;margin-top:10px;"> 
+            <form action="/" onsubmit="return qo_select_first_search();">
+              <input type="search" id="quick-order-search" placeholder="Enter Product Name or Item #" />
+            </form>
+          </div>
+        </div>
+      </div>            
+
+      {% comment %} Footer CTA {% endcomment %}
+      <div class="columns qo-select-go-all qo-populated medium-10 small-8">
+        <button class="button primary full-width" type="submit" name="add" data-loading-text="{{ 'products.product.add_to_cart_loading' | t }}" data-add-to-cart {% if section.settings.ajax %}data-ajax{% endif %}>
+          {{ 'products.product.add_to_cart' | t }} / quote
+        </button>
+      </div>     
+      <div class="columns qo-reset qo-populated medium-2">
+        <button class="button secondary full-width" type="button" name="add">Reset</button>
+      </div>
+
+    </div>
+        
+    <hr>
+	<div class="row">
+      <div class="small-12 large-4"> 
+        <a style="float:right;" href="{{'quick-order.csv' | file_url}}">Download Sample CSV</a>
+        <h5>Upload:</h5>
+        <span class="dropzone-loading" style="display:none;color:red;">Processing...</span>
+        <form action="https://gs-arbor.herokuapp.com/products/skus" class="dropzone" id="asset-dropzone">
+          <span class="dz-message"><strong>Drop File Here</strong> or <strong>Click to Upload</strong></span>
+          <div class="fallback">                          
+            <input name="file" type="file" />
+          </div>		
+        </form>        
+      </div>
+    </div>
+    
+  </div>  
+  
+</div>
+  
+{% schema %}
+  {
+    "name": "Collection Pages",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Banner Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "display_banner",
+        "label": "Display Banner",
+        "default": true
+      },
+      {
+          "type": "image_picker",
+          "id": "banner_image",
+          "label": "Default Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "display_title",
+        "label": "Display Collection Title",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "display_title_img",
+        "label": "Display Collection Title On Banner",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "display_description",
+        "label": "Display Collection Description",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "display_description_img",
+        "label": "Display Collection Description On Banner",
+        "default": true
+      }, 
+      {
+          "type": "color",
+          "id": "banner_bgcolor",
+          "label": "Overlay Color",
+          "default": "#EEEEEE"              
+      },
+      {
+          "type": "range",
+          "id": "banner_opacity",
+          "label": "Overlay Color Transparency",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30,
+          "unit": "%"        
+      },
+      {
+        "type": "select",
+        "id": "height",
+        "label": "Height",
+        "default": "height-small",
+        "options": [
+        {
+            "value": "height-small",
+            "label": "Small"
+        },
+        {
+            "value": "height-medium",
+            "label": "Medium"
+        },
+        {
+            "value": "height-large",
+            "label": "Large"
+        }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "banner_color",
+        "label": "Text Color"
+      },
+      {
+        "type": "range",
+        "id": "banner_text_size",
+        "label": "Text Size",                
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "default": 1
+      }, 
+      {
+        "type": "select",
+        "id": "banner_text_align",
+        "label": "Text alignment",
+        "default":"text-center",
+        "options": [
+        {
+            "value": "text-left",
+            "label": "Left"
+        },
+        {
+            "value": "text-center",
+            "label": "Center"
+        },
+        {
+            "value": "text-right",
+            "label": "Right"
+        }
+        ]
+      },
+      {
+      "type": "select",
+      "id": "banner_text_position",
+      "label": "Text position",
+      "default":"content-center-center",
+      "options": [
+          {
+              "value": "content-top-left",
+              "label": "Top Left"
+          },
+          {
+              "value": "content-top-center",
+              "label": "Top Center"
+          },
+          {
+              "value": "content-top-right",
+              "label": "Top Right"
+          },
+          {
+              "value": "content-center-left",
+              "label": "Center Left"
+          },
+          {
+              "value": "content-center-center",
+              "label": "Center Center"
+          },
+          {
+              "value": "content-center-right",
+              "label": "Center Right"
+          },
+          {
+              "value": "content-bottom-left",
+              "label": "Bottom Left"
+          },
+          {
+              "value": "content-bottom-center",
+              "label": "Bottom Center"
+          },
+          {
+              "value": "content-bottom-right",
+              "label": "Bottom Right"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Breadcrumb Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_breadcrumbs",
+        "label": "Enable Breadcrumbs",
+        "default": true
+      },
+      {
+        "type": "link_list",
+        "id": "breadcrumbs_search_list",
+        "label": "Breadcrumb Collection List",
+        "info": "Try and build more levels of breadcrumbs by searching through this navigation list."
+      },
+      {
+        "type": "header",
+        "content": "Cart Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "display_quantity",
+        "label": "Display Quantity Selectors",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_direct",
+        "label": "Add Immediately To Cart",
+        "info":"The alternative is to assemble a list of SKU's to add to then add all at once.",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Product Display Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_display_badge",
+        "label": "Display Product Badge",
+        "default": true
+      },      
+      {
+        "type": "checkbox",
+        "id": "quick_view",
+        "label": "Enable Quick View",
+        "default": true
+      },                  
+      {
+        "type": "number",
+        "id": "product_count",
+        "label": "Products Per Page",
+        "default": 50
+      },   
+      {
+        "type": "header",
+        "content": "Variant Unpacking Options"
+      },
+      {
+        "type": "select",
+        "id": "unpack",
+        "label": "Variants Unpacking Based On",
+        "default": "0",
+        "info": "If a 'collection.unpack_X' template is selected, that X will determine the setting for this. e.g. 'collection.unpack_2.liquid'",
+        "options": [
+          {
+            "value": "0",
+            "label": "Do Not Unpack"
+          },
+          {
+            "value": "1",
+            "label": "Option 1"
+          },
+          {
+            "value": "2",
+            "label": "Option 2"
+          },
+          {
+            "value": "3",
+            "label": "Option 3"
+          }        
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "unpack_hide_unavailable",
+        "label": "Hide unavailable unpacked variants"
+      },
+      {
+        "type": "header",
+        "content": "Sorting Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "sorting",
+        "label": "Enable Sorting",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sorting_featured",
+        "label": "Featured",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sorting_best_selling",
+        "label": "Best Selling",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sorting_az",
+        "label": "Alphabetical",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sorting_price",
+        "label": "Price",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sorting_date",
+        "label": "Date",
+        "default": true
+      },      
+      {
+        "type": "textarea",
+        "id": "collection_canvas_classes",
+        "label": "Collection Area Classes",
+        "default": "small-12 medium-9 large-9"
+      }
+    ]
+  }
+{% endschema %}

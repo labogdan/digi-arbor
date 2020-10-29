@@ -1,0 +1,8 @@
+{% render 'shogun-products', content: page %}
+{% include 'shogun-products', content: page %}
+{% if page.handle == "X" %}
+    {% section 'page-template-custom-X' %}
+{% else %}
+    {% section 'page-template-custom' %}
+{% endif %}
+

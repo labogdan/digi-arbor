@@ -1,0 +1,39 @@
+{% assign file_extension = 'png' %}
+
+{% for option in product_item.options %}
+{% assign downcased_option = option | downcase %}
+
+  {% assign option_index = forloop.index0 %}
+  {% assign values = '' %}
+  <div class="product-item-swatches" data-product-item-swatches>
+    <div class="option_title">{{ option }}</div>
+    {% for variant in product_item.variants %}
+      {% assign value = variant.options[option_index] %}
+      {% assign this_grid_image = variant.featured_image %}
+      {% unless values contains value %}
+        {% assign values = values | join: ',' %}
+        {% assign values = values | append: ',' | append: value %}
+        {% assign values = values | split: ',' %}
+        <div class="swatch {% if forloop.index0 == 0 %}active{% endif %}" data-swatch-name="meta-{{ downcased_option }}_{{ value | replace: ' ', '_' | downcase }}" data-option-index="{{ forloop.index0 }}" data-value="{{ value }}" data-variant-id="{{ variant.id }}" data-variant-link="{{ variant.url | within: collection }}" data-available="{{ variant.available }}" data-product-image="{{ product_item.featured_image | product_img_url: '1024x' }}">
+          <span {% if section.settings.products_per_row == 2 %}
+                  data-image="{{ this_grid_image | product_img_url: '600x' }}"
+                {% elsif section.settings.products_per_row == 3 %}
+                  data-image="{{ this_grid_image | product_img_url: '500x' }}"
+                {% else %}
+                  data-image="{{ this_grid_image | product_img_url: '1024x' }}"
+                {% endif %}
+                {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+                class="color"
+                style="background-image: url({{ value | handle | append: '.' | append: file_extension | asset_img_url: '50x' | prepend: 'https:' }}); background-color: {{ value | split: ' ' | first | handle }};"
+                {% endif %}>
+                {% unless downcased_option contains 'color' or downcased_option contains 'colour' %}
+                  {{ value }}
+                {% endunless %}
+            </span>
+        </div>
+      {% endunless %}
+    {% endfor %}
+  
+  </div>
+
+{% endfor %}

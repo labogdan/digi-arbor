@@ -1,0 +1,769 @@
+/*
+This is where client/customer specific code goes. We should try as hard as possible to only modify this file.
+This file can accept liquid varaibles.
+*/
+
+(function() {
+  
+  /* PDP Video Thumb/Player */
+  $(".pdp-show").click(function() {
+    $("#pdp-video").show();
+    $("[data-product-featured-image]").hide();
+    $(".zoomImg").css('visibility', 'hidden');
+  });  
+  $(".image-thumb-gallery [data-product-single-thumbnail]").click(function() {
+    $("#pdp-video").hide();
+    $("[data-product-featured-image]").show();
+    $(".zoomImg").css('visibility', 'visible');
+  });
+  
+  // The recommended way from within the init configuration:
+  if($("#asset-dropzone").length > 0)
+  {
+    Dropzone.options.assetDropzone = {
+      paramName: "file", // The name that will be used to transfer the file
+      maxFilesize: 5, // MB,
+      autoProcessQueue:true,
+      createImageThumbnails: false,
+      timeout: null,      
+      init: function() {
+        this.on("processing", function() {
+          $(".dropzone-loading").show();
+        });   
+        this.on("error", function() {
+          $(".dropzone-loading").hide();
+          this.removeAllFiles();
+          swal("SKU Upload","Sorry, we experienced an error reading that file. Please try again or choose a different file.","error");
+        }); 
+        this.on("queuecomplete", function() {
+          this.removeAllFiles();
+          $(".dropzone-loading").hide();
+        });
+        this.on("success", function(file,resp,event) {
+          if(resp.success) {
+            quickOrderPopulate(resp.skus);
+          }
+          else {
+            swal("SKU Upload","Sorry, we experienced an error reading that file. Please try again or choose a different file.","error");
+          }
+        });
+        
+        thisDropZone = this;
+        
+      }
+    };
+       
+    window.setTimeout(quickOrderQuickSearch,2000);
+    
+    /* New QuickOrder Actions */
+    $("body").on("click", ".qo-remove", function(e) {
+      e.preventDefault();
+      $(this).closest(".product-item-wrapper").remove();
+      if($(".quickorder-container .product-item-wrapper").length == 0) {
+        $(".quickorder-container .qo-populated").hide();
+      }
+    });
+    
+    $("body").on("click", ".qo-reset", function(e) {
+      $(".product-item-wrapper").remove();
+      $(".quickorder-container .qo-populated").hide();
+    });
+  }
+  
+  /* Cart Quantity Pricing Fix */
+  cartSkusMerge();
+  
+})();
+
+function qo_select_first_search() {
+  
+  $("div.nxt-ac-item-custom").first().click();
+  return false;
+}
+
+function R(t, e, a, o) {
+  var n, i = t,
+      u = 83094 * t;
+  if (e = void 0 === e ? 0 : e, t == i && a.products.hasOwnProperty(e) && a.products[e].rules.length > 0) {
+      var c = !0,
+          m = !1,
+          s = void 0;
+      try {
+          for (var d, l = a.products[e].rules[Symbol.iterator](); !(c = (d = l.next()).done); c = !0) o >= (w = d.value).quantity_min && (w.percentage > 0 && (n = i * ((100 - w.percentage) / 100)), w.dollars > 0 && (n = i - 100 * w.dollars), w.fixed > 0 && (n = w.fixed), n < u && (t = n / 83094))
+      } catch (t) {
+          m = !0, s = t
+      } finally {
+          try {
+              !c && l.return && l.return()
+          } finally {
+              if (m) throw s
+          }
+      }
+  }
+  if (t == i && a.global.rules.length > 1) {
+      var f = !0,
+          _ = !1,
+          p = void 0;
+      try {
+          for (var y, h = a.global.rules[Symbol.iterator](); !(f = (y = h.next()).done); f = !0) {
+              var w;
+              (w = y.value).percentage > 0 && (t *= (100 - w.percentage) / 100), w.dollars > 0 && (t -= 100 * w.dollars)
+          }
+      } catch (t) {
+          _ = !0, p = t
+      } finally {
+          try {
+              !f && h.return && h.return()
+          } finally {
+              if (_) throw p
+          }
+      }
+  }
+  return t < 0 && (t = 0), e > 0 && $(".pr-property-" + e).length > 0 && $(".pr-property-" + e).val(83094 * t).prop("disabled", !(t < i)), t
+}
+
+function A(t) {
+  /* karla */
+
+  if ($(".price-display", t).length > 0) {
+      var e = function(t) {
+              return "$" + (t / 100).toFixed(2).toLocaleString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          },
+          a = function(a) {
+              $(".price-display").each(function() {
+                  var o = void 0 !== $(this).attr("data-price-orig") ? parseFloat($(this).attr("data-price-orig")) / 100 : parseFloat($(this).text().replace("$", "").replace(",", ""));
+                  if (!o) return !0;
+                  var n = 100 * o,
+                      i = $(this).attr("data-product-id");
+
+                  void 0 === i && (i = $(this).closest("[data-product-id]").attr("data-product-id"));
+                  
+                  var parent = $(this).closest('[data-product-id]').attr('data-product-id');
+                  var qlog = 0;
+                  $('[data-product-id="' + parent + '"] .product-item-quantity').each(function() {
+                    qlog = qlog + parseInt($(this).val());
+                  });
+                           
+                  var u = $(".product-item-quantity", t).length > 0 ? qlog : 0,
+                      c = R(n, i, a, u);
+                  if (c != n || $(this).hasClass("price-touched")) {
+                      if ("strikethrough" == a.global.settings.display_type && ($(".price-display-full", $(this).parent()).remove(), c != n)) {
+                          var m = $("<s>", {
+                              class: "price-display-full"
+                          }).append($("<div>", {
+                              text: e(n)
+                          }));
+                          $(this).parent().prepend(m)
+                      }$(this).text(e(c)).addClass("price-altered").addClass("price-touched"), void 0 === $(this).attr("data-price-orig") && $(this).attr("data-price-orig", n)
+                  }
+              })
+          };
+
+      $("#pricing-rules").length > 0 && function() {
+          if (window.theme.pSettings.fetched) return a(window.theme.pSettings);
+          $.ajax({
+              type: "GET",
+              url: "/?view=pricing_rules",
+              success: function(t) {
+                  window.theme.pSettings.fetched = !0, window.theme.pSettings.global = JSON.parse(t), a(window.theme.pSettings)
+              }
+          })
+      }()
+  } 
+}
+
+function quickOrderQuickSearch() {
+  $("div.nxt-ac-main").last().attr('id','quick-order-quick-results');
+  $('#quick-order-quick-results').on('DOMNodeInserted DOMNodeRemoved', function() {
+    $('#quick-order-quick-results .nxt-ac-item').removeClass('nxt-ac-item').addClass('nxt-ac-item-custom');
+  });
+  $("body").on("click","div.nxt-ac-item-custom", function(e) {
+    let prodUrl = $(this).find("span[data-url]").data('url');
+    prodUrl = prodUrl.replace("arbor-scientific.myshopify.com", "www.arborsci.com"); 
+    $.ajax({
+      type: "GET",
+      url: prodUrl + '?view=quickorder',
+      success: function(resp) {
+        $(".quickorder-container .qo-product-items").append(resp);
+        $(".quickorder-container .qo-populated").show();
+        $(".quickorder-container .qo-remove").show();
+        GS.init_product_items();
+        $('#quick-order-quick-results').hide();
+        $("#quick-order-search").val("");
+        A('[data-product-wrapper]');
+      }
+    });
+  });
+  
+
+  /*
+  console.log($("div.nxt-ac-main").length);
+  
+  $("div.nxt-ac-main").last().off("click");
+  $("body").on("click","div.nxt-ac-main", function(e) {
+    e.preventDefault();   
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    console.log('dingding');
+    return false;
+  });
+  $("div.nxt-ac-main").on("click",function(e) {
+    e.preventDefault();      
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    console.log('clicky');
+    $("div.nxt-ac-main").off("click");
+    $("div.nxt-ac-main").last().off("click");
+    $("div.nxt-ac-item").last().off("click");
+    $("div.nxt-ac-item").off("click");
+    return false;
+  });
+  $("div.nxt-ac-item").on("click",function(e) {
+    e.preventDefault();      
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    console.log('clicky2');
+    return false;
+  });
+  $("body").on("click","div.nxt-ac-item", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    console.log('xxhello');
+    $(this).off("click");
+  	$(".div.nxt-ac-main").off("click");
+    return false;
+  });*/
+  
+  
+  
+}
+
+function cartSkusMerge() {
+  
+  $(".cart-form-checkout").hide();
+  $.ajax({
+    type: "GET",
+    url: '/cart.js',
+    async: false,
+    dataType: 'json',
+    success: function(cart)
+    {
+      let cartSkus = {}, dupSkus = [], line = 0, items = cart.items.reverse(), newItems = [], priceCheck, cartChanged = false;
+      for(ci of items) {
+        if (ci.title.includes("Gift Card") == false) {
+        line++;
+      	thisSku = ci.sku;
+        if(!(thisSku in cartSkus)) {
+          cartSkus[thisSku] = {
+            "qty":0,
+            "count":0,
+            "line":0
+          };
+        }
+        cartSkus[thisSku].qty += ci.quantity;
+        cartSkus[thisSku].count++;
+        if(cartSkus[thisSku].line == 0) {
+          cartSkus[thisSku].line = line;
+        }
+        if(cartSkus[thisSku].count > 1)
+          dupSkus.push(thisSku);
+          
+        }
+      }
+            
+      line = 0
+      for(ci of items) {
+        line++;
+        if(dupSkus.indexOf(ci.sku) >= 0) {
+          cartChanged = true;
+          if ((ci.sku in cartSkus) && cartSkus[ci.sku].line != line) {
+          	continue;
+          }
+        }
+        
+        if (ci.sku in cartSkus)
+        {
+          priceCheck = GS.price_evaluate(ci.price,ci.product_id,window.theme.pSettings,cartSkus[ci.sku].qty);          
+          if(ci.price != priceCheck)
+          {
+            price_prop = "_pr_" + ci.product_id;
+            if(!(price_prop in ci.properties) || ci.properties[price_prop] != (priceCheck*83094)) {              
+              ci.properties[price_prop] = priceCheck*83094;
+              cartChanged = true;
+            }
+          }
+
+          newItems.push({"id": ci.variant_id, "properties": ci.properties, "quantity": cartSkus[ci.sku].qty, "title":ci.title});
+        }
+                
+      }
+      
+      //ok the cart does not need to change and we have our items queued. clear the cart.
+      if(cartChanged) {
+        console.log(newItems);
+        $.ajax({
+          type: "GET",
+          url: '/cart/clear.js',
+          dataType: 'json',
+          success: function() {
+            GS.AddToCartBulk(newItems, function() {$(".cart-form-checkout").show();});
+          }
+        });
+      }
+      else {
+        $(".cart-form-checkout").show();
+      }
+    }
+  });
+  
+  
+  /*
+  var removals = 0, changed_lines = 0;
+  for(cart_sku of window.theme.shopSettings.cart_dup_skus) {
+    for(var i in window.theme.shopSettings.cart_skus[cart_sku].lines) {
+      let new_line = window.theme.shopSettings.cart_skus[cart_sku].lines[i] - removals;
+      if(i == (window.theme.shopSettings.cart_skus[cart_sku].lines.length-1)) {                
+        console.log("Changing line " + new_line + "'s quantity to " + window.theme.shopSettings.cart_skus[cart_sku].qty);
+        //$(".cart-display-item[data-line=" + new_line + "] .input-number").val(window.theme.shopSettings.cart_skus[cart_sku].qty);
+        changed_lines = new_line;
+      } 
+      else {
+        
+        console.log("Remove line number " + new_line);
+        //$(".cart-display-item[data-line=" + new_line + "]").remove();        
+        //GS.RemoveLineFromCart(new_line, function() {});
+        removals++;
+        
+        $(".cart-display-item[data-line]").each(function() {
+          let thisLine = $(this).attr('data-line'), newLine = parseInt(thisLine)-1;
+          $(this).attr('data-line', newLine);
+          console.log("Changing line number " + thisLine + " to " + newLine);
+        });
+      }
+
+    }      
+  }
+  */
+}
+
+/* This function is called after shipping calculation is done (for checking PO boxes in quote form) */
+function cartShipCalcDone()
+{
+  if($("#quote-shipping-address1").length > 0) {
+    let addr = $.trim($("#quote-shipping-address1").val()).toLowerCase();
+    if(addr.indexOf("po") >= 0 && addr.indexOf("box") >= 0) {
+      $(".cart-shipping-calc-rates ul li label").each(function() {
+        if($(this).text().toLowerCase().indexOf("ups") >= 0)
+          $(this).closest("li").remove();
+      });
+    }
+  }
+}
+
+
+/* This function is called after a quote is created. Will populate the PDF download link's href */
+function cartQuotePdf(id, num)
+{
+  $(".cart-quote-success a").attr("href","https://arbor-scientific.myshopify.com/apps/download-pdf/5e96094ddc85c9983ef6/" + id*8643 + "/" + num.replace("#D","") + ".pdf");
+}
+
+/* Function to save current cart questions and jump to cart */
+function cartQuoteGo()
+{
+  var attributes = {};
+  $(".cart-field-input:visible").each(function() {
+  if(!$(this).prop('disabled')) {
+  let attrName = $(this).attr('name').replace("attributes[","").replace("]","");
+  let attrValue = $(this).val();
+  attributes[attrName] = attrValue;
+  }});
+  
+  $.ajax({
+    type: "POST",
+    url: '/cart/update.js',
+    data: {attributes: attributes},
+    dataType: 'json',
+    success: function() {
+      document.location = "/cart?view=quote";
+    }
+  });
+}
+
+/* Funtion to add a set of products' payload to the quick order form */
+function quickOrderPopulate(skus) {
+  //render the display of the products
+  var productRendered = false;
+  for(var sku of skus) {
+    if(sku.prod) {
+      $(".quickorder-container .qo-product-items").append(sku.prod);
+      productRendered = true;
+    }
+  }
+  
+  //get the form ready for bulk add
+  if(productRendered) {
+    $(".quickorder-container .qo-populated").show();
+    $(".quickorder-container .qo-remove").show();
+    GS.init_product_items();   
+    for(var sku of skus) {
+      if(sku.prod) {
+        $(".product-grid-item[data-sku=" + sku.sku + "] .product-item-quantity").val(sku.qty).trigger("change");
+      }
+    }
+  }
+}
+
+
+  function cartShipFunctions() {
+    
+    var stateList = [
+      {
+          "name": "Alabama",
+          "abbreviation": "AL"
+      },
+      {
+          "name": "Alaska",
+          "abbreviation": "AK"
+      },
+      {
+          "name": "American Samoa",
+          "abbreviation": "AS"
+      },
+      {
+          "name": "Arizona",
+          "abbreviation": "AZ"
+      },
+      {
+          "name": "Arkansas",
+          "abbreviation": "AR"
+      },
+      {
+          "name": "California",
+          "abbreviation": "CA"
+      },
+      {
+          "name": "Colorado",
+          "abbreviation": "CO"
+      },
+      {
+          "name": "Connecticut",
+          "abbreviation": "CT"
+      },
+      {
+          "name": "Delaware",
+          "abbreviation": "DE"
+      },
+      {
+          "name": "District Of Columbia",
+          "abbreviation": "DC"
+      },
+      {
+          "name": "Federated States Of Micronesia",
+          "abbreviation": "FM"
+      },
+      {
+          "name": "Florida",
+          "abbreviation": "FL"
+      },
+      {
+          "name": "Georgia",
+          "abbreviation": "GA"
+      },
+      {
+          "name": "Guam",
+          "abbreviation": "GU"
+      },
+      {
+          "name": "Hawaii",
+          "abbreviation": "HI"
+      },
+      {
+          "name": "Idaho",
+          "abbreviation": "ID"
+      },
+      {
+          "name": "Illinois",
+          "abbreviation": "IL"
+      },
+      {
+          "name": "Indiana",
+          "abbreviation": "IN"
+      },
+      {
+          "name": "Iowa",
+          "abbreviation": "IA"
+      },
+      {
+          "name": "Kansas",
+          "abbreviation": "KS"
+      },
+      {
+          "name": "Kentucky",
+          "abbreviation": "KY"
+      },
+      {
+          "name": "Louisiana",
+          "abbreviation": "LA"
+      },
+      {
+          "name": "Maine",
+          "abbreviation": "ME"
+      },
+      {
+          "name": "Marshall Islands",
+          "abbreviation": "MH"
+      },
+      {
+          "name": "Maryland",
+          "abbreviation": "MD"
+      },
+      {
+          "name": "Massachusetts",
+          "abbreviation": "MA"
+      },
+      {
+          "name": "Michigan",
+          "abbreviation": "MI"
+      },
+      {
+          "name": "Minnesota",
+          "abbreviation": "MN"
+      },
+      {
+          "name": "Mississippi",
+          "abbreviation": "MS"
+      },
+      {
+          "name": "Missouri",
+          "abbreviation": "MO"
+      },
+      {
+          "name": "Montana",
+          "abbreviation": "MT"
+      },
+      {
+          "name": "Nebraska",
+          "abbreviation": "NE"
+      },
+      {
+          "name": "Nevada",
+          "abbreviation": "NV"
+      },
+      {
+          "name": "New Hampshire",
+          "abbreviation": "NH"
+      },
+      {
+          "name": "New Jersey",
+          "abbreviation": "NJ"
+      },
+      {
+          "name": "New Mexico",
+          "abbreviation": "NM"
+      },
+      {
+          "name": "New York",
+          "abbreviation": "NY"
+      },
+      {
+          "name": "North Carolina",
+          "abbreviation": "NC"
+      },
+      {
+          "name": "North Dakota",
+          "abbreviation": "ND"
+      },
+      {
+          "name": "Northern Mariana Islands",
+          "abbreviation": "MP"
+      },
+      {
+          "name": "Ohio",
+          "abbreviation": "OH"
+      },
+      {
+          "name": "Oklahoma",
+          "abbreviation": "OK"
+      },
+      {
+          "name": "Oregon",
+          "abbreviation": "OR"
+      },
+      {
+          "name": "Palau",
+          "abbreviation": "PW"
+      },
+      {
+          "name": "Pennsylvania",
+          "abbreviation": "PA"
+      },
+      {
+          "name": "Puerto Rico",
+          "abbreviation": "PR"
+      },
+      {
+          "name": "Rhode Island",
+          "abbreviation": "RI"
+      },
+      {
+          "name": "South Carolina",
+          "abbreviation": "SC"
+      },
+      {
+          "name": "South Dakota",
+          "abbreviation": "SD"
+      },
+      {
+          "name": "Tennessee",
+          "abbreviation": "TN"
+      },
+      {
+          "name": "Texas",
+          "abbreviation": "TX"
+      },
+      {
+          "name": "Utah",
+          "abbreviation": "UT"
+      },
+      {
+          "name": "Vermont",
+          "abbreviation": "VT"
+      },
+      {
+          "name": "Virgin Islands",
+          "abbreviation": "VI"
+      },
+      {
+          "name": "Virginia",
+          "abbreviation": "VA"
+      },
+      {
+          "name": "Washington",
+          "abbreviation": "WA"
+      },
+      {
+          "name": "West Virginia",
+          "abbreviation": "WV"
+      },
+      {
+          "name": "Wisconsin",
+          "abbreviation": "WI"
+      },
+      {
+          "name": "Wyoming",
+          "abbreviation": "WY"
+      }
+   ];  
+    
+    if (sessionStorage.shipstate) {
+      $('.ship-calc-province').val(sessionStorage.shipstate);
+    }
+    if (sessionStorage.shipzip) {
+      $('#ship-calc-zip').val(sessionStorage.shipzip);
+    }
+
+
+    
+    $('.cart-shipping-calc-input .ship-calc-go').click(function( event ) {
+      event.preventDefault()
+    }); 
+    
+   $('#ship-calc-zip').keyup(function() {
+      var lState, lStateFull;
+      if ($(this).val().length == 5) {
+          if ($('.ship-calc-country').val() == "United States") {
+              $.post('https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws', {
+                  Key: 'WC99-PD87-DZ54-ZT62',
+                  Text: $(this).val(),
+                  Limit: 100,
+                  Countries: "US"
+                  /*IsMiddleware: true,
+                  Container: CONTAINER,
+                  Origin: ORIGIN,
+                  Countries: COUNTRIES,
+                  Limit: LIMIT,
+                  Language: LANGUAGE,*/
+              }, function(data) {
+                  if (data.Items.length == 1 && typeof(data.Items[0].Error) != "undefined") {
+                      alert(data.Items[0].Description);
+                  } else {
+                      if (data.Items.length == 0)
+                          alert("Sorry, there were no results");
+                      else {
+                        console.log(data);
+                          for (i = 0; i < data.Items.length; i++) {
+                              if (data.Items[i].Type == "Postcode" && data.Items[i].Id.slice(0, 2) == "US") {
+                                  lState = data.Items[i].Description.split(" - ")[0].slice(-2);
+                                  lStateFull = stateList.filter(function(item) {
+                                    return item.abbreviation == lState;
+                                  });
+                                  if (lStateFull) {
+                                      $('.ship-calc-province').val(lStateFull[0].name).change();
+                                    sessionStorage.shipstate = lStateFull[0].name;
+                                    sessionStorage.shipzip = $('#ship-calc-zip').val();
+                                  }
+                                  break;
+                              }
+                          }
+                      }
+                  }
+              });
+          }
+       }
+   	});
+
+    $('.ship-calc-country').on("change", function() { 
+      $(this).closest('.cart-shipping-calc').find('.ship-calc-province').each(function() {
+        if($(this).find("option").length == 0) {
+          $(this).closest('.cart-shipping-calc').find('.ship-calc-province-text').attr('name', $(this).attr('name'));
+          $(this).attr('name','');
+          $(this).hide();
+          $(this).closest('.cart-shipping-calc').find('.ship-calc-province-text').show();
+        } else {
+          if ($(this).closest('.cart-shipping-calc').find('.ship-calc-province-text').attr('name') != "") {
+            $(this).attr('name',$(this).closest('.cart-shipping-calc').find('.ship-calc-province-text').attr('name'));
+            $(this).closest('.cart-shipping-calc').find('.ship-calc-province-text').attr('name', '');
+          }
+          $(this).show();
+          $(this).closest('.cart-shipping-calc').find('.ship-calc-province-text').hide();
+        }
+      });
+    });
+    
+  }
+$(document).ready(function() {
+	
+  cartShipFunctions();
+
+  quoteFunctions();
+
+});
+
+
+function quoteFunctions() {
+  var selectJob = $('select[name="attributes[I am a...]"]');
+  checkQuoteNewsletter(selectJob);
+  
+  $('select[name="attributes[I am a...]"]').change(function() {
+    checkQuoteNewsletter($(this));
+  });
+}
+
+function checkQuoteNewsletter(element) {
+  var jobSelected = element.val();
+  if (jobSelected == "Teacher/Professor" || jobSelected == "Lab Supervisor") {
+    $("#quote-marketing").prop("checked",true);
+  } else {
+    $("#quote-marketing").prop("checked",false);
+  }
+}
+
+$(document).ready( function() {
+  $(function() {
+    $("#field-materials-date").datepicker( {
+      minDate: +1,
+      maxDate: '+2M'
+    } );
+  });
+});

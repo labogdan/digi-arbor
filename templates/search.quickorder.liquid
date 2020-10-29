@@ -1,0 +1,21 @@
+{% layout none %}{% capture results %}{% paginate search.results by 10000 %}
+{% for item in search.results %}
+{% assign lowerterms = search.terms | downcase %}
+{% assign lowersku = item.variants.first.sku | downcase %}
+{% if item.object_type == "product" and lowersku == lowerterms %}
+  {% assign grid_product = item %}
+  {% include 'product-grid-item',
+    grid_item_loop_index: forloop.index0,
+    grid_item_quick_view: false
+    grid_item_quick_order: true,    
+    grid_item_cart_direct: false,
+    grid_item_classes: "product-item-wrapper product-grid-item quickorder row",
+    grid_item_display_quantity: true,
+    grid_item_display_badge: false,
+    grid_item_display_price: true,
+    grid_item_add2cart: false
+    grid_item_quantity_min: 1,
+    grid_item_swatches: false %}
+{% endif %}
+{% endfor %}
+{% endpaginate %}{% endcapture %}{{results | strip_newlines | strip}}

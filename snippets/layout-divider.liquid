@@ -1,0 +1,23 @@
+{% if type == 'block' %}
+  {% assign id = block.id %}  
+  {% assign divider_line = block.settings.line %}
+  {% assign divider_spacing = block.settings.spacing %}
+  {% assign divider_text = block.settings.text %}
+  {% assign divider_fade = block.settings.fade %}
+{% else %}
+  {% assign id = section.id %}  
+  {% assign divider_line = section.settings.line %}
+  {% assign divider_spacing = section.settings.spacing %}
+  {% assign divider_text = section.settings.text %}
+  {% assign divider_fade = section.settings.fade %}
+{% endif %}
+
+<div class="row">
+  <div class="small-12 columns">
+    {% if divider_line %}
+        <hr class="layout-divider hr-text {% if divider_fade %}fade{% endif %}" data-content="{{divider_text | escape}}" style="{% if divider_spacing %}margin: {{ divider_spacing }}px 0px;{% endif %}">
+    {% else %}
+        <h4 class="text-center layout-divider" style="{% if divider_spacing %}margin: {{ divider_spacing }}px 0px;{% endif %}">{{divider_text}}</h4>
+    {% endif %}
+  </div>
+</div>

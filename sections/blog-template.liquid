@@ -1,0 +1,199 @@
+{% assign blog_img = blank %}
+{% if section.settings.blog_img != blank %}
+  {% assign blog_img = section.settings.blog_img %}
+{% endif %}
+{% for block in section.blocks %}
+	{% if block.type == "blog_header" and block.settings.blog == blog.handle and block.settings.blog_img != blank %}
+		{% assign blog_img = block.settings.blog_img %}
+		{% break %}
+	{% endif %}
+{% endfor %}
+
+{% include 'opacity-inverse', transparency: section.settings.banner_opacity %}
+
+<div class="bg-overlay-container">
+  {%- if section.settings.banner_color != "" -%}
+      <div class="bg-overlay" style="background-color:{{section.settings.banner_color}};opacity:{{opacity}};"></div>
+  {%- endif -%}
+
+  {%- if blog_img != nil -%}
+      <div class="bg-img" style="background-image:url({%- include 'image-src', image_src: blog_img, image_src_sizing: "2048x" %});"></div>
+  {%- endif -%}
+
+  <div class="bg-overlay-content text-center">
+    {% if section.settings.display_title_img %}<h1>{{ blog.title }}</h1>{% endif %}
+  </div>
+</div>
+
+{% unless section.settings.display_title_img %}
+  <div class="large-12 small-12 columns text-center">
+    <h1>{{blog.title}}</h1>
+  </div>
+{% endunless %}
+
+{% paginate blog.articles by 12 %}
+<div class="row" data-section-id="{{ section.id }}" data-section-type="blog">
+
+    {% include 'breadcrumbs' %}
+
+    <div class="small-12 {{section.settings.blog_canvas_classes}} columns">
+        
+        <div class="small-12 columns">
+            {%- assign blog_title = blog.title -%}
+            {% if current_tags %}
+                {% capture blog_title %}{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}{% endcapture %}
+            {% endif %}
+        </div>
+    	<div class="row">
+        {% for article in blog.articles %}
+            <div class="small-12 large-3 columns blog-listing">
+                {% if article.image %}
+                  <a href="{{ article.url }}" class="image-pg">
+                    <img src="{{ article.image | img_url: '420x340' }}" alt="{{ article.title }}">
+                  </a>
+                {% endif %}
+        
+                <h5>
+                  <a href="{{ article.url }}">{{ article.title }}</a>
+                </h5>
+        
+                {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+        
+                <!--<p class="blog-meta">
+                    <i class="fa fa-calendar"></i><span> {{ article.published_at | time_tag: format: 'month_day_year' }}</span>
+                    <i class="fa fa-user"></i><span> {{ article.author }}</span>
+                </p>-->
+            
+        
+                <!--<div class="small-12 columns">
+                    {% if blog.comments_enabled? or article.tags.size > 0 %}
+                        <ul class="no-bullets blog-tags">
+                            {% if blog.comments_enabled? %}
+                                <li>
+                                    <a href="{{ article.url }}#comments">
+                                        {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if article.tags.size > 0 %}
+                                <div class="inline"><i class="fa fa-tags"> </i><span>Tags: </span></div>
+                                {% for tag in article.tags %}
+                                    <li>
+                                        <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+                                        {% unless forloop.last %} {% endunless %}
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </div>-->
+
+                <div class="blog-excerpt">
+                    <div class="rte">
+                      {% if article.excerpt.size > 0 %}
+                        {{ article.excerpt | strip_html | truncatewords: 40 }}
+                      {% else %}
+                        <p>
+                          {{ article.content | strip_html | truncatewords: 40 }}
+                        </p>
+                      {% endif %}
+                    </div>
+                </div>
+
+                <!--<div class="small-12 columns text-center">
+                    <p>
+                        <a class="button" href="{{ article.url }}">
+                        <span class="hide" aria-hidden="false">{{article.title}}</span>
+                        {{ 'blogs.article.read_more' | t }}
+                        </a>
+                    </p>
+                </div>-->
+              </div>
+        {% endfor %}
+      </div>
+        <div class="small-12 columns">
+          {% if paginate.pages > 1 %}
+            {% include 'pagination' %}
+          {% endif %}
+        </div>
+    </div> 
+</div>
+{% endpaginate %}
+
+{% schema %}
+  {
+    "name": "Blog Page Settings",
+    "settings": [	         
+      {
+        "type": "header",
+        "content": "Banner Options"
+      },
+      {
+          "type": "image_picker",
+          "id": "blog_img",
+          "label": "Default Blog Banner"
+      },      
+      {
+          "type": "color",
+          "id": "banner_color",
+          "label": "Overlay Color",
+          "default": "#EEEEEE"              
+      },
+      {
+          "type": "range",
+          "id": "banner_opacity",
+          "label": "Overlay Color Transparency",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30,
+          "unit": "%"        
+      },        
+      {
+        "type": "checkbox",
+        "id": "display_title_img",
+        "label": "Display Title On Header Image",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Display Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_breadcrumbs",
+        "label": "Enable Breadcrumbs",
+        "default": true
+      },      
+      {
+        "type": "textarea",
+        "id": "blog_canvas_classes",
+        "label": "Blog Area Classes",
+        "default": "small-12 medium-9 large-9"
+      }
+	],
+	"blocks":[
+	    {
+		    "type": "blog_header",
+			"name": "Blog Header Image",
+			"settings":[    		        
+	        	{
+              "type": "text",
+              "id": "title",
+    		      "label": "Block Label"
+            },
+	        	{
+		          "type": "blog",
+		          "id": "blog",
+				  "label": "The blog to have this header"
+		        },
+		        {
+		          "type": "image_picker",
+		          "id": "blog_img",
+				  "label": "The header image to use"
+		        }
+			]
+		}		
+	]
+}
+{% endschema %}

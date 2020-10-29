@@ -1,0 +1,150 @@
+{% comment %}
+- Image Gallery section
+- Each block is an image
+{% endcomment %}
+
+{% assign default = '1400x' %}
+{% assign size1 = '480x' %}
+{% assign size2 = '765x' %}
+{% assign size3 = '900x' %}
+{% assign size4 = '1000x' %}
+{% assign size5 = '1100x' %}
+{% assign size6 = '1300x' %}
+{% assign size7 = '1500x' %}
+{% assign size8 = '1700x' %}
+{% assign size9 = '1900x' %}
+{% assign size10 = '2000x' %}
+{% assign cols_css = 12 | divided_by: section.settings.max_cols %}
+{% if section.blocks.size < section.settings.max_cols %}
+  {% assign cols_css = 12 | divided_by: section.blocks.size %}
+{% endif %}
+
+<div class="row image-gallery" data-section-id="{{section.id}}" data-section-type="image-with-text">
+  <div class="{% if section.settings.wide %}wide small-12{% else %}small-10 small-offset-1{% endif %}">    
+    {% if section.settings.title != blank %}
+        <h2 class="title text-center">{{ section.settings.title | escape }}</h2>        
+    {% endif %}
+
+    {% if section.blocks.size > 0 %}
+      <div class="row image-gallery-items {% if section.settings.centered %}centered{% endif %}">
+        {% for block in section.blocks %}
+          <div class="{{block.settings.classes}} image-gallery-item {% unless section.settings.wide %}columns{% endunless %} small-{{cols_css}}" {{ block.shopify_attributes }}>
+            {% if block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" class="logo-bar__link">
+            {% endif %}
+            {% if block.settings.image != blank %}
+              <img  src="{{ block.settings.image | img_url: '100x' }}"
+                alt="{{ block.settings.image.alt | escape }}"
+                class="lazyload"
+                style="max-width: {{- block.settings.image.width -}}px;"
+                data-sizes="auto"
+                data-src="{{ block.settings.image | img_url: default }}"
+                data-srcset="
+                {{ block.settings.image | img_url: default }} {{default | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size1 }} {{size1 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size2 }} {{size2 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size3 }} {{size3 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size4 }} {{size4 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size5 }} {{size5 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size6 }} {{size6 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size7 }} {{size7 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size8 }} {{size8 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size9 }} {{size9 | replace: 'x', 'w'}},
+                {{ block.settings.image | img_url: size10 }} {{size10 | replace: 'x', 'w'}}"
+                 />
+            {% else %}
+              {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+            {% endif %}
+            {% if block.settings.link != blank %}
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Image Gallery",
+    "class": "section-image-gallery",
+    "max_blocks": 20,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Image Gallery"
+      },
+      {
+        "type": "range",
+        "id": "max_cols",
+        "label": "Max Images Per Row",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "default": 4    
+      },
+      {
+        "type": "checkbox",
+        "id": "wide",
+        "label": "Wide display"
+      },
+      {
+        "type": "checkbox",
+        "id": "centered",
+        "label": "Centered"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "400 x 300px recommended"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+          },
+          {
+            "type": "header",
+            "content": "Display Settings"          
+          },              
+          {
+              "type": "text",
+              "id": "classes",
+              "label": "CSS Classes"
+          } 
+        ]
+      }          
+    ],
+    "presets": [
+      {
+        "name": "Image Gallery",
+        "category": "Image",
+        "blocks": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

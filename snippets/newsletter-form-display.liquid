@@ -1,0 +1,12 @@
+<div class="row ">
+  <!--newsletter-entry a class for the semi half button-->
+  {% if block.settings.newsletter_text != "" %}
+    <div class="columns arbor-email-signup">
+      <h4 class="newsletter-head">{{block.settings.newsletter_text}}</h4>
+         <div class="bg-overlay-buttons ">                                                        
+               <a href="/pages/email-signup" class="button primary fill center" tabindex="-1">SIGN UP!</a>
+            </div>
+    </div>
+  {% endif %}
+ 
+  </div>

@@ -1,0 +1,15 @@
+{% layout none %}{% capture results %}{% paginate search.results by 10000 %}{
+"items": [
+{% for item in search.results %}
+{% if forloop.index > 1%},{% endif %}
+{
+"id": {{item.id}},
+"title": "{{item.title | escape | replace: '"', '\"'}}",
+"handle": "{{item.handle}}",
+"image": "{{item.featured_image | img_url: "100x" }}",
+"price": "{{item.price}}",
+"object": "{{item.object_type}}"
+}
+{% endfor %}
+]}
+{% endpaginate %}{% endcapture %}{{results | strip_newlines | strip}}

@@ -1,0 +1,380 @@
+{% comment %}
+- Image With Text Overlay
+- Really similar to a slideshow section (with just one slide)
+{% endcomment %}
+
+<div data-section-type="image-with-text-overlay" data-section-id="{{section.id}}" class="row">
+    {% include 'section-tile' tile_settings: section.settings, section_type: "image-with-text-overlay" %}
+</div>
+
+{% schema %}
+{
+  "name": "Image with Text Overlay",
+  "class": "section-image-with-text-overlay",
+  "settings": [        
+    {
+        "type": "header",
+        "content": "Background Settings"
+    },
+    {
+        "type": "image_picker",
+        "id": "bgimage",
+        "label": "Background Image"
+    },
+    {
+        "type": "select",
+        "id": "image_position",
+        "label": "Background Image Position",
+        "default": "background",
+        "options": [
+          {
+            "value": "background",
+            "label": "Background"
+          },
+          {
+            "value": "inline",
+            "label": "Inline"
+          }
+        ],
+        "info":"Use 'Inline' for better performance and height determined by image vs 'Background' for better quality and height determined by content."
+    },
+    {
+        "type": "color",
+        "id": "bgcolor",
+        "label": "Background Color",
+        "default": "#EEEEEE"              
+    },
+    {
+        "type": "range",
+        "id": "opacity",
+        "label": "Background Transparency",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 30,
+        "unit": "%"        
+    },   
+    {
+        "type": "header",
+        "content": "Content"          
+    },
+    {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"          
+    },
+    {
+        "type": "text",
+        "id": "preheader",
+        "label": "Pre Header"          
+    },
+    {
+        "type": "text",
+        "id": "header",
+        "label": "Header",
+        "default": "Your Text"
+    },
+    {
+        "type": "html",
+        "id": "content",
+        "label": "Content"
+    },
+    {
+        "type": "header",
+        "content": "Buttons"          
+    },
+    {
+        "type": "text",
+        "id": "button1_text",
+        "label": "Button 1 Text"
+    },
+    {
+        "type": "url",
+        "id": "button1_link",
+        "label": "Button 1 Link"
+    },
+    {
+        "type": "select",
+        "id": "button1_color",
+        "label": "Button 1 Color",
+        "default":"primary",
+        "options": [
+        {
+            "value": "primary",
+            "label": "Primary"
+        },
+        {
+            "value": "secondary",
+            "label": "Secondary"
+        },
+        {
+            "value": "tertiary",
+            "label": "Tertiary"
+        },
+        {
+            "value": "white",
+            "label": "White"
+        }
+        ]
+    },
+    {
+        "type": "select",
+        "id": "button1_style",
+        "label": "Button 1 Style",
+        "default":"fill",
+        "options": [
+        {
+            "value": "fill",
+            "label": "Fill"
+        },
+        {
+            "value": "hollow",
+            "label": "Hollow"
+        },
+        {
+            "value": "underline",
+            "label": "Underline"
+        }
+        ]
+    },                
+    {
+        "type": "checkbox",
+        "id": "button1_full_width",
+        "label": "Button 1 Full-Width"
+    },
+    {
+        "type": "text",
+        "id": "button2_text",
+        "label": "Button 2 Text"
+    },
+    {
+        "type": "url",
+        "id": "button2_link",
+        "label": "Button 2 Link"
+    },
+    {
+        "type": "select",
+        "id": "button2_color",
+        "label": "Button 2 Color",
+        "default":"primary",
+        "options": [
+        {
+            "value": "primary",
+            "label": "Primary"
+        },
+        {
+            "value": "secondary",
+            "label": "Secondary"
+        },
+        {
+            "value": "tertiary",
+            "label": "Tertiary"
+        },
+        {
+            "value": "white",
+            "label": "White"
+        }
+        ]
+    },
+    {
+        "type": "select",
+        "id": "button2_style",
+        "label": "Button 2 Style",
+        "default":"fill",
+        "options": [
+        {
+            "value": "fill",
+            "label": "Fill"
+        },
+        {
+            "value": "hollow",
+            "label": "Hollow"
+        },
+        {
+            "value": "underline",
+            "label": "Underline"
+        }
+        ]
+    },                
+    {
+        "type": "checkbox",
+        "id": "button2_full_width",
+        "label": "Button 2 Full-Width"
+    },
+    {
+        "type": "text",
+        "id": "button3_text",
+        "label": "Button 3 Text"
+    },
+    {
+        "type": "url",
+        "id": "button3_link",
+        "label": "Button 3 Link"
+    },
+    {
+        "type": "select",
+        "id": "button3_color",
+        "label": "Button 3 Color",
+        "default":"primary",
+        "options": [
+        {
+            "value": "primary",
+            "label": "Primary"
+        },
+        {
+            "value": "secondary",
+            "label": "Secondary"
+        },
+        {
+            "value": "tertiary",
+            "label": "Tertiary"
+        },
+        {
+            "value": "white",
+            "label": "White"
+        }
+        ]
+    },
+    {
+        "type": "select",
+        "id": "button3_style",
+        "label": "Button 3 Style",
+        "default":"fill",
+        "options": [
+        {
+            "value": "fill",
+            "label": "Fill"
+        },
+        {
+            "value": "hollow",
+            "label": "Hollow"
+        },
+        {
+            "value": "underline",
+            "label": "Underline"
+        }
+        ]
+    },                
+    {
+        "type": "checkbox",
+        "id": "button3_full_width",
+        "label": "Button 3 Full-Width"
+    },
+    {
+        "type": "header",
+        "content": "Display Settings"          
+    },    
+    {
+        "type": "select",
+        "id": "height",
+        "label": "Height",
+        "default": "height-small",
+        "options": [
+        {
+            "value": "height-small",
+            "label": "Small"
+        },
+        {
+            "value": "height-medium",
+            "label": "Medium"
+        },
+        {
+            "value": "height-large",
+            "label": "Large"
+        }
+        ]
+    },
+    {
+        "type": "color",
+        "id": "color",
+        "label": "Text Color"
+    },
+    {
+        "type": "range",
+        "id": "text_size",
+        "label": "Text Size",                
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "default": 1
+    }, 
+    {
+        "type": "select",
+        "id": "text_align",
+        "label": "Text alignment",
+        "default":"text-center",
+        "options": [
+        {
+            "value": "text-left",
+            "label": "Left"
+        },
+        {
+            "value": "text-center",
+            "label": "Center"
+        },
+        {
+            "value": "text-right",
+            "label": "Right"
+        }
+        ]
+    },
+    {
+        "type": "select",
+        "id": "text_position",
+        "label": "Text position",
+        "default":"content-center-center",
+        "options": [
+            {
+                "value": "content-top-left",
+                "label": "Top Left"
+            },
+            {
+                "value": "content-top-center",
+                "label": "Top Center"
+            },
+            {
+                "value": "content-top-right",
+                "label": "Top Right"
+            },
+            {
+                "value": "content-center-left",
+                "label": "Center Left"
+            },
+            {
+                "value": "content-center-center",
+                "label": "Center Center"
+            },
+            {
+                "value": "content-center-right",
+                "label": "Center Right"
+            },
+            {
+                "value": "content-bottom-left",
+                "label": "Bottom Left"
+            },
+            {
+                "value": "content-bottom-center",
+                "label": "Bottom Center"
+            },
+            {
+                "value": "content-bottom-right",
+                "label": "Bottom Right"
+            }
+        ]
+    },
+    {
+        "type": "text",
+        "id": "classes",
+        "label": "CSS Classes",
+        "info": "Advanced"
+    }  
+  ],  
+  "presets": [
+    {
+      "name": "Image with Text Overlay",
+      "category": "Image"      
+    }
+  ]
+}
+
+{% endschema %}

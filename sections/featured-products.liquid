@@ -1,0 +1,419 @@
+{% comment %}
+- Featured products
+- Each block is a "pair" of product image and product details
+{% endcomment %}
+
+<div class="row" data-section-id="{{section.id}}" data-section-type="image-with-text">
+    <div class="{% if section.settings.wide %}small-12{% else %}small-10 small-offset-1{% endif %}">
+        <div class="product-item-wrapper image-with-text featured-products-new across-{{section.settings.pairs_per_row}} image-align-{{ section.settings.image_position }} {% if section.settings.margins %}image-text-margins{% endif %}">
+            {% if section.blocks.size > 0 %}
+                {% for block in section.blocks %}
+                    {% assign block_product = all_products[block.settings.product] %}
+                    {% include 'opacity-inverse', transparency: block.settings.opacity %}
+
+                    <div class="{{block.settings.height}} image-text-pair image-text-pair-{{ forloop.index }}" {{ block.shopify_attributes }}>
+                    
+                        <div class="image-text-half img {{block.settings.width}} {{block.settings.width_mobile}}">
+                            <div class="image-text-img">  
+                                {% if block_product != empty %}                                    
+                                    <a href="{{ block_product.url }}" title="{{block_product.title }}" class="product-item-image">
+                                        {% include 'product-badge', badge_product: product %}
+                                        {% if block_product.featured_image.image.alt != blank %}
+                                            {% assign image_tag_alt = block_product.featured_image.alt | escape %}
+                                        {% else %}
+                                            {% assign image_tag_alt = block_product.title | escape %}
+                                        {% endif %}
+                                        {% capture img_tag_classes %}full-width-image{% endcapture %}
+                                        {% include 'image-tag',
+                                            image_tag_src : {{block_product.featured_image | img_url: '100x'}},
+                                            image_tag_alt: dyno_block_header,
+                                            image_tag_classes: img_tag_classes %}                                    
+                                    </a>
+                                {% else %}
+                                    {% capture i %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
+                                    {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
+                                {% endif %}                                
+                            </div>
+                        </div>
+                        <div class="{{block.settings.text_align}} text-size-{{block.settings.text_size}} {{block.settings.text_position}} image-text-half txt {{block.settings.classes}} bg-overlay-container" style="{% if block.settings.color and block.settings.color != emtpy %}color:{{block.settings.color}};{% endif %}">
+                            {%- if block.settings.bgcolor != "" -%}
+                            <div class="bg-overlay" style="background-color:{{block.settings.bgcolor}};opacity:{{opacity}};"></div>
+                            {%- elsif section.settings.bgcolor != "" -%}
+                                <div class="bg-overlay" style="background-color:{{section.settings.bgcolor}};opacity:{{opacity}};"></div>
+                            {%- endif -%}	
+                            <div class="padding-small image-text-txt">   
+                              {% if block.settings.preheader != "" %}
+                                <div class="bg-overlay-text-preheader">{{block.settings.preheader}}</div>
+                              {% endif %}                       
+                              {% if block.settings.display_vendor and block_product != empty and block_product.vendor != blank %}
+                                <div class="bg-overlay-text-preheader">{{block_product.vendor}}</div>
+                              {% endif %}
+                              <div class="bg-overlay-text-header">
+                                  {% if block_product != empty and block.settings.display_title %}
+                                      {{block_product.title}}
+                                  {% elsif block.settings.display_title %}
+                                      Product {{forloop.index}}
+                                  {% endif %}
+                              </div>                                
+                              <div class="bg-overlay-text-content">
+                                {% if block.settings.display_description and block_product != empty and block_product.description != blank %}
+                                    {{ block_product.description | truncate_words: 250 }}
+                                {% endif %}
+                                {% if block.settings.display_price and block_product != empty %}
+                                    {% include 'product-pricing', price_product: block_product, price_data: block_product, add2Cart: block.settings.display_addtocart_button %}
+                                {% endif %}
+                                {% if block.settings.display_addtocart_button %}
+                                  {% include 'product-item-form', product_item: block_product, product_item_variant: empty, swatches: block.settings.display_addtocart_swatches %}            
+                                {% endif %}
+                                {% if block.settings.button_label != blank %}
+                                    <a {% if block_product != empty %}href="{{ block_product.url }}"{% endif %} class="{{block.settings.button_color}} {{block.settings.button_style}} button {% if block.settings.button_full_width %}full-width{% endif %}">
+                                        {{ block.settings.button_label }}
+                                    </a>
+                                {% endif %}
+                              </div>
+                            </div>                    
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "class": "section-featured-products",
+  "max_blocks": 16,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Display Settings"          
+    },  
+    {
+      "type": "select",
+      "id": "pairs_per_row",
+      "label": "Products per row",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "wide",
+      "label": "Wide display",
+      "default":true     
+    },
+    {
+      "type": "checkbox",
+      "id": "margins",
+      "label": "Margins",
+      "info": "Spaced grid if 'Images per row' is set to 1"
+    },    
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "First image position",
+      "info": "Subsequent images will appear staggered",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Image Settings"          
+        },        
+        {
+          "type": "select",
+          "id": "width",
+          "label": "Image Width",
+          "default":"large-6",
+          "options": [
+            {
+              "value": "large-6",
+              "label": "One-Half"
+            },
+            {
+              "value": "large-4",
+              "label": "One-Third"
+            },
+            {
+              "value": "large-3",
+              "label": "One-Quarter"
+            },
+            {
+              "value": "large-8",
+              "label": "Two-Thirds"
+            },
+            {
+              "value": "large-9",
+              "label": "Three-Quarters"
+            }
+          ]
+        },
+        {
+            "type": "header",
+            "content": "Product Content"          
+        },  
+        {
+            "type": "product",
+            "id": "product",
+            "label": "Choose Product"            
+        },   
+        {
+            "type": "text",
+            "id": "preheader",
+            "label": "Pre-Header"            
+        },    
+        {
+            "type": "checkbox",
+            "id": "display_title",
+            "label": "Display Title",
+            "default": true
+        },  
+        {
+            "type": "checkbox",
+            "id": "display_vendor",
+            "label": "Display Vendor",
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "display_description",
+            "label": "Display Description",
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "display_price",
+            "label": "Display Price",
+            "default": true
+        },          
+        {
+            "type": "checkbox",
+            "id": "display_addtocart_button",
+            "label": "Display Add to Cart Button",
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "display_addtocart_swatches",
+            "label": "Display Add to Cart Swatches",
+            "default": false
+        },
+        {
+          "type": "header",
+          "content": "Button Settings"          
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop Now"
+        },        
+        {
+          "type": "select",
+          "id": "button_color",
+          "label": "Button color",
+          "default":"primary",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary"
+            },
+            {
+              "value": "tertiary",
+              "label": "Tertiary"
+            },
+            {
+              "value": "white",
+              "label": "White"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "default":"fill",
+          "options": [
+            {
+              "value": "fill",
+              "label": "Fill"
+            },
+            {
+              "value": "hollow",
+              "label": "Hollow"
+            },
+            {
+              "value": "underline",
+              "label": "Underline"
+            }
+          ]
+        },                
+        {
+          "type": "checkbox",
+          "id": "button_full_width",
+          "label": "Full-Width"
+        },
+        {
+          "type": "header",
+          "content": "Display Settings"          
+        },
+        {
+            "type": "color",
+            "id": "bgcolor",
+            "label": "Background Color"                
+        },
+        {
+            "type": "range",
+            "id": "opacity",
+            "label": "Background Transparency",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30,
+            "unit": "%"        
+        },   
+        {
+          "type": "select",
+          "id": "height",
+          "label": "Height",
+          "default": "height-small",
+          "options": [
+            {
+              "value": "height-small",
+              "label": "Small"
+            },
+            {
+              "value": "height-medium",
+              "label": "Medium"
+            },
+            {
+              "value": "height-large",
+              "label": "Large"
+            }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Text Color"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Text Size",                
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 1
+        }, 
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Text alignment",
+          "default":"text-center",
+          "options": [
+            {
+              "value": "text-left",
+              "label": "Left"
+            },
+            {
+              "value": "text-center",
+              "label": "Center"
+            },
+            {
+              "value": "text-right",
+              "label": "Right"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "text_position",
+          "label": "Text position",
+          "default":"content-center-center",
+          "options": [
+            {
+              "value": "content-top-left",
+              "label": "Top Left"
+            },
+            {
+              "value": "content-top-center",
+              "label": "Top Center"
+            },
+            {
+              "value": "content-top-right",
+              "label": "Top Right"
+            },
+            {
+              "value": "content-center-left",
+              "label": "Center Left"
+            },
+            {
+              "value": "content-center-center",
+              "label": "Center Center"
+            },
+            {
+              "value": "content-center-right",
+              "label": "Center Right"
+            },
+            {
+              "value": "content-bottom-left",
+              "label": "Bottom Left"
+            },
+            {
+              "value": "content-bottom-center",
+              "label": "Bottom Center"
+            },
+            {
+              "value": "content-bottom-right",
+              "label": "Bottom Right"
+            }
+          ]
+        },          
+        {
+            "type": "text",
+            "id": "classes",
+            "label": "CSS Classes",
+            "info": "Advanced"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Featured Products",
+    "category": "Products",    
+    "blocks": [
+      {
+        "type": "product"
+      }
+    ]
+  }]
+}
+{% endschema %}

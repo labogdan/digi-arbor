@@ -1,0 +1,212 @@
+{%- assign section_blog = blogs[section.settings.blog] -%}
+
+{% assign cols_css = 12 | divided_by: section.settings.cols %}
+{% if section_blog != empty and section_blog.articles_count < section.settings.cols %}
+    {% assign cols_css = 12 | divided_by: section_blog.articles_count %}
+{% elsif section_blog == empty %}
+    {% assign cols_css = 4 %}    
+{% endif %}
+
+<div class="row featured-blog {{section.settings.classes}}" data-section-id="{{section.id}}" data-section-type="dyno">
+  <div class="{% if section.settings.wide %}wide small-12{% else %}small-10 small-offset-1{% endif %}">    
+    {% if section.settings.title != blank %}
+        <h2 class="title text-center">{{ section.settings.title | escape }}</h2>        
+    {% endif %}
+    
+    {% if section.settings.display_type == "slider" %}
+      {% assign slider = true %}
+      {% capture grid_item_classes %}columns{% endcapture %}
+      <div
+        id="{{section.id}}"
+        class="dyno-slider"
+        data-slider-arrows="{{section.settings.arrows}}"
+        data-slider-dots="{{section.settings.dots}}"
+        data-slider-infinite="{{section.settings.infinite}}"
+        data-slider-slides-to-show="{{section.settings.slides_to_show}}"
+        data-slider-slides-to-show-small="{{section.settings.slides_to_show_small}}"
+        data-slider-slides-to-show-medium="{{section.settings.slides_to_show_medium}}"
+        data-slider-slides-to-scroll="{{section.settings.slides_to_scroll}}"
+        data-slider-autoplay="{{section.settings.slider_autoplay}}"
+        data-slider-autoplay-secs="{{section.settings.slider_autoplay_secs}}">
+    {% else %}
+      {% assign slider = false %}      
+      {% capture grid_item_classes %}large-{{cols_css}}{% endcapture %}
+      <div class="row">      
+    {% endif %}
+      {% if section_blog != empty %}
+        {% for blog_article in section_blog.articles limit: section.settings.max_cols %}
+            <div class="{{grid_item_classes}}">
+                <a class="image-pg" href="{{ grid_product.url | within: collection }}{% if grid_variant %}?variant_id={{grid_variant.id}}{% endif %}">
+                    {% include 'image-tag',
+                    image_tag_src : blog_article.image
+                    image_tag_alt: blog_article.image.alt
+                    image_tag_sizing: "800x", %}
+                </a>
+                {% if section.settings.display_title %}
+                    <h5><a href="{{ blog_article.url}}">{{ blog_article.title }}</a></h5>                
+                {% endif %}
+                {% if section.settings.display_excerpt and blog_article.excerpt_or_content != blank %}
+                    <p>{{blog_article.blog_article.excerpt_or_content | strip_html | truncate_words: 250 }}
+                {% endif %}
+            </div>
+        {% endfor %}
+      {% else %}
+        {% for ii in (1..section.settings.max_cols) %}   
+            <div class="columns large-{{cols_css}}">               
+                {% capture i %}{% cycle "1", "2" %}{% endcapture %}
+                {{ 'lifestyle-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
+            </div>
+        {% endfor %}
+      {% endif %}
+    </div>    
+
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Featured Blog",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured blog"
+      },
+      {
+        "id": "blog",
+        "type": "blog",
+        "label": "Choose Blog"
+      },
+      {
+        "type": "range",
+        "id": "max_cols",
+        "label": "Maximum Articles",
+        "min": 2,
+        "max": 50,
+        "step": 2,
+        "default": 6
+      },                 
+      {
+        "type": "header",
+        "content": "Article Display Options"
+      },      
+      {
+        "type": "checkbox",
+        "id": "display_title",
+        "label": "Display Title",
+        "default": true
+      },                        
+      {
+        "type": "checkbox",
+        "id": "display_excerpt",
+        "label": "Display Excerpt",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Display Settings",
+        "info":"More options for each below."
+      },      
+      {
+         "type":      "radio",
+         "id":        "display_type",
+         "label":     "Choose:",
+         "options": [
+           { "value": "grid", "label": "Grid" },
+           { "value": "slider", "label": "Slider" }           
+         ],
+         "default":   "grid"
+      },
+      {
+        "type": "checkbox",
+        "id": "wide",
+        "label": "Wide Display",
+        "default": false
+      },
+      {
+          "type": "text",
+          "id": "classes",
+          "label": "CSS Classes",
+          "info":"Advanced"
+      },
+      {
+        "type": "header",
+        "content": "Grid Settings"
+      },
+      {
+        "type": "range",
+        "id": "cols",
+        "label": "Products Per Row",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "default": 3
+      },      
+      {
+          "type": "header",
+          "content": "Slider Settings"
+      },      
+      {
+          "type": "checkbox",
+          "id": "arrows",
+          "label": "Show Navigation Arrows?",
+          "default":true
+      },
+      {
+          "type": "checkbox",
+          "id": "dots",
+          "label": "Show Navigation Dots?"
+      },
+      {
+          "type": "checkbox",
+          "id": "infinite",
+          "label": "Infinite Scrolling?"
+      },
+      {
+          "type": "number",
+          "id": "slides_to_show",
+          "label": "Slides To Show",
+          "default": 4
+      },
+      {
+          "type": "number",
+          "id": "slides_to_show_small",
+          "label": "Slides To Show On Mobile",
+          "default": 1
+      },
+      {
+          "type": "number",
+          "id": "slides_to_show_medium",
+          "label": "Slides To Show On Tablet",
+          "default": 3
+      },
+      {
+          "type": "number",
+          "id": "slides_to_scroll",
+          "label": "Slides To Scroll",
+          "default":1
+      },
+      {
+        "type": "checkbox",
+        "id": "slider_autoplay",
+        "label": "Auto Play",
+        "default":false
+      },
+      {
+        "type": "number",
+        "id": "slider_autoplay_secs",
+        "label": "Auto Play Delay",
+        "default":2,
+        "info": "Number of seconds before scrolling"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Blog",
+        "category": "Text"
+      }
+    ]
+  }
+
+{% endschema %}

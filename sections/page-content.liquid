@@ -1,0 +1,178 @@
+{% comment %}
+- Page content section
+- Displays the content of a page
+{% endcomment %}
+{% assign section_page = pages[section.settings.page] %}
+
+<div data-section-type="page-content" data-section-id="{{section.id}}" class="row">
+
+    {% include 'opacity-inverse', transparency: section.settings.opacity %}
+
+    <div class="bg-overlay-container {{section.settings.text_align}} {{section.settings.classes}} rel-position columns">
+        {%- if section.settings.bgcolor != "" -%}
+            <div class="bg-overlay" style="background-color:{{section.settings.bgcolor}};opacity:{{opacity}};"></div>
+        {%- endif -%}
+
+        <div class="bg-overlay-content">
+            <div class="bg-overlay-text">                        
+                {% if section.settings.display_title and section_page != empty and section_page.title != blank %}
+                    <h2 class="headline">{{section_page.title}}</h2>
+                {% elsif section.settings.display_title and section_page == empty %}
+                    <h2 class="headline">Your Page Title</h2>
+                {% endif %}
+
+                {% if section.settings.display_content and section_page != empty and section_page.content != blank %}
+                    <p>{{section_page.content}}</p>
+                {% elsif section.settings.display_content and section_page == empty %}
+                    <p>Your page content.</p>
+                {% endif %}   
+                            
+                <div class="bg-overlay-buttons">                                
+                    {% if section.settings.button_label != blank and section_page != empty %}                                
+                        <a href="{{section_page.url}}" class="button {{section.settings.button_color}} {{section.settings.button_style}} {% if section.settings.button_full_width %}full-width{% endif %}">{{section.settings.button_label}}</a>
+                    {% endif %}            
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page Content",
+  "class": "section-page-content",
+  "settings": [   
+    {
+        "type": "header",
+        "content": "Page Content"          
+    },  
+    {
+        "type": "page",
+        "id": "page",
+        "label": "Choose Page"            
+    },       
+    {
+        "type": "checkbox",
+        "id": "display_title",
+        "label": "Display Title",
+        "default": true
+    },      
+    {
+        "type": "checkbox",
+        "id": "display_content",
+        "label": "Display Content",
+        "default": false
+    },    
+    {
+        "type": "header",
+        "content": "Button Settings"          
+    },
+    {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label",
+        "default": "Read More"
+    },        
+    {
+        "type": "select",
+        "id": "button_color",
+        "label": "Button color",
+        "default":"primary",
+        "options": [
+        {
+            "value": "primary",
+            "label": "Primary"
+        },
+        {
+            "value": "secondary",
+            "label": "Secondary"
+        },
+        {
+            "value": "tertiary",
+            "label": "Tertiary"
+        },
+        {
+            "value": "white",
+            "label": "White"
+        }
+        ]
+    },
+    {
+        "type": "select",
+        "id": "button_style",
+        "label": "Button style",
+        "default":"fill",
+        "options": [
+        {
+            "value": "fill",
+            "label": "Fill"
+        },
+        {
+            "value": "hollow",
+            "label": "Hollow"
+        },
+        {
+            "value": "underline",
+            "label": "Underline"
+        }
+        ]
+    },                
+    {
+        "type": "checkbox",
+        "id": "button_full_width",
+        "label": "Full-Width"
+    },
+    {
+        "type": "header",
+        "content": "Display Settings"          
+    },
+    {
+        "type": "color",
+        "id": "bgcolor",
+        "label": "Background Color"                
+    },
+    {
+        "type": "range",
+        "id": "opacity",
+        "label": "Background Transparency",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 30,
+        "unit": "%"        
+    },       
+    {
+        "type": "select",
+        "id": "text_align",
+        "label": "Text alignment",
+        "default":"text-center",
+        "options": [
+        {
+            "value": "text-left",
+            "label": "Left"
+        },
+        {
+            "value": "text-center",
+            "label": "Center"
+        },
+        {
+            "value": "text-right",
+            "label": "Right"
+        }
+        ]
+    },          
+    {
+        "type": "text",
+        "id": "classes",
+        "label": "CSS Classes",
+        "info": "Advanced"
+    }     
+  ],
+  "presets": [
+    {
+      "name": "Page Content",
+      "category": "Text"      
+    }
+  ]
+}
+{% endschema %}

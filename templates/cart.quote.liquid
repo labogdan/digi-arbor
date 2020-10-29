@@ -1,0 +1,216 @@
+{% assign default_billing = customer.default_address %}
+{% assign default_shipping = customer.default_address %}
+
+<div class="cart-content" id="cart-template-content">
+    <div class="row">
+        {% if cart.item_count > 0 %}
+            <div class="columns small-12">
+                <div class="cart-quote-success padding-small-text hide-first" id="cart-quote-done">
+                    <div class="quote-border">
+                    <h3>Great! We have successfully created your quote.</h3>
+                    <p><i style="color:#ba3431;" class="fas fa-file-pdf"></i> <a target="_blank" href="" onclick="window.dataLayer.push({'event' : 'quoteCompleted'}); ">Download Quote as PDF</a></p>
+                    <p>Your quote number: <strong></strong></p>
+                    <small><em>{{shop.metafields.arbor.quote_message}}</em></small>
+                    </div>
+                    
+                    <div id="wufoo-mrchcox027y0u7"> Fill out my <a href="https://arborsci.wufoo.com/forms/mrchcox027y0u7">online form</a>. </div> 
+                    <!-- companion script in layout.theme.js -->
+                </div>
+            </div>
+            <div class="columns large-6 cart-quote-entry">
+                <div class="row">
+                    <div class="columns">
+                        <h3 class="padding-small-text">{{ 'cart.general.quote' | t }}</h3>
+                        <div id="cart-quote">                        
+                            <form class="checkout-go-form cart-quote-form" novalidate>
+                                <div class="row">
+                                    <div class="columns small-12">
+                                        <h5>Your Details</h5>
+                                    </div>                            
+                                    <div class="columns small-12">
+                                        <label for="quote-email">Email Address
+                                        <input type="email" name="quote[email]" id="quote-email" placeholder="jane@doe.com" class="required" value="{{customer.email}}">
+                                        </label>
+                                    </div>
+                                    <div class="columns small-12">
+                                        <input type="checkbox" name="quote[marketing]" id="quote-marketing" value="1">
+                                        <label for="quote-marketing">Sign Up for the CoolStuff Newsletter</label>
+                                    </div>
+                                  	<div id="quote-customer-notes" class="columns small-12">
+                                      <label for="CartSpecialInstructions" class="text-left">{{ 'cart.general.note' | t }}
+                                      	<textarea name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+                                      </label>
+                                      {% if settings.cart_fields %}                
+                                          {% section 'cart-fields' %}
+                                      {% endif %}
+                                      <div id="field-container-materials" class="cart-field-container ">
+                                          <label for="materials" class="text-left">When would you need the materials delivered? 
+                                              <input data-cart-field="9999" class=" cart-field-input" type="text" name="attributes[When would you need the materials delivered?]" id="field-materials-date" placeholder="" value="">
+                                          </label>
+                                      </div>
+                                  	</div>
+                                    <div class="columns small-12">
+                                        <h5>Billing Address</h5>
+                                    </div>
+                                    <div class="columns small-12">
+                                        <input type="checkbox" name="quote[billing_shipping]" id="quote-billing-shipping" checked value="1" onclick="$('.quote-billing').toggle();">
+                                        <label for="quote-billing-shipping">Same as Shipping?</label>
+                                    </div>                                
+                                    <div class="quote-billing columns small-12 medium-6">
+                                        <label for="quote-billing-fname">First Name
+                                        <input type="text" name="quote[billing_address][first_name]" id="quote-billing-fname" placeholder="Jane" class="required" value="">
+                                        </label>                             
+                                    </div>
+                                    <div class="quote-billing columns small-12 medium-6">
+                                        <label for="quote-billing-lname">Last Name
+                                        <input type="text" name="quote[billing_address][last_name]" id="quote-billing-lname" placeholder="Doe" class="required">
+                                        </label>                             
+                                    </div>
+                                    <div class="quote-billing columns small-12">
+                                        <label for="quote-billing-company">Institution
+                                        <input type="text" name="quote[billing_address][company]" id="quote-billing-company" placeholder="Acme, Inc." class="required">
+                                        </label>
+                                    </div>
+                                    <div class="quote-billing columns small-12">
+                                        <label for="quote-billing-phone">Phone Number
+                                        <input type="tel" name="quote[billing_address][phone]" id="quote-billing-phone" placeholder="xxx-xxx-xxxx" class="required">
+                                        </label>
+                                    </div>
+                                    <div class="quote-billing columns small-12">
+                                        <label for="quote-billing-address1">Address
+                                        <input type="text" name="quote[billing_address][address1]" id="quote-billing-address1" placeholder="123 Main St." class="required">
+                                        <input type="text" name="quote[billing_address][address2]" id="quote-billing-address2" placeholder="Unit 1">
+                                        </label>
+                                    </div>                                
+                                    <div class="quote-billing columns small-12">
+                                        <label for="quote-billing-city">City
+                                        <input type="text" name="quote[billing_address][city]" id="quote-billing-city" placeholder="Your City" class="required">
+                                        </label>
+                                    </div>
+                                    <div class="quote-billing cart-shipping-calc quote columns small-12">
+                                        <div class="cart-shipping-calc-input">
+                                            <div class="ship-calc-country-container hide-first">
+                                                <label for="ship-calc-country">Country
+                                                <select name="quote[billing_address][country]" class="ship-calc-country required" data-default="{{settings.cart_shipping_calc_country}}">{{ country_option_tags }}</select>
+                                                </label>    
+                                            </div>
+
+                                            <div class="ship-calc-province-container hide-first" id="ship-calc-province-container">
+                                                <label for="ship-calc-province">State/Province
+                                                <select name="quote[billing_address][province]" class="ship-calc-province required" data-default=""></select>
+                                                <input type="text" name="" class="ship-calc-province-text required" data-default="{{default_shipping.province}}" />
+                                                </label>
+                                            </div>
+
+                                            <div class="ship-calc-zip-container hide-first">
+                                                <label for="ship-calc-zip">Postal Code
+                                                <input name="quote[billing_address][zip]" type="text" id="ship-calc-zip" class="required">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>                          
+                                    <div class="columns small-12">
+                                        <h5>Shipping Address</h5>
+                                    </div>
+                                    <div class="columns small-12 medium-6">
+                                        <label for="quote-shipping-fname">First Name
+                                        <input type="text" name="quote[shipping_address][first_name]" id="quote-shipping-fname" placeholder="Jane" class="required" value="{{default_shipping.first_name}}">
+                                        </label>                             
+                                    </div>
+                                    <div class="columns small-12 medium-6">
+                                        <label for="quote-shipping-lname">Last Name
+                                        <input type="text" name="quote[shipping_address][last_name]" id="quote-shipping-lname" placeholder="Doe" class="required" value="{{default_shipping.last_name}}">
+                                        </label>                             
+                                    </div>
+                                    <div class="columns small-12">
+                                        <label for="quote-shipping-company">Institution
+                                        <input type="text" name="quote[shipping_address][company]" id="quote-shipping-company" placeholder="Acme, Inc." class="required" value="{{default_shipping.company}}">
+                                        </label>
+                                    </div>
+                                    <div class="columns small-12">
+                                        <label for="quote-shipping-phone">Phone Number
+                                        <input type="tel" name="quote[shipping_address][phone]" id="quote-shipping-phone" placeholder="xxx-xxx-xxxx" class="required" value="{{default_shipping.phone}}">
+                                        </label>
+                                    </div>
+                                    <div class="columns small-12">
+                                        <label for="quote-shipping-address1">Address
+                                        <input type="text" name="quote[shipping_address][address1]" id="quote-shipping-address1" placeholder="123 Main St." class="required" value="{{default_shipping.address1}}">
+                                        <input type="text" name="quote[shipping_address][address2]" id="quote-shipping-address2" placeholder="Unit 1" value="{{default_shipping.address2}}">
+                                        </label>
+                                    </div>                                
+                                    <div class="columns small-12">
+                                        <label for="quote-shipping-city">City
+                                        <input type="text" name="quote[shipping_address][city]" id="quote-shipping-city" placeholder="Your City" class="required" value="{{default_shipping.city}}">
+                                        </label>
+                                    </div>
+                                    <div class="cart-shipping-calc quote columns small-12">
+                                        <div class="ship-calc-country-container hide-first">
+                                            <label for="ship-calc-country">Country
+                                            <select name="quote[shipping_address][country]" class="ship-calc-country required" data-default="{% if customer and default_shipping.country and default_shipping.country != "" %}{{default_shipping.country}}{% else %}{{settings.cart_shipping_calc_country}}{% endif %}">{{ country_option_tags }}</select>
+                                            </label>    
+                                        </div>
+
+                                        <div class="ship-calc-province-container hide-first" id="ship-calc-province-container">
+                                            <label for="ship-calc-province">State/Province
+                                            <select name="quote[shipping_address][province]" class="ship-calc-province required" data-default="{{default_shipping.province}}"></select>
+                                            <input type="text" name="" class="ship-calc-province-text required" data-default="{{default_shipping.province}}" />
+                                            </label>
+                                        </div>
+
+                                        <div class="ship-calc-zip-container hide-first">
+                                            <label for="ship-calc-zip">Postal Code
+                                            <input name="quote[shipping_address][zip]" type="text" id="ship-calc-zip" class="required" value="{{default_shipping.zip}}">
+                                            </label>
+                                        </div>
+
+                                        <div class="cart-shipping-calc-input">                                        
+                                            <button class="button secondary ship-calc-go" data-quote data-loading-text="One Moment...">Select Shipping Rates</button>
+                                        </div>
+
+                                        <div class="cart-shipping-calc-error text-danger hide-first">
+                                          	No shipping method is available for your order. Please contact customer service at 800-367-6695 or <a href="mailto:helpdesk@arborsci.com">helpdesk@arborsci.com</a>.
+                                        </div>
+
+                                        <div class="cart-shipping-calc-success hide-first">
+                                            <div class="text-right">
+                                                <a class="cart-shipping-calc-reset" href="#">Change Destination</a>
+                                            </div>
+                                            <h5>Choose Your Shipping Rate</h5>
+                                            <div class="cart-shipping-calc-rates">
+                                                <ul></ul>                                            
+                                            </div>
+                                            <button onclick="window.dataLayer.push({'event' : 'quoteDetailsFormSubmitted'});" type="submit" class="button primary quote-go" data-loading-text="Creating...">Create Quote</button>
+                                            <div class="cart-quote-input-error text-danger hide-first">
+                                                Please complete all the required fields above.
+                                            </div>
+                                            <div class="cart-quote-error text-danger hide-first">
+                                                We're sorry. But we had an issue creating your quote. Please try again. If the problem continues please contact customer service at 800-367-6695 or <a href="mailto:helpdesk@arborsci.com">helpdesk@arborsci.com</a>.
+                                            </div>
+                                        </div>
+                                    </div>                                  	
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="columns large-6 cart-quote-cart">
+                {% include 'cart', cart_read_only: true %}
+            </div>
+        {% else %}
+            <div class="columns padding-small">
+                <h3 class="padding-small-text">{{ 'cart.general.quote' | t }}</h3>
+                {% comment %} Cart empty state {% endcomment %}
+                <div class="supports-cookies">
+                    <p>{{ 'cart.general.empty' | t }}</p>
+                    <p>{{ 'cart.general.continue_browsing_html' | t }}</p>
+                </div>
+
+                {% comment %} Cart no cookies state --------------------- Browser cookies are required to use the cart. If cookies aren't enabled in the browser a message is displayed prompting the user to enable them. {% endcomment %}
+                <div class="supports-no-cookies">
+                    <p>{{ 'cart.general.cookies_required' | t }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>

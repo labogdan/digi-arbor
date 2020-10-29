@@ -1,0 +1,35 @@
+{% assign mf_parts = block.settings.mf | split: "." %}
+{% assign mf_data = product.metafields[mf_parts[0]][mf_parts[1]] %}
+{% if mf_data and mf_data.size > 0 %}
+
+  {% if block.settings.slider %}
+  <div
+    class="related-products dyno-slider"
+    data-slider-arrows="{{block.settings.arrows}}"
+    data-slider-dots="{{block.settings.dots}}"
+    data-slider-infinite="{{block.settings.infinite}}"
+    data-slider-slides-to-show="{{block.settings.slides_to_show}}"
+    data-slider-slides-to-show-small="{{block.settings.slides_to_show_small}}"
+    data-slider-slides-to-show-medium="{{block.settings.slides_to_show_medium}}"
+    data-slider-slides-to-scroll="{{block.settings.slides_to_scroll}}"
+    data-slider-autoplay="{{block.settings.slider_autoplay}}"
+    data-slider-autoplay-secs="{{block.settings.slider_autoplay_secs}}">
+{% else %}
+  <div class="related-products row">
+{% endif %}
+      {% for object in mf_data %}
+        {% if block.settings.object_type == "product" and object.handle == product.handle %}
+          {% continue %}
+        {% endif %}
+        {% if block.settings.object_type == "article" %}
+        	{% assign grid_article = all_articles[object.handle] %}
+    		{% if grid_article.id == blank %}{% continue %}{% endif %}
+        	{% include 'article-grid-item'slider: block.settings.slider, column_flex: true %}
+        {% else %}
+        	{% assign grid_product = all_products[object.handle] %}
+    		{% if grid_product.id == blank %}{% continue %}{% endif %}
+        	{% include 'product-grid-item', grid_item_rowcount: 4, slider: block.settings.slider, column_flex: false, quick_view: block.settings.quick_view %}
+        {% endif %}
+      {% endfor %}
+  </div>
+{% endif %}

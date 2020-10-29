@@ -1,0 +1,109 @@
+{% comment %}
+- Included by image-with-text-overlay, slideshow sections, promotion tiles
+{% endcomment %}
+
+{% assign default = '1400x' %}
+{% assign size1 = '480x' %}
+{% assign size2 = '765x' %}
+{% assign size3 = '900x' %}
+{% assign size4 = '1000x' %}
+{% assign size5 = '1100x' %}
+{% assign size6 = '1300x' %}
+{% assign size7 = '1500x' %}
+{% assign size8 = '1700x' %}
+{% assign size9 = '1900x' %}
+{% assign size10 = '2000x' %}
+
+{% include 'opacity-inverse', transparency: tile_settings.opacity %}
+
+<div {% if is_block %}data-block="{{block.id}}"{% endif %} {% if in_slider %}data-slide="{{forloop.index0}}"{% endif %} style="{% if tile_settings.color and tile_settings.color != emtpy %}color:{{tile_settings.color}};{% endif %}" class="bg-overlay-container text-size-{{tile_settings.text_size}} {{tile_settings.height}} {{tile_settings.text_position}} {{tile_settings.text_align}} {{tile_settings.classes}} rel-position columns {% if in_slider %} slide-display slide-{{forloop.index}}{% else %}{{tile_settings.width}} {{tile_settings.width_mobile}}{% endif %}" {% if is_block %}{{ block.shopify_attributes }}{% endif %}>
+    {%- if tile_settings.bgcolor != "" -%}
+        <div class="bg-overlay" style="background-color:{{tile_settings.bgcolor}};opacity:{{opacity}};"></div>
+    {%- endif -%}
+
+    {%- if tile_settings.image_position == "background" and tile_settings.bgimage != nil -%}
+        <div class="bg-img lazy-image" style="background-image:url({%- include 'image-src', image_src: tile_settings.bgimage %});"></div>
+    {%- endif -%}
+
+    {% if tile_settings.image_position == "inline" and tile_settings.bgimage != nil %}
+                
+        <img 
+            alt="{{ tile_settings.bgimage.alt | escape }}"
+            class="lazy-image js-image-loaded"
+            sizes="100vw"
+            data-src="{{ tile_settings.bgimage | img_url: default, format: 'pjpg' }}"
+            bg_data-src="{{ tile_settings.bgimage | img_url: default, format: 'pjpg' }}"
+            srcset="
+            {{ tile_settings.bgimage | img_url: default, format: 'pjpg' }} {{default | replace: 'x', 'w'}},
+            {{ tile_settings.bgimage | img_url: size1, format: 'pjpg' }} {{size1 | replace: 'x', 'w'}},
+            {{ tile_settings.bgimage | img_url: size2, format: 'pjpg' }} {{size2 | replace: 'x', 'w'}},
+            {{ tile_settings.bgimage | img_url: size3, format: 'pjpg' }} {{size3 | replace: 'x', 'w'}},
+            {{ tile_settings.bgimage | img_url: size4, format: 'pjpg' }} {{size4 | replace: 'x', 'w'}},
+            {{ tile_settings.bgimage | img_url: size5, format: 'pjpg' }} {{size5 | replace: 'x', 'w'}},
+            {{ tile_settings.bgimage | img_url: size6, format: 'pjpg' }} {{size6 | replace: 'x', 'w'}},
+            {{ tile_settings.bgimage | img_url: size7, format: 'pjpg' }} {{size7 | replace: 'x', 'w'}},
+            {{ tile_settings.bgimage | img_url: size8, format: 'pjpg' }} {{size8 | replace: 'x', 'w'}},
+            {{ tile_settings.bgimage | img_url: size9, format: 'pjpg' }} {{size9 | replace: 'x', 'w'}},
+            {{ tile_settings.bgimage | img_url: size10, format: 'pjpg' }} {{size10 | replace: 'x', 'w'}}"/>
+
+    {% endif %}
+    
+    <div class="bg-overlay-content image-position-{{tile_settings.image_position}}">
+        <div class="bg-overlay-text ">    
+
+            {% if tile_settings.image and tile_settings.image != empty %}
+                <div class="bg-overlay-image">
+                    <img alt="{{ tile_settings.header | escape }}"
+                        class="lazy-image js-image-loaded"
+                        sizes="100vw"
+                        data-src="{{ tile_settings.bgimage | img_url: default, format: 'pjpg' }}"
+                        bg_data-src="{{ tile_settings.image | img_url: default, format: 'pjpg' }}"
+                        srcset="
+                        {{ tile_settings.image | img_url: default, format: 'pjpg' }} {{default | replace: 'x', 'w'}},
+                        {{ tile_settings.image | img_url: size1, format: 'pjpg' }} {{size1 | replace: 'x', 'w'}},
+                        {{ tile_settings.image | img_url: size2, format: 'pjpg' }} {{size2 | replace: 'x', 'w'}},
+                        {{ tile_settings.image | img_url: size3, format: 'pjpg' }} {{size3 | replace: 'x', 'w'}},
+                        {{ tile_settings.image | img_url: size4, format: 'pjpg' }} {{size4 | replace: 'x', 'w'}},
+                        {{ tile_settings.image | img_url: size5, format: 'pjpg' }} {{size5 | replace: 'x', 'w'}},
+                        {{ tile_settings.image | img_url: size6, format: 'pjpg' }} {{size6 | replace: 'x', 'w'}},
+                        {{ tile_settings.image | img_url: size7, format: 'pjpg' }} {{size7 | replace: 'x', 'w'}},
+                        {{ tile_settings.image | img_url: size8, format: 'pjpg' }} {{size8 | replace: 'x', 'w'}},
+                        {{ tile_settings.image | img_url: size9, format: 'pjpg' }} {{size9 | replace: 'x', 'w'}},
+                        {{ tile_settings.image | img_url: size10, format: 'pjpg' }} {{size10 | replace: 'x', 'w'}}"/>
+                </div>
+            {% endif %}
+
+            {% if tile_settings.preheader != blank %}<div class="bg-overlay-text-preheader">{{tile_settings.preheader}}</div>{% endif %}
+            {% if tile_settings.header != blank %}<div class="bg-overlay-text-header">{{tile_settings.header}}</div>{% endif %}
+            {% if tile_settings.content != blank %}<p class="bg-overlay-text-content">{{tile_settings.content}}</p>{% endif %}   
+            
+            {% if tile_settings.source_name != blank %}
+                {{ tile_settings.source_name }}<br>
+            {% endif %}
+
+            {% if tile_settings.source_company != blank %}
+                {% if tile_settings.source_link != blank %}<a target="_blank" href="{{ tile_settings.source_link }}">{% endif %}
+                <strong>{{ tile_settings.source_company }}</strong>
+                {% if tile_settings.source_link != blank %}</a>{% endif %}
+            {% endif %}         
+
+            <div class="bg-overlay-buttons">                                
+                {% if tile_settings.button1_text != blank %}                                
+                    <a href="{{tile_settings.button1_link}}" class="button {{tile_settings.button1_color}} {{tile_settings.button1_style}} {% if tile_settings.button1_full_width %}full-width{% endif %}" {% if tile_settings.button1_link contains "://" %}target="_blank"{% endif %}>{{tile_settings.button1_text}}</a>
+                    <style type="text/css">
+                    div[data-block="{{block.id}}"] a.button.hollow:hover {
+                      color:{{tile_settings.bgcolor}} !important;
+                    }
+                    </style>
+                {% endif %}
+                {% if tile_settings.button2_text != blank %}
+                    <a href="{{tile_settings.button2_link}}" class="button {{tile_settings.button2_color}} {{tile_settings.button2_style}} {% if tile_settings.button2_full_width %}full-width{% endif %}" {% if tile_settings.button2_link contains "://" %}target="_blank"{% endif %}>{{tile_settings.button2_text}}</a>
+                {% endif %}
+                {% if tile_settings.button3_text != blank %}
+                    <a href="{{tile_settings.button3_link}}" class="button {{tile_settings.button3_color}} {{tile_settings.button3_style}} {% if tile_settings.button3_full_width %}full-width{% endif %}" {% if tile_settings.button3_link contains "://" %}target="_blank"{% endif %}>{{tile_settings.button3_text}}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+

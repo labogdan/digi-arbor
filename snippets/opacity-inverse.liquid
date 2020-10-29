@@ -1,0 +1,5 @@
+{% assign transparency = transparency | plus: 0 %}
+{% capture opacity %}.{{100 | minus: transparency}}{% endcapture %}                       
+{% if opacity == ".100" %}
+    {% assign opacity = "1" %}
+{% endif %}

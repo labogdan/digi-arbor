@@ -1,0 +1,182 @@
+{% include 'content-transformations', content_transform: page.content %}
+{% assign page_img = blank %}
+{% if section.settings.page_img != blank %}
+  {% assign page_img = section.settings.page_img %}
+{% endif %}
+
+{% include 'opacity-inverse', transparency: section.settings.banner_opacity %}
+
+<div class="bg-overlay-container">
+  {%- if section.settings.banner_color != "" -%}
+      <div class="bg-overlay" style="background-color:{{section.settings.banner_color}};opacity:{{opacity}};"></div>
+  {%- endif -%}
+
+  {%- if page_img != nil -%}
+      <div class="bg-img" style="background-image:url({%- include 'image-src', image_src: page_img, image_src_sizing: "2048x" %});"></div>
+  {%- endif -%}
+
+  <div class="bg-overlay-content text-center">
+    {% if section.settings.display_title_img %}<h1>{{ page.title }}</h1>{% endif %}
+  </div>
+</div>
+
+{% unless section.settings.display_title_img %}
+  <div class="large-12 small-12 columns text-center">
+    <h1>{{page.title}}</h1>
+  </div>
+{% endunless %}
+
+<div class="row max-width" data-section-id="{{ section.id }}" data-section-type="page">
+
+  {% include 'breadcrumbs' %}
+  
+  <div class="small-12 {{section.settings.page_canvas_classes}} columns  page-container">
+
+    <div class="rte">
+      {{ page.content }}
+    </div>
+    
+    {% assign ul_exists = false %}
+    {% assign ul_started = false %}
+    {% assign ul_just_closed = true %}
+    
+    {% for block in section.blocks %}
+        {% if block.type == "accordion_item" %}
+            {% assign ul_exists = true %}
+            {% if ul_just_closed %}
+            <ul class="accordion" data-accordion {% if section.settings.multi_expand %}data-multi-expand="true"{% endif %} {% if section.settings.all_closed %}data-allow-all-closed="true"{% endif %}>
+            {% assign ul_just_closed = false %}
+            {% endif %}
+            <li class="accordion-item {% if block.settings.open %}is-active{% endif %}" data-accordion-item {{ block.shopify_attributes }}>
+            <a href="#" class="accordion-title">{{block.settings.title}}</a>
+            <div class="accordion-content" data-tab-content>
+                {{block.settings.content}}
+            </div>
+            </li>
+        {% elsif block.type == "accordion_break" %}
+            {% if ul_exists and forloop.index0 > 0 %}
+            </ul>
+            {% assign ul_just_closed = true %}
+            {% endif %}
+            <h2>{{block.settings.title}}</h2>
+            <p>{{block.settings.content}}</p>
+        {% endif %}
+    {% endfor %}
+    {% if ul_exists %}</ul>{% endif %}
+    
+  </div>
+  
+</div>
+
+
+{% schema %}
+  {
+    "name": "FAQ Page Settings",
+    "settings": [	         
+      {
+        "type": "header",
+        "content": "Banner Options"
+      },
+      {
+          "type": "image_picker",
+          "id": "page_img",
+          "label": "Default Page Banner"
+      },      
+      {
+          "type": "color",
+          "id": "banner_color",
+          "label": "Overlay Color",
+          "default": "#EEEEEE"              
+      },
+      {
+          "type": "range",
+          "id": "banner_opacity",
+          "label": "Overlay Color Transparency",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30,
+          "unit": "%"        
+      },        
+      {
+        "type": "checkbox",
+        "id": "display_title_img",
+        "label": "Display Title On Header Image",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Display Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_breadcrumbs",
+        "label": "Enable Breadcrumbs",
+        "default": true
+      },      
+      {
+        "type": "textarea",
+        "id": "page_canvas_classes",
+        "label": "Page Area Classes",
+        "default": "small-12 medium-9 large-9"
+      },      
+      {
+          "type": "header",
+          "content": "Accordion Settings"
+      },
+      {
+          "type": "checkbox",
+          "id": "multi_expand",
+          "label": "Allow Multiple Expanded",
+          "default": true
+      },
+      {
+          "type": "checkbox",
+          "id": "all_closed",
+          "label": "Allow All Closed",
+          "default": true
+      }
+	],
+	"blocks":[	    
+        {
+          "type": "accordion_item",
+          "name": "Accordion Item",
+          "settings":
+          [
+            {
+              "type": "textarea",
+              "id": "title",
+              "label": "Title"
+            },
+            {
+              "type": "textarea",
+              "id": "content",
+              "label": "Content"
+            },
+            {
+              "type": "checkbox",
+              "id": "open",
+              "label": "Start Open"
+            }
+          ]
+      },
+      {
+          "type": "accordion_break",
+          "name": "Accordion Break",
+          "settings":
+          [
+            {
+              "type": "textarea",
+              "id": "title",
+              "label": "Title"
+            },
+            {
+              "type": "textarea",
+              "id": "content",
+              "label": "Content"
+            }
+          ]
+      }
+	]
+}
+{% endschema %}

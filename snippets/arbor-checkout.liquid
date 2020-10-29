@@ -1,0 +1,35 @@
+{% capture pre_logic %}
+<script>
+  window.ac$ = window.Checkout.$;
+  var ac = {};
+  ac.marketing = false;    
+  ac.poNumber = "";
+  ac.email = "{{checkout.email}}";
+  ac.teNumber = "";
+  ac.teApplied = false;
+  ac.attributes = [];
+  {% for attr in checkout.attributes %}
+  ac.attributes.push({"name":"{{attr.first}}","value":"{{attr.last}}"});
+  {% if attr.first == "I am a..." and attr.last == "Teacher/Professor" %}
+  ac.marketing = true;
+  {% elsif attr.first == "I am a..." and attr.last == "Lab Supervisor" %}
+  ac.marketing = true;
+  {% elsif attr.first == "PO Number" %}
+  ac.poNumber = "{{attr.last}}";
+  {% elsif attr.first == "Tax Exemption Number" %}
+  ac.teNumber = "{{attr.last}}";
+  {% endif %}
+  {% endfor %}
+                      {% if customer %}
+                      {% for tag in customer.tags %}
+                      {% if tag contains "taxid:" %}
+                      	ac.teNumber = "{{tag | remove: 'taxid:'}}";
+                      {% endif %}
+                      {% endfor %}
+                      {% endif %}
+                      console.log(ac);
+</script>
+{% endcapture %}
+{{pre_logic | strip_newlines | strip | remove:  "	" | remove: "  "}}
+
+{{'arbor-checkout.js' | asset_url | script_tag}}

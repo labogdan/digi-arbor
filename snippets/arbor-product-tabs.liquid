@@ -1,0 +1,264 @@
+{% assign resources = false %}
+{% assign datasheets = "ProductDatasheet,ProductDatasheet1,ProductDatasheet2,ProductDatasheet3,ProductDatasheet4,ProductDatasheet5,ProductDatasheet6,ProductDatasheet7,ProductDatasheet8,ProductDatasheet9,ProductDatasheet10" | split: "," %}
+{% if product.metafields.arbor.Resources and product.metafields.arbor.Resources != "" %}
+{% assign resources = true %}
+{% endif %}
+{% for ds in datasheets %}
+{% if product.metafields.arbor[ds] and product.metafields.arbor[ds] != "" %}
+{% assign resources = true %}          
+{% endif %}
+{% endfor %}   
+{% if product.metafields.gsrelated.articles and product.metafields.gsrelated.articles.size > 0 %}
+{% assign resources = true %}
+{% endif %}
+{% if product.metafields.arbor.ProductTeachertube and product.metafields.arbor.ProductTeachertube != "" %}
+{% assign resources = true %}
+{% endif %}
+{% if product.metafields.arbor.ProductYoutube and product.metafields.arbor.ProductYoutube != "" %}
+{% assign resources = true %}
+{% endif %}
+
+
+<div class="tab-wrap">
+    <ul class="tabs" id="product-content-tabs" data-responsive-accordion-tabs="tabs medium-tabs small-accordion">
+      <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Overview</a></li> 
+      {% if resources %} <li class="tabs-title pending" id="tab-title-resources"><a href="#panel2">Resources</a></li> {% endif %}
+      {% if product.metafields.arbor.ProductTabWhatsIncluded and product.metafields.arbor.ProductTabWhatsIncluded != "" %}
+      <li class="tabs-title pending" id="tab-title-included"><a href="#panel3">What's Included</a></li>
+      {% endif %}
+      {% if product.metafields.arbor.FeaturesAndSpecs and product.metafields.arbor.FeaturesAndSpecs != "" %}
+      <li class="tabs-title pending" id="tab-title-specs"><a href="#panel4">Features &amp; Specs</a></li>
+      {% endif %}
+      {% if product.metafields.arbor.Standards and product.metafields.arbor.Standards != "" %}
+      <li class="tabs-title" id="tab-title-standards"><a href="#panel5">Standards</a></li>
+      {% endif %}
+      <li class="tabs-title pending" id="tab-title-accessories"><a href="#panel6">Accessories &amp; Replacements</a></li>
+      {% if product.metafields.arbor.ProductConceptualAcademy and product.metafields.arbor.ProductConceptualAcademy != "" %}
+      <li class="tabs-title" id="tab-title-standards"><a href="#panel7">Conceptual Academy Videos</a></li>
+      {% endif %}
+	</ul>
+  
+    <div class="tabs-content" data-tabs-content="product-content-tabs">
+
+      {% comment %}Overview{% endcomment %}
+      <div class="tabs-panel is-active" id="panel1">
+        {{product.description}}
+
+        <div class="safety-warnings">
+          {% if product.metafields.arbor.SafetyWarning1 and product.metafields.arbor.SafetyWarning1 != "" %}
+            <p>
+                <i class="fas fa-exclamation-triangle"></i>
+                Small Parts. Not for children under 3 years.
+            </p>
+          {% endif %}
+          {% if product.metafields.arbor.SafetyWarning2 and product.metafields.arbor.SafetyWarning2 != "" %}
+            <p>
+                <i class="fas fa-exclamation-triangle"></i>
+                Children under 8 years can choke or suffocate on uninflated or broken balloons. Adult supervision required.
+            </p>
+          {% endif %}
+          {% if product.metafields.arbor.SafetyWarning3 and product.metafields.arbor.SafetyWarning3 != "" %}
+            <p>
+                <i class="fas fa-exclamation-triangle"></i>
+                Toy is a small ball. Not for children under 3 years.
+            </p>
+          {% endif %}
+          {% if product.metafields.arbor.SafetyWarning4 and product.metafields.arbor.SafetyWarning4 != "" %}
+            <p>
+                <i class="fas fa-exclamation-triangle"></i>
+                Toy contains a small ball. Not for children under 3 years.
+            </p>
+          {% endif %}
+          {% if product.metafields.arbor.SafetyWarning5 and product.metafields.arbor.SafetyWarning5 != "" %}
+            <p>
+                <i class="fas fa-exclamation-triangle"></i>
+                Toy is a marble. Not for children under 3 years.
+            </p>
+          {% endif %}
+          {% if product.metafields.arbor.SafetyWarning6 and product.metafields.arbor.SafetyWarning6 != "" %}
+            <p>
+                <i class="fas fa-exclamation-triangle"></i>
+                Small parts. Toy contains a marble. Not for children under 3 years.
+            </p>
+          {% endif %}
+          {% if product.metafields.arbor.SafetyWarning7 and product.metafields.arbor.SafetyWarning7 != "" %}
+            <p>
+                <i class="fas fa-exclamation-triangle"></i>
+                Products being sold are not toys. They are for Educational / Labratory use only. They are not for use by children 12 and under.
+            </p>
+          {% endif %}
+        </div>
+
+      </div>
+
+
+      {% if resources %}
+      {% comment %}Resources {% endcomment %}
+      <div class="tabs-panel" id="panel2">
+        
+        <div class="row">
+
+          {% if product.metafields.arbor.ProductTeachertube and product.metafields.arbor.ProductTeachertube != "" %}
+          {% assign videos_teacher = product.metafields.arbor.ProductTeachertube | split: "," %}
+          {% endif %}
+          {% if product.metafields.arbor.ProductYoutube and product.metafields.arbor.ProductYoutube != "" %}
+          {% assign videos_youtube = product.metafields.arbor.ProductYoutube | split: "," %}
+          {% endif %}
+
+          {% if videos_teacher.size > 0 or videos_youtube.size > 0 %}
+          <div class="columns small-12"><h6>Videos</h6></div>           	
+          {% for video in videos_youtube %}
+          {% assign video_split = video | split: "?v=" %}
+          <div class="columns small-12 large-4">
+            <div class="resource">
+              <div class="video-responsive"><iframe width="560" height="315" src="https://www.youtube.com/embed/{{video_split | last}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+            </div>
+          </div>
+          {% endfor %}
+          {% for video in videos_teacher %}
+          {% assign video_split = video | split: "video_id=" %}
+          {% assign video_split2 = video_split | last | split: "&" %}
+          <div class="columns small-4">
+            <div class="resource">    
+              <div class="video-responsive"><iframe width="560" height="315" src="https://www.teachertube.com/embed/video/{{video_split2[0]}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+            </div>
+          </div>
+          {% endfor %}
+          <script>var tabTitle = document.getElementById("tab-title-resources");tabTitle.classList.remove("pending");</script>
+
+          {% endif %}
+
+          {% if product.metafields.gsrelated.articles and product.metafields.gsrelated.articles.size > 0 %}
+            <div class="columns small-12"><h6>Blog Posts</h6></div>
+          	{% for this_related in product.metafields.gsrelated.articles %}
+              {% assign blog_article = articles[this_related.handle] %}
+              {% if blog_article.id == empty %}{% continue %}{% endif %}
+              <div class="columns small-12 large-4">
+                <div class="resource bp">
+                  <a class="image-pg" href="">
+                    <img src="{{blog_article.image | img_url: "200x"}}" alt="{{blog_article.title}}" class="">
+                  </a>                
+                  <a href="{{blog_article.url}}">{{blog_article.title}}</a>                
+                </div>
+              </div>
+             <script>var tabTitle = document.getElementById("tab-title-resources");tabTitle.classList.remove("pending");</script>
+          	{% endfor %}            
+          {% endif %}
+
+           
+          	
+          {% if resources %}
+          <div class="columns small-12"><h6>Other Resources</h6></div>
+          <div class="columns small-12 large-12 d-or">
+            <ul>
+            
+            {% for ds in datasheets %}
+              {% assign dsTitle = ds | append: "Title" %}
+              {% if product.metafields.arbor[ds] and product.metafields.arbor[ds] != "" %}
+                {% if product.metafields.arbor[dsTitle] and product.metafields.arbor[dsTitle] != "" %}
+                    {% assign dsTitleDisplay = product.metafields.arbor[dsTitle] %}
+                {% else %}
+                    {% assign dsTitleDisplay = "Datasheet: " | append: product.metafields.arbor[ds] %}
+                {% endif %}
+                {% assign dsCheck = product.metafields.arbor[ds] | downcase | slice: 0, 4 %}
+                <li class="large-4 small-12">
+                  <a href="{% unless dsCheck == "http" %}https://asc-mag-media.s3.amazonaws.com/datasheet/{% endunless %}{{product.metafields.arbor[ds]}}" target="_blank">{{dsTitleDisplay}}</a>
+                </li>
+              {% endif %}
+            {% endfor %}                
+            {% if product.metafields.arbor.Resources and product.metafields.arbor.Resources != "" %}
+            	{{product.metafields.arbor.Resources | replace: '""', '"' | replace: "<a ", "<a target='_blank' " | remove: "<ul>" | remove: "</ul>"}}
+            {% endif %}
+            </ul>
+            <script>var tabTitle = document.getElementById("tab-title-resources");tabTitle.classList.remove("pending");</script>
+          </div>
+          {% endif %}
+
+        </div> 
+
+      </div>
+      {% endif %}
+        
+      {% comment %}What's Included{% endcomment %}
+      {% if product.metafields.arbor.ProductTabWhatsIncluded and product.metafields.arbor.ProductTabWhatsIncluded != "" %}
+      <div class="tabs-panel" id="panel3">
+        <h4>What’s Included</h4>
+        {{product.metafields.arbor.ProductTabWhatsIncluded}}
+        <script>var tabTitle = document.getElementById("tab-title-included");tabTitle.classList.remove("pending");</script>
+      </div>
+      {% endif %}
+
+      {% comment %}Specs{% endcomment %}
+      {% if product.metafields.arbor.FeaturesAndSpecs and product.metafields.arbor.FeaturesAndSpecs != "" %}
+        <div class="tabs-panel" id="panel4">
+          {{product.metafields.arbor.FeaturesAndSpecs | replace: '""', '"' | replace: "<a ", "<a target='_blank' "}}
+        </div>
+      	<script>var tabTitle = document.getElementById("tab-title-specs");tabTitle.classList.remove("pending");</script>
+      {% endif %}
+
+      {% comment %}Standards{% endcomment %}
+      {% if product.metafields.arbor.Standards and product.metafields.arbor.Standards != "" %}
+      <div class="tabs-panel" id="panel5">
+        {{product.metafields.arbor.Standards}}
+      </div>
+      {% endif %}
+
+      {% comment %}Accessories/Replacements{% endcomment %}
+      <div class="tabs-panel" id="panel6">
+        {% if product.metafields.gsrelated.accessories and product.metafields.gsrelated.accessories.size > 0 %}
+          <h4> Accessories</h4>
+
+          {% for this_related in product.metafields.gsrelated.accessories %}
+              {% assign grid_product = all_products[this_related.handle] %}
+              {% if grid_product.id == empty %}{% continue %}{% endif %}
+              {% include 'product-grid-item',
+                  grid_collection: collection,
+                  grid_item_loop_index: forloop.index0,
+                  grid_item_quick_view: false
+                  grid_item_quick_order: true,
+                  grid_item_cart_direct: true,
+                  grid_item_classes: "product-item-wrapper product-grid-item quickorder row",
+                  grid_item_display_quantity: true,
+                  grid_item_display_badge: false,
+                  grid_item_display_price: true,
+                  grid_item_add2cart: true,
+    			  grid_item_quantity_min: 0,
+                  grid_item_swatches: false %}
+        	<script>var tabTitle = document.getElementById("tab-title-accessories");tabTitle.classList.remove("pending");</script>
+          {% endfor %}
+        {% endif %}
+        <br>
+        {% if product.metafields.gsrelated.replacements and product.metafields.gsrelated.replacements.size > 0 %}
+          <h4> Replacements</h4>
+
+          {% for this_related in product.metafields.gsrelated.replacements %}
+              {% assign grid_product = all_products[this_related.handle] %}
+              {% if grid_product.id == empty %}{% continue %}{% endif %}
+              {% include 'product-grid-item',
+                  grid_collection: collection,
+                  grid_item_loop_index: forloop.index0,
+                  grid_item_quick_view: false
+                  grid_item_quick_order: true,
+                  grid_item_cart_direct: true,
+                  grid_item_classes: "product-item-wrapper product-grid-item quickorder row",
+                  grid_item_display_quantity: true,
+                  grid_item_display_badge: false,
+                  grid_item_display_price: true,
+                  grid_item_add2cart: true,
+    			  grid_item_quantity_min: 0,
+                  grid_item_swatches: false %}
+        	<script>var tabTitle = document.getElementById("tab-title-accessories");tabTitle.classList.remove("pending");</script>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+
+        {% comment %}Conceptual Academy{% endcomment %}
+        {% if product.metafields.arbor.ProductConceptualAcademy and product.metafields.arbor.ProductConceptualAcademy != "" %}
+        <div class="tabs-panel" id="panel7">
+          {{product.metafields.arbor.ProductConceptualAcademy}}
+        </div>
+        {% endif %}
+    </div>
+
+    </div>

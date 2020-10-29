@@ -1,0 +1,74 @@
+<style>
+  
+  :root {
+  
+    /*================ Colors - Text ================*/
+    --color-text-header-copy: {{settings.color_text_header_copy}};
+    --color-text-header-promo: {{settings.color_text_header_promo}};
+    --color-text-banner-heading: {{settings.color_text_banner_heading}};
+    --color-text-banner-copy: {{settings.color_text_banner_copy}};
+    --color-text-page-heading: {{settings.color_text_page_heading}};
+    --color-text-page-copy: {{settings.color_text_page_copy}};
+    --color-text-footer-heading: {{settings.color_text_footer_heading}};
+    --color-text-footer-copy: {{settings.color_text_footer_copy}};
+    --color-text-lines: {{settings.color_text_lines}};
+
+    /*================ Colors - Links/Buttons ================*/
+    --color-button-overlay: {{settings.color_button_overlay}};
+    --color-button-overlay-hover: {{settings.color_button_overlay | color_darken: 15}};
+    --color-button-copy: {{settings.color_button_copy}};
+    --color-button-copy-hover: {{settings.color_button_copy | color_darken: 15}};
+    --color-button-primary: {{settings.color_button_primary}};
+    --color-button-primary-hover: {{settings.color_button_primary | color_darken: 15}};
+    --color-button-secondary: {{settings.color_button_secondary}};
+    --color-button-secondary-hover: {{settings.color_button_secondary | color_darken: 15}};
+    --color-button-tertiary: {{settings.color_button_tertiary}};
+    --color-button-tertiary-hover: {{settings.color_button_tertiary | color_darken: 15}};
+    --color-link-primary: {{settings.color_link_primary}};
+    --color-link-primary-hover: {{settings.color_link_primary | color_darken: 15}};
+    --color-link-secondary: {{settings.color_link_secondary}};
+    --color-link-secondary-hover: {{settings.color_link_secondary | color_darken: 15}};
+    --color-link-header: {{settings.color_link_header}};
+    --color-link-header-hover: {{settings.color_link_header | color_darken: 15}};
+    --color-link-footer: {{settings.color_link_footer}};
+    --color-link-footer-hover: {{settings.color_link_footer | color_darken: 15}};
+    --radius-button-primary: {{settings.radius_button_primary}}px;
+    --radius-button-secondary: {{settings.radius_button_secondary}}px;
+    --radius-button-tertiary: {{settings.radius_button_tertiary}}px;
+
+    /*================ Colors - Backgrounds ================*/
+    --bgcolor-header: {{ settings.bgcolor_header }};
+    --bgcolor-header-top: {{ settings.bgcolor_header_top }};
+    --bgcolor-banners: {{ settings.bgcolor_banners }};
+    --bgcolor-nav: {{ settings.bgcolor_nav }};
+    --bgcolor-body: {{ settings.bgcolor_body }};
+    --bgcolor-footer: {{ settings.bgcolor_footer }};
+    --bgcolor-cart-ribbon: {{ settings.bgcolor_cart_ribbon }};
+
+    /*================ Typography Variables ================*/
+    --font-name-headings: {{ settings.font_name_headings }};
+    --font-weight-headings: {{ settings.font_weight_headings }};
+    --font-size-headings: {{ settings.font_size_headings }}px;
+    --font-name-body: {{ settings.font_name_body }};
+    --font-weight-body: {{ settings.font_weight_body }};
+    --font-size-body: {{ settings.font_size_body }}px;
+    --font-name-accent: {{ settings.font_name_accent }};
+    --font-weight-accent: {{ settings.font_weight_accent }};
+    --font-size-accent: {{ settings.font_size_accent }}px;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    
+    /*================ Sizing/Layout Variables ================*/
+    --display-site-width: {{ settings.display_site_width; }}px;
+    --display-content-width: {{ settings.display_content_width; }}px;
+    --display-text-width: {{ settings.display_text_width; }}px;
+    
+    /*============================================================================
+      Grid Breakpoints and Class Names
+        - Do not change the variable names
+    ==============================================================================*/
+    --grid-medium: {{settings.display_breakpoint_medium}}px;
+    --grid-large: {{settings.display_breakpoint_large}}px;
+    --grid-widescreen: {{settings.display_site_width}}px;
+  }
+</style>

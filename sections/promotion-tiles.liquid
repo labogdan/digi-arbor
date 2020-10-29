@@ -1,0 +1,608 @@
+{% assign slider_started = false %}
+{% assign slider_ended = false %}
+{% assign in_slider = false %}
+
+<div class="row">
+    <div class="{% if section.settings.wide %}wide small-12{% else %}small-10 small-offset-1{% endif %}">
+        <div class="row" data-section-id="{{section.id}}" data-section-type="dyno">            
+            {%- for block in section.blocks -%}
+                
+                {% if section.settings.slider_start > 0 and section.settings.slider_end > section.settings.slider_start and section.settings.slider_start == forloop.index %}
+                    {% assign slider_started = true %}                                                        
+                    <div
+                        class="dyno-slider columns no-padding"
+                        data-slider-arrows="{{section.settings.arrows}}"
+                        data-slider-dots="{{section.settings.dots}}"
+                        data-slider-infinite="{{section.settings.infinite}}"
+                        data-slider-slides-to-show="{{section.settings.slides_to_show}}"
+                        data-slider-slides-to-show-small="{{section.settings.slides_to_show_small}}"
+                        data-slider-slides-to-show-medium="{{section.settings.slides_to_show_medium}}"
+                        data-slider-slides-to-scroll="{{section.settings.slides_to_scroll}}"
+                        data-slider-autoplay="{{section.settings.slider_autoplay}}"
+                        data-slider-autoplay-secs="{{section.settings.slider_autoplay_secs}}">
+                        {% assign in_slider = true %}                
+                {% endif %}                
+
+                {% include 'section-tile' tile_settings: block.settings, section_type: "promotion_tiles", is_block: true, in_slider: in_slider %}                
+
+                {% if slider_started and section.settings.slider_end == forloop.index %}
+                    {% assign slider_ended = true %}
+                    {% assign in_slider = false %}
+                </div>
+                {% endif %}
+            {% endfor %}   
+            {% if slider_started and slider_ended == false %}            
+                </div>
+            {% endif %}                        
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+  "name": "Promotion Tiles",
+  "class": "section-promotion-tiles",
+  "settings": [              
+    {
+        "type": "text",
+        "id":"title",
+        "info":"An internal, optional, label to easily know what this content is in your theme editor.",
+        "label":"Internal Label"
+    },  
+    {
+        "type": "header",
+        "content": "Slider Settings",
+        "info": "Wrap all, or a range of, tiles in a slider. Set starting point to 0 to disable slider."
+    },
+    {
+        "type": "range",
+        "id": "slider_start",
+        "label": "Start Slider",
+        "info": "Choose the tile number to be the first slide.",
+        "min": 0,
+        "max": 3,
+        "step": 1,
+        "default": 0        
+    }, 
+    {
+        "type": "range",
+        "id": "slider_end",
+        "label": "End Slider",
+        "info": "Choose the tile number to be the last slide.",
+        "min": 2,
+        "max": 4,
+        "step": 1,
+        "default": 4       
+    },
+    {
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "Show Navigation Arrows?",
+        "default":true
+    },
+    {
+        "type": "checkbox",
+        "id": "dots",
+        "label": "Show Navigation Dots?"
+    },
+    {
+        "type": "checkbox",
+        "id": "infinite",
+        "label": "Infinite Scrolling?"
+    },
+    {
+        "type": "number",
+        "id": "slides_to_show",
+        "label": "Slides To Show",
+        "default": 1
+    },
+    {
+        "type": "number",
+        "id": "slides_to_show_small",
+        "label": "Slides To Show On Mobile",
+        "default": 1
+    },
+    {
+        "type": "number",
+        "id": "slides_to_show_medium",
+        "label": "Slides To Show On Tablet",
+        "default": 2
+    },
+    {
+        "type": "number",
+        "id": "slides_to_scroll",
+        "label": "Slides To Scroll",
+        "default":1
+    },
+    {
+        "type": "checkbox",
+        "id": "slider_autoplay",
+        "label": "Auto Play",
+        "default":false
+    },   
+    {
+      "type": "range",
+      "id": "slider_autoplay_secs",
+      "label": "Change slides every",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 6,
+      "unit": "sec"        
+    },
+    {
+        "type": "header",
+        "content": "General Display Settings"
+    },
+    {
+        "type": "checkbox",
+        "id": "wide",
+        "label": "Wide display"
+    }
+  ],  
+  "blocks": [
+    {
+        "type": "tile",
+        "name": "Tile",
+        "settings":
+        [       
+            {
+                "type": "text",
+                "id":"title",
+                "info":"An internal, optional, label to easily know what this content is in your theme editor.",
+                "label":"Internal Label"
+            },           
+            {
+                "type": "header",
+                "content": "Background Settings"
+            },
+            {
+                "type": "image_picker",
+                "id": "bgimage",
+                "label": "Background Image"
+            },
+            {
+                "type": "select",
+                "id": "image_position",
+                "label": "Background Image Position",
+                "default": "background",
+                "options": [
+                    {
+                    "value": "background",
+                    "label": "Background"
+                    },
+                    {
+                    "value": "inline",
+                    "label": "Inline"
+                    }
+                ],
+                "info":"Use 'Inline' for better performance and height determined by image vs 'Background' for better quality and height determined by content."
+            },
+            {
+                "type": "color",
+                "id": "bgcolor",
+                "label": "Background Color",
+                "default": "#EEEEEE"              
+            },
+            {
+                "type": "range",
+                "id": "opacity",
+                "label": "Background Transparency",
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "default": 30,
+                "unit": "%"        
+            },   
+            {
+                "type": "header",
+                "content": "Content"          
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"          
+            },
+            {
+                "type": "text",
+                "id": "preheader",
+                "label": "Pre Header"          
+            },
+            {
+                "type": "text",
+                "id": "header",
+                "label": "Header",
+                "default": "Your Text"
+            },
+            {
+                "type": "html",
+                "id": "content",
+                "label": "Content"
+            },
+            {
+                "type": "header",
+                "content": "Buttons"          
+            },
+            {
+                "type": "text",
+                "id": "button1_text",
+                "label": "Button 1 Text"
+            },
+            {
+                "type": "url",
+                "id": "button1_link",
+                "label": "Button 1 Link"
+            },
+            {
+                "type": "select",
+                "id": "button1_color",
+                "label": "Button 1 Color",
+                "default":"primary",
+                "options": [
+                    {
+                        "value": "primary",
+                        "label": "Primary"
+                    },
+                    {
+                        "value": "secondary",
+                        "label": "Secondary"
+                    },
+                    {
+                        "value": "tertiary",
+                        "label": "Tertiary"
+                    },
+                    {
+                        "value": "white",
+                        "label": "White"
+                    }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "button1_style",
+                "label": "Button 1 Style",
+                "default":"fill",
+                "options": [
+                    {
+                        "value": "fill",
+                        "label": "Fill"
+                    },
+                    {
+                        "value": "hollow",
+                        "label": "Hollow"
+                    },
+                    {
+                        "value": "underline",
+                        "label": "Underline"
+                    }
+                ]
+            },                
+            {
+                "type": "checkbox",
+                "id": "button1_full_width",
+                "label": "Button 1 Full-Width"
+            },
+            {
+                "type": "text",
+                "id": "button2_text",
+                "label": "Button 2 Text"
+            },
+            {
+                "type": "url",
+                "id": "button2_link",
+                "label": "Button 2 Link"
+            },
+            {
+                "type": "select",
+                "id": "button2_color",
+                "label": "Button 2 Color",
+                "default":"primary",
+                "options": [
+                    {
+                        "value": "primary",
+                        "label": "Primary"
+                    },
+                    {
+                        "value": "secondary",
+                        "label": "Secondary"
+                    },
+                    {
+                        "value": "tertiary",
+                        "label": "Tertiary"
+                    },
+                    {
+                        "value": "white",
+                        "label": "White"
+                    }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "button2_style",
+                "label": "Button 2 Style",
+                "default":"fill",
+                "options": [
+                    {
+                        "value": "fill",
+                        "label": "Fill"
+                    },
+                    {
+                        "value": "hollow",
+                        "label": "Hollow"
+                    },
+                    {
+                        "value": "underline",
+                        "label": "Underline"
+                    }
+                ]
+            },                
+            {
+                "type": "checkbox",
+                "id": "button2_full_width",
+                "label": "Button 2 Full-Width"
+            },
+            {
+                "type": "text",
+                "id": "button3_text",
+                "label": "Button 3 Text"
+            },
+            {
+                "type": "url",
+                "id": "button3_link",
+                "label": "Button 3 Link"
+            },
+            {
+                "type": "select",
+                "id": "button3_color",
+                "label": "Button 3 Color",
+                "default":"primary",
+                "options": [
+                    {
+                        "value": "primary",
+                        "label": "Primary"
+                    },
+                    {
+                        "value": "secondary",
+                        "label": "Secondary"
+                    },
+                    {
+                        "value": "tertiary",
+                        "label": "Tertiary"
+                    },
+                    {
+                        "value": "white",
+                        "label": "White"
+                    }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "button3_style",
+                "label": "Button 3 Style",
+                "default":"fill",
+                "options": [
+                    {
+                        "value": "fill",
+                        "label": "Fill"
+                    },
+                    {
+                        "value": "hollow",
+                        "label": "Hollow"
+                    },
+                    {
+                        "value": "underline",
+                        "label": "Underline"
+                    }
+                ]
+            },                
+            {
+                "type": "checkbox",
+                "id": "button3_full_width",
+                "label": "Button 3 Full-Width"
+            },
+            {
+                "type": "header",
+                "content": "Display Settings"          
+            },    
+            {
+                "type": "select",
+                "id": "width",
+                "label": "Desktop Width",
+                "default":"",
+                "options": [
+                    {
+                        "value": "",
+                        "label": "Automatic"
+                    },
+                    {
+                        "value": "large-6",
+                        "label": "One-Half"
+                    },
+                    {
+                        "value": "large-4",
+                        "label": "One-Third"
+                    },
+                    {
+                        "value": "large-3",
+                        "label": "One-Quarter"
+                    },
+                    {
+                        "value": "large-8",
+                        "label": "Two-Thirds"
+                    },
+                    {
+                        "value": "large-9",
+                        "label": "Three-Quarters"
+                    },
+                    {
+                        "value": "large-12",
+                        "label": "Full-Width"
+                    }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "width_mobile",
+                "label": "Mobile Width",
+                "default":"small-12",
+                "options": [
+                    {
+                        "value": "",
+                        "label": "Automatic"
+                    },
+                    {
+                        "value": "small-6",
+                        "label": "One-Half"
+                    },
+                    {
+                        "value": "small-4",
+                        "label": "One-Third"
+                    },
+                    {
+                        "value": "small-3",
+                        "label": "One-Quarter"
+                    },
+                    {
+                        "value": "small-8",
+                        "label": "Two-Thirds"
+                    },
+                    {
+                        "value": "small-9",
+                        "label": "Three-Quarters"
+                    },
+                    {
+                        "value": "small-12",
+                        "label": "Full-Width"
+                    }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "height",
+                "label": "Height",
+                "default": "height-small",
+                "options": [
+                    {
+                        "value": "height-small",
+                        "label": "Small"
+                    },
+                    {
+                        "value": "height-medium",
+                        "label": "Medium"
+                    },
+                    {
+                        "value": "height-large",
+                        "label": "Large"
+                    }
+                ]
+            },                            
+            {
+                "type": "color",
+                "id": "color",
+                "label": "Text Color"
+            },
+            {
+                "type": "range",
+                "id": "text_size",
+                "label": "Text Size",                
+                "min": 1,
+                "max": 6,
+                "step": 1,
+                "default": 1
+            }, 
+            {
+                "type": "select",
+                "id": "text_align",
+                "label": "Text alignment",
+                "default":"text-center",
+                "options": [
+                    {
+                        "value": "text-left",
+                        "label": "Left"
+                    },
+                    {
+                        "value": "text-center",
+                        "label": "Center"
+                    },
+                    {
+                        "value": "text-right",
+                        "label": "Right"
+                    }
+                ]
+            },
+            {
+                "type": "select",
+                "id": "text_position",
+                "label": "Text position",
+                "default":"content-center-center",
+                "options": [
+                    {
+                        "value": "content-top-left",
+                        "label": "Top Left"
+                    },
+                    {
+                        "value": "content-top-center",
+                        "label": "Top Center"
+                    },
+                    {
+                        "value": "content-top-right",
+                        "label": "Top Right"
+                    },
+                    {
+                        "value": "content-center-left",
+                        "label": "Center Left"
+                    },
+                    {
+                        "value": "content-center-center",
+                        "label": "Center Center"
+                    },
+                    {
+                        "value": "content-center-right",
+                        "label": "Center Right"
+                    },
+                    {
+                        "value": "content-bottom-left",
+                        "label": "Bottom Left"
+                    },
+                    {
+                        "value": "content-bottom-center",
+                        "label": "Bottom Center"
+                    },
+                    {
+                        "value": "content-bottom-right",
+                        "label": "Bottom Right"
+                    }
+                ]
+            },
+            {
+                "type": "text",
+                "id": "classes",
+                "label": "CSS Classes",
+                "info": "Advanced"
+            }
+        ]
+    }
+  ],
+    "presets": [
+        {
+        "name": "Promotion Tiles",
+        "category": "Image",
+        "settings":{
+            "wide":true                
+        },
+        "blocks": [
+            {
+            "type": "tile"            
+            },
+            {
+            "type": "tile"            
+            },
+            {
+            "type": "tile"
+            }
+        ]
+        }
+    ]
+}
+
+{% endschema %}

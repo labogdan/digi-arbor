@@ -1,0 +1,84 @@
+<!---JSON SCHEMA Product--->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.title | strip_html | escape }}",
+  "image": "{{ product.featured_image | product_img_url: 'master' }}",
+  {% if product.metafields.global.description_tag.size > 0 %}
+  	"description": "{{ product.metafields.global.description_tag | strip_html | escape }}",
+  {% else %}
+  	"description": "{{ product.description | strip_html | escape }}",
+  {% endif %}
+  "id": "{{ canonical_url }}",
+  "url": "{{ shop.url }}{{ product.url }}",
+  "sku": "{{ product.variants[0].id }}",
+  "mpn": "{{ product.selected_or_first_available_variant.sku }}",
+  "itemCondition": "New",
+  "brand": {
+    "@type": "Brand",
+    "name": "{{ product.vendor }}"
+  },
+  "releaseDate": "{{product.metafields.data.year}}",
+  {% if product.metafields.yotpo.reviews_count and product.metafields.yotpo.reviews_count != "0" %}
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "itemReviewed": "{{ product.title | strip_html | escape }}",
+    "ratingValue": "{% if product.metafields.yotpo.reviews_average %}{{ product.metafields.yotpo.reviews_average }}{% endif %}",
+    "reviewCount": "{% if product.metafields.yotpo.reviews_count %}{{ product.metafields.yotpo.reviews_count }}{% endif %}"
+  },
+  {% endif %}
+  
+  "offers": [
+  {% assign highprice = 0 %}
+  {% assign lowprice = 999999999 %}
+  {% assign vct = product.variants.size %}
+  {% assign ict = 0 %}
+    {% for variant in product.variants %}
+    {% assign ict = ict | plus: 1 %}
+    {
+    "@type": "Offer",
+    "url": "{{ shop.url }}{{ product.url }}",
+    "priceCurrency": "{{ shop.currency }}",
+    "price": "{{ variant.price | money_without_currency | remove: ',' }}",
+    "sku": "{{variant.id}}",
+    "mpn": "{{variant.sku}}",
+    "priceValidUntil": "2020-12-1",
+    "availability": "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+    "seller": {
+      "@type": "Organization",
+      "name": "{{ product.vendor }}"
+    }
+    }
+    {% if ict < vct %},{% endif %}
+    {% if variant.price < lowprice %}
+    	{% assign lowprice = variant.price %}
+    {% endif %}
+    {% if variant.price > highprice %}
+    	{% assign highprice = variant.price %}
+    {% endif %}
+    {% endfor %}
+    
+  
+  ,{ 
+    "@type": "AggregateOffer",
+    "url": "{{ shop.url }}{{ product.url }}",
+    "priceCurrency": "{{ shop.currency }}",
+    
+    "highPrice": "{{ highprice | money_without_currency | replace: ",", "" | replace: "USD", ""  }}",
+    "lowPrice": "{{ lowprice | money_without_currency | remove: ',' | replace: "USD", ""  }}",
+    "offerCount": "{{vct}}",
+    "priceValidUntil": "2020-12-1",
+    "availability": "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+    "seller": {
+      "@type": "Organization",
+      "name": "{{ product.vendor }}"
+    }
+   }
+  ]
+  
+  {% if product.selected_or_first_available_variant.barcode %}
+  	,"gtin8": "{{product.selected_or_first_available_variant.barcode}}"
+  {% endif %}
+}
+</script>

@@ -1,0 +1,368 @@
+{% assign display_blocks = 0 %}
+{% assign last_display_block = 0 %}
+{% capture footer_scripts %}
+  {% for block in section.blocks %}
+    {% if block.type == "footer_script" %}
+      <!-- Footer Script: {{block.settings.title}} -->
+      {{block.settings.script}}    
+    {% else %}
+      {% assign display_blocks = display_blocks | plus: 1 %}
+      {% assign last_display_block = block.id %}
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+
+
+
+<footer class="footer padding-small">
+  <div class="footer-upper">
+  	<div class="row">
+      {% for block in section.blocks %}
+
+      {% capture tablet_class %}
+        {% if forloop.first == true %}first{% else %}medium-6{% endif%}
+      {% endcapture %}
+
+    	{% if block.type == "news_letter" %}{% continue %}{% endif %}
+        {% if block.type == "footer_script" %}{% continue %}{% endif %}
+        <div class="columns small-12 {{ tablet_class }} large-expand" {{ block.shopify_attributes }}>
+          {% if block.type == 'logo' %}
+            <div class="text-{{block.settings.text_align}}">
+              {% if block.settings.image %}
+                <img  src="{{ block.settings.image | img_url: '100x' }}"
+                      alt="{{ block.settings.image.alt | escape }}"
+                      class="footer-logo lazy-image"
+                      data-sizes="25vw"                      
+                      data-src="{{ block.settings.image | img_url: '2048x' }}"
+                      data-srcset=" {{ block.settings.image | img_url: '200x' }} 200w,
+                                    {{ block.settings.image | img_url: '300x' }} 300w,
+                                    {{ block.settings.image | img_url: '400x' }} 400w,
+                                    {{ block.settings.image | img_url: '500x' }} 500w,
+                                    {{ block.settings.image | img_url: '600x' }} 600w,
+                                    {{ block.settings.image | img_url: '1000x' }} 1000w"
+                   />
+              {% else %}
+                <div class="logo">{{ shop.name }}</div>
+              {% endif %}
+            </div>
+
+ 
+          {% elsif block.type == 'link_list' %}
+            <div class="footer_menu">
+              {% if block.settings.menu != blank %}
+                <h6>{{ linklists[block.settings.menu].title }}<span class="right icon-down-arrow"></span></h6>
+                <div class="toggle_content">
+                  <ul class="menu vertical">
+                    {% for link in linklists[block.settings.menu].links %}
+                      <li><p><a href="{{ link.url }}">{{ link.title }}</a></p></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% else %}
+                <h6>Menu title<span class="right icon-down-arrow"></span></h6>
+                <div class="toggle_content">
+                  <ul class="menu vertical">
+                    <li><p>{{ 'homepage.onboarding.no_content' | t }}</p></li>
+                  </ul>
+                </div>
+              {% endif %}
+            </div>
+
+          {% elsif block.type == 'text' %}
+            <div class="footer_content footer-text">
+              {% if block.settings.title != blank %}
+                <h6>{{ block.settings.title }}<span class="right icon-down-arrow"></span></h6>
+                <div class="toggle_content">
+                  {{ block.settings.content }}
+                </div>
+              {% else %}
+              	<div class="toggle_content">
+                  {{ block.settings.content }}
+                </div>
+              {% endif %}
+            </div>
+          {% elsif block.type == 'page' %}
+            <div class="footer_content footer-text">
+              {% if block.settings.page != blank %}
+                <h6>{{ pages[block.settings.page].title }}<span class="right icon-down-arrow"></span></h6>
+                <div class="toggle_content">
+                  {{ pages[block.settings.page].content }}
+                </div>
+              {% else %}
+                <h6>Page title<span class="right icon-down-arrow"></span></h6>
+                <div class="toggle_content">
+                  <p>{{ 'homepage.onboarding.no_content' | t }}</p>
+                </div>
+              {% endif %}
+            </div>
+         
+          {% elsif block.type == 'empty' %}
+            <div class="empty-column"></div>
+
+          {% endif %}
+        </div>
+        
+      {% endfor %}
+    
+    </div>
+  </div>
+</footer>
+
+{% for block in section.blocks %}
+  {% if block.type == "news_letter" %}
+    <div class="footer-newsletter">
+      <div class="large-12 columns text-{{section.settings.text_align}}">
+        {% include 'newsletter-form-display', block.settings %}
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+<footer class="footer padding-small">
+	<div class="row">
+      <div class="large-12 columns text-{{section.settings.text_align}}">
+        <div class="row">
+          <div class="small-12 medium-6 large-6 columns copyright">
+            <p class="credits">
+              &copy; {{ "now" | date: "%Y" }} {{ shop.name | link_to: '/' }}
+              {{ section.settings.copyright_text }}
+            </p>
+
+            {% if section.settings.display_payment_methods %}
+            <div class="payment-icons">
+              {% for type in shop.enabled_payment_types %}
+              {{ type | payment_type_svg_tag: class:'payment-icon icon' }}
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          <div class="small-12 medium-6 large-6 columns social-icons">
+
+            <div class="footer-social-icons">
+              <h6>Follow Us</h6> 
+
+              {% include 'social-media-icons' %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</footer>
+
+{{ footer_scripts | strip }}
+
+{% schema %}
+
+{
+  "name": "Footer",
+  "class": "footer-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text"
+    },    
+    {
+      "type": "checkbox",
+      "id": "display_payment_methods",
+      "label": "Show payment method icons",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    }
+  ],
+  "blocks": [
+    {
+    "type": "news_letter",
+	"name": "Newsletter Form",
+     "settings": [
+        {
+          "type": "textarea",
+          "id": "newsletter_text",
+          "label": "Newsletter promo text"
+        },
+        {
+          "type": "textarea",
+          "id": "newsletter_text_classes",
+          "label": "Promo Area Classes",
+          "default": "small-12 large-expand medium-expand large-text-right small-text-center"
+        },
+        {
+          "type": "html",
+          "id": "newsletter_embed",
+          "label": "Third party embed code"
+        },
+        {
+          "type": "textarea",
+          "id": "newsletter_embed_classes",
+          "label": "Embed Area Classes",
+          "default": "small-12 large-expand medium-expand small-only-text-center"
+        }
+      ]
+    },
+	{
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Logo alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "checkbox",
+          "id": "social_icons_footer",
+          "label": "Show social media footer icons",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "link_list",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "info": "This menu won't show drop-down items"
+        },
+        {
+          "type": "checkbox",
+          "id": "social_icons_footer",
+          "label": "Show social media footer icons",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "page",
+      "name": "Page",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Content page"
+        },
+        {
+          "type": "checkbox",
+          "id": "social_icons_footer",
+          "label": "Show social media footer icons",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text/HTML",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Title"
+        },
+        {
+          "type": "html",
+          "id": "content",
+          "label": "Text",
+          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "social_icons_footer",
+          "label": "Show social media footer icons",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "empty",
+      "name": "Empty column",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "social_icons_footer",
+          "label": "Show social media footer icons",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "footer_script",
+      "name": "Footer Script",
+      "settings":
+      [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Script Label",
+            "info": "An internal label to keep track of this script."
+        },
+        {
+            "type": "textarea",
+            "id": "script",
+            "label": "Script Code",
+            "placeholder": "<script>.....</script>"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "logo"
+      },
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "text"
+      }
+    ]
+  }
+}
+
+{% endschema %}

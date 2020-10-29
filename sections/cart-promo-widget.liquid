@@ -1,0 +1,48 @@
+{% comment %}
+    Section displayed on the cart to display promotion progress content and meter
+{% endcomment %}
+
+{% assign amount_needed = section.settings.amount | times: 100 %}
+{% assign cart_total = cart.total_price %}
+{% assign remaining_amount = amount_needed | minus: cart_total %}
+<div class="cart-promo" data-goal="{{ amount_needed }}" data-promo="{{ section.settings.promo_earned }}">
+  <div class="cart-promo-container">
+      <h2 class="cart-promo-title">{{ section.settings.title }}</h2>
+      <p class="cart-promo-message">
+        {% if cart_total >= amount_needed %}
+        You've Earned <span class="promo-earned-message">{{ section.settings.promo_earned }}</span>!
+        {% else %}
+        You're <span class="goal-amount">{{ remaining_amount | money }}</span> Away From <span class="promo-earned-message">{{ section.settings.promo_earned }}</span>!
+        {% endif %}
+      </p>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Cart Promotion",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Promo Title"
+      },
+      {
+        "type": "text",
+        "id": "promo_earned",
+        "label": "Promotion Earned"
+      },
+      {
+        "type": "text",
+        "id": "amount",
+        "label": "Amount Needed to Reach Promotion"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

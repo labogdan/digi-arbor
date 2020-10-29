@@ -1,0 +1,29 @@
+{% assign parent_menu_offset = forloop.index0 %} 
+{% assign links_left_for_display = linklists[parent_link_handle].links.size | minus: parent_menu_offset %}   
+
+{% if links_left_for_display >= forloop.index and forloop.last %}
+    {% assign parent_menu_limit = links_left_for_display %}
+{% elsif section.blocks.size >= forloop.index %}
+    {% assign parent_menu_limit = 1 %}
+{% else %}
+    {% assign parent_menu_limit = section.blocks.size | minus: forloop.index %}
+{% endif %}
+
+<div class="dropdown_column__menu">                                
+<ul class="no-bullets">
+    {% for link in linklists[parent_link_handle].links offset: parent_menu_offset limit: parent_menu_limit %}
+    <li>
+        <a class="dropdown_title" href="{{ link.url }}" class="menu-parent">{{ link.title }}</a>
+        {% if link.links.size > 0 %}                        
+            <ul class="no-bullets">
+            {% for sublink in link.links %}
+                <li>
+                <a href="{{ sublink.url }}">{{ sublink.title }}</a>
+                </li>
+            {% endfor %}
+            </ul>                        
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>                
+</div> 

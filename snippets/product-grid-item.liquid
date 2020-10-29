@@ -1,0 +1,118 @@
+{% comment %}
+- Reusable snippet for the display of a particular product item. Used in sections like collections, featured collections, related
+products etc...
+{% endcomment %}
+
+{% unless slider %}
+    {% assign slider = false %}
+{% endunless %}
+{% unless grid_item_image_size %}
+    {% assign grid_item_image_size = "1024x" %}
+{% endunless %}
+{% unless grid_item_loop_index %}
+    {% assign grid_item_loop_index = 0 %}
+{% endunless %}
+{% unless grid_item_display_badge %}
+    {% assign grid_item_display_badge = true %}
+{% endunless %}
+{% unless grid_item_display_image %}
+    {% assign grid_item_display_image = true %}
+{% endunless %}
+{% unless grid_item_display_title %}
+    {% assign grid_item_display_title = true %}
+{% endunless %}
+{% unless grid_item_display_price %}
+    {% assign grid_item_display_price = true %}
+{% endunless %}
+{% unless grid_item_rowcount %}
+    {% assign grid_item_rowcount = 0 %}
+{% endunless %}
+{% unless grid_item_rowcount_mobile %}
+    {% assign grid_item_rowcount_mobile = 1 %}
+{% endunless %}
+{% unless grid_item_quantity_min %}
+    {% assign grid_item_quantity_min = 1 %}
+{% endunless %}
+
+{% comment %} Determine the classes to use on desktop {% endcomment %}
+{% assign col_classes = grid_item_classes %}
+{% if grid_item_rowcount > 0 and slider == false %}
+    {% assign cols = 12 | divided_by: grid_item_rowcount %}
+    {% if grid_collection != empty and grid_collection.products_count < grid_item_rowcount %}
+        {% assign cols = 12 | divided_by: grid_collection.products_count %}
+    {% endif %}    
+    {% capture col_classes %}{{col_classes}} large-{{cols}}{% endcapture %}    
+{% endif %}
+
+{% comment %} Determine the classes to use on mobile {% endcomment %}
+{% if grid_item_rowcount_mobile > 0 and slider == false %}
+    {% assign cols = 12 | divided_by: grid_item_rowcount_mobile %}
+    {% if grid_collection != empty and grid_collection.products_count < grid_item_rowcount_mobile %}
+        {% assign cols = 12 | divided_by: grid_collection.products_count %}
+    {% endif %}    
+    {% capture col_classes %}{{col_classes}} small-{{cols}}{% endcapture %}    
+{% endif %}
+
+{% assign grid_item_data = grid_product %}
+{% assign grid_item_img = grid_product.featured_image %}
+{% assign grid_item_title = grid_product.title %}
+{% if grid_variant %}
+    {% assign grid_item_data = grid_variant %}
+    {% if grid_variant.image %}
+        {% assign grid_item_img = grid_variant.featured_image %}
+    {% endif %}
+    {% if grid_variant.title != "Default" %}
+        {% assign grid_item_title = grid_item_title | append: " &mdash; " | append: grid_variant.title %}
+    {% endif %}
+{% endif %}
+
+{% assign grid_item_image_classes = "lazyload" %}
+
+{% if grid_item_quick_order %}
+    {% include 'product-item-quickorder' %}    
+{% else %}
+    <div class="{{col_classes}} {% unless slider %}columns {% endunless %} product-item-wrapper product-grid-item {% if grid_product.price == 0 %}without-price{% endif %}" data-product-wrapper data-handle="{{grid_product.handle}}" data-product-id="{{grid_product.id}}">
+        {% if grid_product %}
+            {% if grid_product.price != 0 %}
+      			{% if grid_item_display_badge %}
+                	{% include 'product-badge', badge_product: grid_product %}
+            	{% endif %}
+      		{% endif %}
+            {% if grid_item_display_image %}
+                <a class="image-pg" href="{{ grid_product.url | within: collection }}{% if grid_variant %}?variant_id={{grid_variant.id}}{% endif %}" title="{{ grid_item_title }}">
+                    {% include 'image-tag',
+                        image_tag_src : grid_item_img,
+                        image_tag_alt: grid_item_img.alt
+                        image_tag_sizing: grid_item_image_size,
+                     %}
+                </a>
+            {% endif %}
+            {% if grid_item_display_title %}
+                <h5>
+                    <a href="{{ grid_product.url | within: collection }}{% if grid_variant %}?variant_id={{grid_variant.id}}{% endif %}" title="{{ grid_item_title }}">{{ grid_item_title }}</a>
+                </h5>
+                {%if template == "donotdisplay"%} <!-- formerly "index" -->
+                    <!-- Yotpo Star Rating -->
+                    <div class="yotpo bottomLine" data-product-id="{{ grid_product.id }}"></div>
+                {%endif%}
+            {% endif %}
+      		{% if grid_product.price != 0 %}
+              {% if grid_item_display_price %}
+                  {% include 'product-pricing', price_product: grid_product, price_data: grid_item_data, add2Cart: grid_item_add2Cart, swatches: grid_item_swatches %}        
+              {% endif %}
+              {% if grid_item_add2cart %}
+                  {% include 'product-item-form', product_item: grid_product, product_item_variant: grid_item_variant, swatches: grid_item_swatches %}            
+              {% endif %}
+      		{% endif %}
+            {% if grid_item_quick_view %}
+                <div class="text-center product-qv-wrapper">            
+                    <a href="#" class="product-quick-view button primary" data-handle="{{grid_product.handle}}" data-variant="{{grid_variant.id}}">Quick View</a>
+                </div>
+            {% endif %}
+        {% else %}
+            {% capture i %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
+            {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--slideshow' }}
+        {% endif %}
+      {% include 'pricing-data', pricing_data_type: "product", pricing_data_product: grid_product %}
+    </div>
+{% endif %}

@@ -1,0 +1,14 @@
+{% if settings.cart_type != 'page' %}
+<div class="off-canvas position-{{settings.cart_direction}}" id="cart-drawer" data-off-canvas data-options="contentScroll:false;">
+    <button class="close-button" aria-label="Close menu" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="cart-content" id="cart-drawer-content">
+        {% include 'cart', drawer: true %}
+    </div>
+</div>
+{% endif %}
+
+{% if settings.cart_ribbon_enable %}
+  {% include 'cart-ribbon' %}
+{% endif %}

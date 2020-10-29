@@ -1,0 +1,51 @@
+<div class="cart-shipping-calc text-left padding-small-text">
+    <h5 class="text-left">{{ 'cart.shipping_calculator.title' | t }}</h5>
+    {%- capture all_countries_tags -%}
+      {{ country_option_tags }}
+    {%- endcapture -%}
+
+    {%- assign all_countries_tags = all_countries_tags | split: '<option value="---" data-provinces="[]">---</option>' -%}
+    {%- assign all_countries_tags = all_countries_tags[1] -%}
+     <div class="cart-shipping-calc-input">
+        <div class="ship-calc-country-container hide-first">
+            <label for="ship-calc-country">Select Country
+            <select class="ship-calc-country" data-default="{{settings.cart_shipping_calc_country}}">{{ all_countries_tags }}</select>
+            </label>    
+        </div>
+
+        <div class="ship-calc-province-container hide-first" id="ship-calc-province-container">
+            <label for="ship-calc-province">Select State/Province
+            <select class="ship-calc-province" data-default=""></select>
+            <input type="text" class="ship-calc-province-text" />
+            </label>
+        </div>
+
+        <div class="ship-calc-city-container hide-first">
+            <label for="ship-city">City
+            <input type="text" id="ship-city">
+            </label>
+        </div>
+
+        <div class="ship-calc-zip-container hide-first">
+            <label for="ship-calc-zip">Postal Code
+            <input type="text" id="ship-calc-zip">
+            </label>
+        </div>
+
+        <button class="button secondary ship-calc-go" data-loading-text="One Moment...">{{ 'cart.shipping_calculator.button' | t }}</button>
+    </div>
+
+    <div class="cart-shipping-calc-error text-danger hide-first">
+      	No shipping method is available for your order. Please contact customer service at 800-367-6695 or <a href="mailto:helpdesk@arborsci.com">helpdesk@arborsci.com</a>.
+    </div>
+
+    <div class="cart-shipping-calc-success hide-first">
+        <div class="text-right">
+            <a class="cart-shipping-calc-reset" href="#">Change Destination</a>
+        </div>
+        <div class="cart-shipping-calc-rates">
+            <ul></ul>            
+            <small>*{{ 'cart.shipping_calculator.disclaimer' | t }}</small>
+        </div>
+    </div>
+</div>

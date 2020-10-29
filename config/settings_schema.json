@@ -1,0 +1,939 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "GS Habitat",
+    "theme_version": "2.0",
+    "theme_author": "Growth Spark",
+    "theme_documentation_url": "https:\/\/www.growthspark.com",
+    "theme_support_email": "theme-support@growthspark.com",
+    "theme_packaged_with": "@shopify\/slate-tools@1.0.0-beta.5"
+  },
+  {
+    "name": "Logos",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo_desktop",
+        "label": "Desktop Logo",
+        "info": "Recommended size: 300 x 300 pixels"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_mobile",
+        "label": "Mobile Logo",
+        "info": "Recommended size: 200 x 200 pixels"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_shortcut",
+        "label": "FAVICON",
+        "info": "Used for browser tabs. Will be scaled down to 32 x 32px."
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_social",
+        "label": "Social Sharing Image",
+        "info": "Used for sharing home page to social networks or any other page that does not have an image associated with it."
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "type": "color",
+        "id": "color_text_header_copy",
+        "label": "Header Content",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "color_text_header_promo",
+        "label": "Header Promo",
+        "default": "#ba1414"
+      },
+      {
+        "type": "color",
+        "id": "color_text_banner_heading",
+        "label": "Banner Headings",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "color_text_banner_copy",
+        "label": "Banner Copy",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "color_text_page_heading",
+        "label": "Page Headings",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "color_text_page_copy",
+        "label": "Page Copy",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "color_text_footer_heading",
+        "label": "Footer Headings",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "color_text_footer_copy",
+        "label": "Footer Copy",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "color_text_lines",
+        "label": "Lines & Borders",
+        "default": "#888888"
+      },
+      {
+        "type": "header",
+        "content": "Buttons\/Links"
+      },
+      {
+        "type": "color",
+        "id": "color_button_overlay",
+        "label": "Overlay Buttons",
+        "default": "#207ab8",
+        "info": "Used for buttons overlayed on backgrounds and images"
+      },
+      {
+        "type": "color",
+        "id": "color_button_copy",
+        "label": "Page Copy Buttons",
+        "default": "#207ab8",
+        "info": "Default button color for page content"
+      },
+      {
+        "type": "color",
+        "id": "color_button_primary",
+        "label": "Primary Buttons",
+        "default": "#207ab8"
+      },
+      {
+        "type": "color",
+        "id": "color_button_secondary",
+        "label": "Secondary Buttons",
+        "default": "#3ac4b8"
+      },
+      {
+        "type": "color",
+        "id": "color_button_tertiary",
+        "label": "Tertiary Buttons",
+        "default": "#a9c4b4"
+      },
+      {
+        "type": "color",
+        "id": "color_link_primary",
+        "label": "Primary Links",
+        "default": "#207ab8"
+      },
+      {
+        "type": "color",
+        "id": "color_link_secondary",
+        "label": "Secondary Links",
+        "default": "#3ac4b8"
+      },
+      {
+        "type": "color",
+        "id": "color_link_header",
+        "label": "Header Links",
+        "default": "#3ac4b8"
+      },
+      {
+        "type": "color",
+        "id": "color_link_footer",
+        "label": "Footer Links",
+        "default": "#3ac4b8"
+      },
+      {
+        "type": "header",
+        "content": "Button Shape",
+        "info": "The higher the radius, the more round the button gets."
+      },
+      {
+        "type": "range",
+        "id": "radius_button_primary",
+        "label": "Primary Button Radius",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 0,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "radius_button_secondary",
+        "label": "Secondary Button Radius",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 0,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "radius_button_tertiary",
+        "label": "Tertiary Button Radius",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 0,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Background Colors"
+      },
+      {
+        "type": "color",
+        "id": "bgcolor_header",
+        "label": "Header",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "bgcolor_header_top",
+        "label": "Header Top Bar",
+        "default": "#dddddd"
+      },
+      {
+        "type": "color",
+        "id": "bgcolor_banners",
+        "label": "Banners",
+        "default": "#aaaaaa"
+      },
+      {
+        "type": "color",
+        "id": "bgcolor_nav",
+        "label": "Navigation",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "bgcolor_cart_ribbon",
+        "label": "Cart Ribbon",
+        "default": "#944150",
+        "info": "Displayed when items added\/updated in cart"
+      },
+      {
+        "type": "color",
+        "id": "bgcolor_body",
+        "label": "Body",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "bgcolor_footer",
+        "label": "Footer",
+        "default": "#ffffff"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "html",
+        "id": "typography_scripts",
+        "label": "3rd Party Font Scripts",
+        "info": "e.g. Google Fonts, TypeKit, etc..."
+      },
+      {
+        "type": "header",
+        "content": "Headings"
+      },
+      {
+        "type": "text",
+        "id": "font_name_headings",
+        "label": "Font Name",
+        "default": "'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif",
+        "info": "e.g. 'proxima-nova', sans-serif"
+      },
+      {
+        "type": "range",
+        "id": "font_weight_headings",
+        "label": "Font Weight",
+        "min": 100,
+        "max": 900,
+        "step": 100,
+        "default": 400,
+        "info": "The higher the number the more bold."
+      },
+      {
+        "type": "range",
+        "id": "font_size_headings",
+        "label": "Font Size",
+        "min": 8,
+        "max": 50,
+        "step": 1,
+        "default": 22,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Body"
+      },
+      {
+        "type": "text",
+        "id": "font_name_body",
+        "label": "Font Name",
+        "default": "'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif",
+        "info": "e.g. 'proxima-nova', sans-serif"
+      },
+      {
+        "type": "range",
+        "id": "font_weight_body",
+        "label": "Font Weight",
+        "min": 100,
+        "max": 900,
+        "step": 100,
+        "default": 400,
+        "info": "The higher the number the more bold."
+      },
+      {
+        "type": "range",
+        "id": "font_size_body",
+        "label": "Font Size",
+        "min": 8,
+        "max": 50,
+        "step": 1,
+        "default": 12,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Accent\/Pre-Headings"
+      },
+      {
+        "type": "text",
+        "id": "font_name_accent",
+        "label": "Font Name",
+        "default": "'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif",
+        "info": "e.g. 'proxima-nova', sans-serif"
+      },
+      {
+        "type": "range",
+        "id": "font_weight_accent",
+        "label": "Font Weight",
+        "min": 100,
+        "max": 900,
+        "step": 100,
+        "default": 400,
+        "info": "The higher the number the more bold."
+      },
+      {
+        "type": "range",
+        "id": "font_size_accent",
+        "label": "Font Size",
+        "min": 8,
+        "max": 50,
+        "step": 1,
+        "default": 18,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Navigation \/ Menus",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Desktop Menu"
+      },
+      {
+        "type": "paragraph",
+        "content": "Select the number of custom mega menus to enable"
+      },
+      {
+        "type": "checkbox",
+        "id": "mega_menu_1",
+        "label": "Enable mega menu 1"
+      },
+      {
+        "type": "checkbox",
+        "id": "mega_menu_2",
+        "label": "Enable mega menu 2"
+      },
+      {
+        "type": "checkbox",
+        "id": "mega_menu_3",
+        "label": "Enable mega menu 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "mega_menu_4",
+        "label": "Enable mega menu 4"
+      },
+      {
+        "type": "checkbox",
+        "id": "mega_menu_5",
+        "label": "Enable mega menu 5"
+      },
+      {
+        "type": "checkbox",
+        "id": "mega_menu_6",
+        "label": "Enable mega menu 6"
+      },
+      {
+        "type": "header",
+        "content": "Mobile Menu"
+      },
+      {
+        "type": "text",
+        "id": "mobile_menu_title",
+        "label": "Menu Title",
+        "default": "Menu"
+      },
+      {
+        "type": "link_list",
+        "id": "mobile_menu",
+        "label": "Menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "select",
+        "id": "mobile_menu_direction",
+        "label": "Slide Direction",
+        "default": "left",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "mobile_menu_transition",
+        "label": "Slide Transition",
+        "default": "push",
+        "options": [
+          {
+            "value": "push",
+            "label": "Push"
+          },
+          {
+            "value": "overlap",
+            "label": "Overlap"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Display Options"
+      },
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart Type",
+        "default": "page",
+        "options": [
+          {
+            "value": "page",
+            "label": "Full Page"
+          },
+          {
+            "value": "drawer",
+            "label": "Slide Out"
+          },
+          {
+            "value": "drawer_mobile",
+            "label": "Slide Out Mobile Only"
+          },
+          {
+            "value": "drawer_desktop",
+            "label": "Slide Out Desktop Only"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "cart_direction",
+        "label": "Cart Slide Direction",
+        "info": "Only for 'Slide Out' cart type",
+        "default": "right",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_display_vendor",
+        "label": "Display Vendor?",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart notes",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_ribbon_enable",
+        "label": "Enable cart ribbon",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "cart_ribbon_delay",
+        "label": "How long should 'add to cart' ribbon display on top of page?",
+        "info": "Number is milliseconds",
+        "default": 5000
+      },
+      {
+        "type": "number",
+        "id": "cart_max_quantity",
+        "label": "Maximum number for quantity selector",
+        "default": 10
+      },
+      {
+        "type": "header",
+        "content": "Shipping Calculator"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_shipping_calc",
+        "label": "Enable Shipping Calculator"
+      },
+      {
+        "type": "text",
+        "id": "cart_shipping_calc_country",
+        "label": "Default Country",
+        "default": "United States"
+      },
+      {
+        "type": "header",
+        "content": "Cart Upsell",
+        "info": "This feature allows for the specification of rules to show upsell products in the cart.."
+      },
+      {
+        "type": "paragraph",
+        "content": "When enabled, a special section will appear above the Header section which will allow you to specify a set of rules for which products to show as upsell items."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_upsell",
+        "label": "Enable Cart Upsell"
+      },
+      {
+        "type": "header",
+        "content": "Cart Promo Widget",
+        "info": "This feature adds a customizable promotional widget to the the cart page or mini-cart that motivates customers to earn a reward the more they spend."
+      },
+      {
+        "type": "paragraph",
+        "content": "When enabled, a special section will appear above the Header section which will allow you to specify your promotional rules and messaging."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_promo",
+        "label": "Enable Cart Promo Widget"
+      },
+      {
+        "type": "header",
+        "content": "Additional Cart Fields",
+        "info": "This feature adds the ability to add special fields to the shopping cart that will appear as Order Attribute."
+      },
+      {
+        "type": "paragraph",
+        "content": "When enabled, a special section will appear above the Header section which will allow you to specify your additional fields."
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_fields",
+        "label": "Enable Cart Fields"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_fields_top",
+        "label": "Display Fields above Cart Note"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social sharing options"
+      },
+      {
+        "type": "checkbox",
+        "id": "social_sharing_blog",
+        "label": "Enable sharing for blog articles",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_facebook",
+        "label": "Share on Facebook",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_twitter",
+        "label": "Tweet on Twitter",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_pinterest",
+        "label": "Pin on Pinterest",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Sharing links"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter link"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook link"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest link"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram link"
+      },
+      {
+        "type": "text",
+        "id": "social_snapchat_link",
+        "label": "Snapchat link"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "Tumblr link"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "Youtube link"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo_link",
+        "label": "Vimeo link"
+      }
+    ]
+  },
+  {
+    "name": "Global Scripts",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Header Scripts and Snippets",
+        "info": "This advanced feature allows for custom script and the content of up to 5 theme snippets to be included before the end <\/head> tag"
+      },
+      {
+        "type": "html",
+        "id": "header_scripts",
+        "label": "Script Content"
+      },
+      {
+        "type": "snippet",
+        "id": "header_snippets_1",
+        "label": "Snippet 1"
+      },
+      {
+        "type": "snippet",
+        "id": "header_snippets_2",
+        "label": "Snippet 2"
+      },
+      {
+        "type": "snippet",
+        "id": "header_snippets_3",
+        "label": "Snippet 3"
+      },
+      {
+        "type": "snippet",
+        "id": "header_snippets_4",
+        "label": "Snippet 4"
+      },
+      {
+        "type": "snippet",
+        "id": "header_snippets_5",
+        "label": "Snippet 5"
+      },
+      {
+        "type": "header",
+        "content": "Footer Scripts and Snippets",
+        "info": "This advanced feature allows for custom script and the content of up to 5 theme snippets to be included before the end <\/body> tag"
+      },
+      {
+        "type": "textarea",
+        "id": "footer_scripts",
+        "label": "Script Content"
+      },
+      {
+        "type": "paragraph",
+        "content": "Do NOT add 'gs-scripts-footer' or 'customer-scripts-footer' since those are automatically included"
+      },
+      {
+        "type": "snippet",
+        "id": "footer_snippets_1",
+        "label": "Snippet 1"
+      },
+      {
+        "type": "snippet",
+        "id": "footer_snippets_2",
+        "label": "Snippet 2"
+      },
+      {
+        "type": "snippet",
+        "id": "footer_snippets_3",
+        "label": "Snippet 3"
+      },
+      {
+        "type": "snippet",
+        "id": "footer_snippets_4",
+        "label": "Snippet 4"
+      },
+      {
+        "type": "snippet",
+        "id": "footer_snippets_5",
+        "label": "Snippet 5"
+      }
+    ]
+  },
+  {
+    "name": "Advanced Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Responsive Display Settings"
+      },
+      {
+        "type": "number",
+        "id": "display_breakpoint_medium",
+        "label": "Medium Screen Width",
+        "default": 640
+      },
+      {
+        "type": "number",
+        "id": "display_breakpoint_large",
+        "label": "Large Screen Width",
+        "default": 1024
+      },
+      {
+        "type": "number",
+        "id": "display_site_width",
+        "label": "Max Site Width",
+        "default": 1580
+      },
+      {
+        "type": "number",
+        "id": "display_content_width",
+        "label": "Max Contents Width",
+        "default": 1260
+      },
+      {
+        "type": "number",
+        "id": "display_text_width",
+        "label": "Max Text Width",
+        "default": 800
+      },
+      {
+        "type": "header",
+        "content": "Pricing Rules",
+        "info": "This feature requires Shopify Plus and a companion Shopify Script to honor any price changes in the cart."
+      },
+      {
+        "type": "paragraph",
+        "content": "When enabled, a special section will appear below the Footer section which will allow you to specify a set of rules (customer tags) to affect a product's price."
+      },
+      {
+        "type": "checkbox",
+        "id": "pricing_rules",
+        "label": "Enable Pricing Rules"
+      },
+      {
+        "type": "header",
+        "content": "Nextopia"
+      },
+      {
+        "type": "paragraph",
+        "content": "Nextopia is a service that provides extended functionality of search results and collection pages. Only use these settings if the app is installed and really will be used."
+      },
+      {
+        "type": "paragraph",
+        "content": "Be sure to create a collection with the handle of 'search-results'."
+      },
+      {
+        "type": "text",
+        "id": "nxt_client_id",
+        "label": "Nextopia Client ID",
+        "info": "This will enable all other Nextopia settings. Retrieve this from GrowthSpark or the Nextopia representative."
+      },
+      {
+        "type": "checkbox",
+        "id": "nxt_recommendations",
+        "label": "Use Nextopia Recomendations"
+      },
+      {
+        "type": "header",
+        "content": "Other Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "admin_bar",
+        "label": "Display Top Admin Bar",
+        "info": "Only shows when an admin is logged in",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Currency",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "To offer multiple currencies on your online store, you must first edit your store's currency formatting - https:\/\/help.shopify.com\/en\/themes\/customization\/currencies\/show-multiple-currencies."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_multiple_currencies",
+        "label": "Enable currency conversion",
+        "info": "Even though prices are displayed in different currencies, orders will still be processed in your store's currency."
+      },
+      {
+        "type": "select",
+        "id": "currency_format",
+        "label": "Format",
+        "options": [
+          {
+            "value": "money_format",
+            "label": "Without currency ($10.00)"
+          },
+          {
+            "value": "money_with_currency_format",
+            "label": "With currency ($10.00 CAD)"
+          }
+        ],
+        "default": "money_with_currency_format"
+      },
+      {
+        "type": "text",
+        "id": "supported_currencies",
+        "label": "Supported currencies",
+        "default": "INR GBP CAD USD AUD EUR JPY",
+        "info": "Use the country's ISO [currency code](http:\/\/www.xe.com\/iso4217.php). Separate your currency codes with a space."
+      },
+      {
+        "type": "text",
+        "id": "default_currency",
+        "label": "Default currency",
+        "default": "USD"
+      }
+    ]
+  },
+  {
+    "name": "Shipping Rates Calculator",
+    "settings": [
+      {
+        "type": "select",
+        "id": "shipping_calculator",
+        "label": "Show the shipping calculator?",
+        "options": [
+          {
+            "value": "Disabled",
+            "label": "No"
+          },
+          {
+            "value": "Enabled",
+            "label": "Yes"
+          }
+        ],
+        "default": "Enabled"
+      },
+      {
+        "type": "text",
+        "id": "shipping_calculator_heading",
+        "label": "Heading text",
+        "default": "Get shipping estimates"
+      },
+      {
+        "type": "text",
+        "id": "shipping_calculator_default_country",
+        "label": "Default country selection",
+        "default": "United States"
+      },
+      {
+        "type": "paragraph",
+        "content": "If your customer is logged-in, the country in his default shipping address will be selected. If you are not sure about the  spelling to use here, refer to the first checkout page."
+      },
+      {
+        "type": "text",
+        "id": "shipping_calculator_submit_button_label",
+        "label": "Submit button label",
+        "default": "Calculate shipping"
+      },
+      {
+        "type": "text",
+        "id": "shipping_calculator_submit_button_label_disabled",
+        "label": "Submit button label when calculating",
+        "default": "Calculating..."
+      },
+      {
+        "type": "paragraph",
+        "content": "Do not forget to include the snippet shipping-calculator in your cart.liquid template where you want the shipping  calculator to appear. You can get the snippet here: [shipping-calculator.liquid](https:\/\/github.com\/carolineschnapp\/shipping-calculator\/blob\/master\/shipping-calculator.liquid) ."
+      }
+    ]
+  }
+]

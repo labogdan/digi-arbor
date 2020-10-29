@@ -1,0 +1,118 @@
+<!---JSON SCHEMA BreadcrumbList--->
+<script type="application/ld+json">
+{
+    "@context":"http://schema.org",
+    "@type":"BreadcrumbList",
+    "@id":"{{ shop.domain }}",
+    "itemListElement":[
+        {
+            "@type":"ListItem",
+            "position":1,
+            "item":{
+                "@id":"{{ shop.domain | strip_html }}",
+                "url":"{{ shop.domain }}",
+                "name":"{{ shop.domain | strip_html }}"
+            }
+        }
+
+        {% if template contains 'collection' %}
+        ,
+            {% if collection.handle %}
+                    {
+                        "@type":"ListItem",
+                        "position":2,
+                        "item":{
+                            "@id":"{{ collection.title | escape }}",
+                            "url":"{{ shop.domain }}{{ collection.handle }}",
+                            "name":"{{ collection.title | escape }}"
+                        }
+                    }
+            {% endif %}
+
+        {% elsif template == 'blog' %}
+            ,
+                {
+                    "@type":"ListItem",
+                    "position":2,
+                    "item":{
+                        "@id":"{{ blog.title | escape }}",
+                        "url":"{{ shop.domain }}/{{ blog.url }}",
+                        "name":"{{ blog.title | escape }}"
+                    }
+                }
+
+        {% elsif template == 'article' %}
+            ,
+                {
+                    "@type":"ListItem",
+                    "position":2,
+                    "item":{
+                        "@id":"{{ blog.title }}",
+                        "url":"{{ shop.domain }}/{{ blog.url }}",
+                        "name":"{{ blog.title }}"
+                    }
+                }
+
+        {% elsif template == 'customers/addresses' or template == 'customers/order' %}
+            ,
+                {
+                    "@type":"ListItem",
+                    "position":2,
+                    "item":{
+                        "@id":"{{ 'customer.account.title' | t }}",
+                        "url":"{{ shop.domain }}/account",
+                        "name":"{{ page.title }}"
+                    }
+                }
+
+        {% elsif template == 'customers/account' %}
+            ,
+                {
+                    "@type":"ListItem",
+                    "position":2,
+                    "item":{
+                        "@id":"{{ 'customer.account.title' | t }}",
+                        "url":"{{ shop.domain }}/account",
+                        "name":"{{ page.title }}"
+                    }
+                }
+        {% elsif template contains 'search' %}
+            ,
+                {
+                    "@type":"ListItem",
+                    "position":2,
+                    "item":{
+                        "@id":"{{ page.title }}",
+                        "url":"{{ shop.domain }}/search",
+                        "name":"{{ page.title }}"
+                    }
+                }
+        {% elsif template contains 'product' %}
+        ,
+        {
+            "@type":"ListItem",
+            "position":2,
+            "item":{
+                "@id":"{{ shop.url }}/{{ product.url }}",
+                    "url":"{{ shop.url }}/{{ product.url }}",
+                    "name":"{{ product.title | escape }}"
+            }
+        }
+        {% elsif template == 'index' %}
+ 
+        {% else %}
+         ,
+        {
+            "@type":"ListItem",
+            "position":2,
+            "item":{
+                "@id":"{{ page.title | escape }}",
+                "url":"{{ shop.domain }}/{{ page.handle }}",
+                "name":"{{ page.title | escape }}"
+            }
+        }
+        {% endif %}
+
+        ]
+    }
+</script>

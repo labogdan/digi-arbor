@@ -1,0 +1,102 @@
+<div class="accordion-container" data-product-extended>
+    {% assign first_control = true %}
+    {% if section.settings.extended_type == "tabs" %}        
+        <ul class="tabs prod-accordion" data-responsive-accordion-tabs="tabs small-accordion large-tabs" id="product-extended-{{product.id}}">        
+            {% for block in section.blocks %}
+                {% if block.type == "control" %}
+                    <li class="tabs-title {% if first_control %}is-active{% endif %}"><a href="#{{block.id}}" aria-selected="true">{{block.settings.title}}</a></li>            
+                    {% assign first_control = false %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+       
+        {% assign first_control = true %}
+        <div class="tabs-content" data-tabs-content="product-extended-{{product.id}}">
+            {% for block in section.blocks %}
+                {% if block.type == "control" %}                   
+                    <div class="tabs-panel {% if first_control %}is-active{% endif %}" id="{{block.id}}" {{block.shopify_attributes}}>                                            
+                        {% if block.settings.content_split_top != "" %}                    
+                            {% assign split_top = block.settings.content_split_top | plus: 0 %}                        
+                            {% if split_top >= 0 %}
+                                <p>{{long_content[split_top]}}</p>
+                            {% endif %}
+                        {% endif %}
+                        {{block.settings.content_top | replace: "%product.id%", product.id | replace: "%product.title%", product.title | replace: "%product.handle%", product.handle}}
+                        {% if block.settings.mf != blank %}
+                            {% assign mf_parts = block.settings.mf | split: "." %}
+                            <p>{{ product.metafields[mf_parts[0]][mf_parts[1]] }}</p>
+                        {% endif %}
+                        {{block.settings.content_bottom | replace: "%product.id%", product.id | replace: "%product.title%", product.title | replace: "%product.handle%", product.handle}}
+                        {% if block.settings.content_split_bottom != "" %}
+                            {% assign split_bottom = block.settings.content_split_bottom | plus: 0 %}
+                            {% if split_bottom >= 0 %}
+                                <p>{{long_content[split_bottom]}}</p>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    {% assign first_control = false %}
+                {% endif %}
+            {% endfor %}            
+        </div>
+    {% elsif section.settings.extended_type == "accordion" %}
+        <ul class="accordion" data-accordion>
+            {% for block in section.blocks %}
+                {% if block.type == "control" %}
+                    <li class="accordion-item {% if first_control %}is-active{% endif %}" data-accordion-item {{block.shopify_attributes}}>
+                        <!-- Accordion tab title -->
+                        <a href="#" class="accordion-title">{{block.settings.title}}</a>
+
+                        <!-- Accordion tab content: it would start in the open state due to using the `is-active` state class. -->
+                        <div class="accordion-content" data-tab-content>
+                            {% if block.settings.content_split_top != "" %}                    
+                                {% assign split_top = block.settings.content_split_top | plus: 0 %}                        
+                                {% if split_top >= 0 %}
+                                    <p>{{long_content[split_top]}}</p>
+                                {% endif %}
+                            {% endif %}
+                            {{block.settings.content_top | replace: "%product.id%", product.id | replace: "%product.title%", product.title | replace: "%product.handle%", product.handle}}
+                            {% if block.settings.mf != blank %}
+                                {% assign mf_parts = block.settings.mf | split: "." %}
+                                <p>{{ product.metafields[mf_parts[0]][mf_parts[1]] }}</p>
+                            {% endif %}
+                            {{block.settings.content_bottom | replace: "%product.id%", product.id | replace: "%product.title%", product.title | replace: "%product.handle%", product.handle}}
+                            {% if block.settings.content_split_bottom != "" %}
+                                {% assign split_bottom = block.settings.content_split_bottom | plus: 0 %}
+                                {% if split_bottom >= 0 %}
+                                    <p>{{long_content[split_bottom]}}</p>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% assign first_control = false %}
+                {% endif %}
+            {% endfor %}            
+        </ul>
+    {% else %}
+        {% for block in section.blocks %}
+            {% if block.type == "control" %}                   
+                <div id="{{block.id}}" {{block.shopify_attributes}}>                    
+                    {% if block.settings.content_split_top != "" %}                    
+                        {% assign split_top = block.settings.content_split_top | plus: 0 %}                        
+                        {% if split_top >= 0 %}
+                            <p>{{long_content[split_top]}}</p>
+                        {% endif %}
+                    {% endif %}
+                    {{block.settings.content_top | replace: "%product.id%", product.id | replace: "%product.title%", product.title | replace: "%product.handle%", product.handle}}
+                    {% if block.settings.mf != blank %}
+                        {% assign mf_parts = block.settings.mf | split: "." %}
+                        <p>{{ product.metafields[mf_parts[0]][mf_parts[1]] }}</p>
+                    {% endif %}
+                    {{block.settings.content_bottom | replace: "%product.id%", product.id | replace: "%product.title%", product.title | replace: "%product.handle%", product.handle}}
+                    {% if block.settings.content_split_bottom != "" %}
+                        {% assign split_bottom = block.settings.content_split_bottom | plus: 0 %}
+                        {% if split_bottom >= 0 %}
+                            <p>{{long_content[split_bottom]}}</p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                {% assign first_control = false %}
+            {% endif %}
+        {% endfor %}
+    {% endif %} 
+</div>

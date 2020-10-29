@@ -1,0 +1,36 @@
+{% comment %}
+- More compact add2Cart form for use in areas where we display a product outside of the PDP area
+{% endcomment %}
+
+{% assign available = product_item.available %}
+<div class="product-item-form" {% if hide_container != true %} data-add2cart-container {% endif %}>
+
+    {% if swatches %}
+        {% include 'product-item-swatches' %}
+    {% endif %}
+    
+    {% if product_item_variant and product_item_variant != empty %}
+        {% assign available = product_item_variant.available %}
+        <input type="hidden" name="id" value="{{ product_item_variant.id }}">
+    {% elsif 1==2 and product_item.variants.size > 1 and product_item.options.first != 'Title' and product_item.variants.first.title != 'Default Title' %}
+        <select name="id" class="product-item-form-option-selector" {% unless available %}disabled{% endunless%} {% if swatches %} style="display: none;" {% endif %} data-option-selector>
+            {% for grid_product_variant in product_item.variants %}
+                {% if grid_product_variant.available %}
+                    <option data-price="{{grid_product_variant.price | money}}" value="{{grid_product_variant.id}}" {% if grid_product_variant.id == grid_product.selected_or_first_available_variant %}selected{% endif %} data-option1="{{ grid_product_variant.option1 | escape }}" data-option2="{{ grid_product_variant.option2 | escape }}" data-option3="{{ grid_product_variant.option3 | escape }}">{{grid_product_variant.title}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    {% else %}
+        <input type="hidden" name="id" value="{{ product_item.variants.first.id }}">
+    {% endif %}
+    
+    <button {% unless available %}disabled{% endunless %} data-add2cart class="button full" type="submit" name="add" data-loading-text="{{ 'products.product.add_to_cart_loading' | t }}"  data-ajax>
+        <span data-add-to-cart-text>
+        {% if available %}
+            {{ 'products.product.add_to_cart' | t }}
+        {% else %}
+            {{ 'products.product.sold_out' | t }}
+        {% endif %}
+        </span>
+    </button>
+</div>

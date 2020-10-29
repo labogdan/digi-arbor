@@ -1,0 +1,179 @@
+{% comment %}
+Enabled through general settings
+{% endcomment %}
+
+{% include 'mega-menu-display', menu_number: 6 %}
+
+{% schema %}
+
+{
+  "name": "Mega menu 6",
+  "class": "mega-menu-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "parent",
+      "label": "Link title",
+      "info": "The mega menu will appear below this parent link"
+    },
+    {
+      "type": "checkbox",
+      "id": "parent_menus",
+      "label": "Parent Link Menus",
+      "info": "If checked, the mega menu will have its columns pre-populated with a menu named the same as this parent link. Column content blocks below can be prepended or appended to these menus."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "textarea",
+          "id":"column_classes",
+          "label": "Column Classes",
+          "info": "If blank, classes are set based on number of columns."
+        },
+        {
+          "type": "checkbox",
+          "id":"parent_menus_prepend",
+          "label": "Prepend to Parent Link Menus",
+          "info": "If checked, this content will prepend to any menu items. Otherwise this content will be appended.",
+          "default":true
+        },
+        {
+          "type": "header",
+          "content": "Top content"
+        },
+        {
+          "type": "html",
+          "id": "richtext_top",
+          "label": "Text area"
+        },
+        {
+          "type": "header",
+          "content": "Product content"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "checkbox",
+          "id": "product_display_title",
+          "label": "Display Title"
+        },
+        {
+          "type": "checkbox",
+          "id": "product_display_vendor",
+          "label": "Display Vendor"
+        },
+        {
+          "type": "checkbox",
+          "id": "product_display_price",
+          "label": "Display Price"
+        },
+        {
+          "type": "html",
+          "id": "product_display_text",
+          "label": "Product Text"
+        },
+        {
+          "type": "header",
+          "content": "Image content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_top",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_caption_top",
+          "label": "Image caption"
+        },
+        {
+          "type": "url",
+          "id": "image_link_top",
+          "label": "Image link"
+        },
+        {
+          "type": "header",
+          "content": "Navigation"
+        },
+        {
+          "type": "link_list",
+          "id": "menu_1",
+          "label": "Menu 1"
+        },
+        {
+          "type": "url",
+          "id": "menu_1_link",
+          "label": "Menu 1 link",
+          "info": "Add a link to the title of the menu."
+        },
+        {
+          "type": "link_list",
+          "id": "menu_2",
+          "label": "Menu 2"
+        },
+        {
+          "type": "url",
+          "id": "menu_2_link",
+          "label": "Menu 2 link",
+          "info": "Add a link to the title of the menu."
+        },
+        {
+          "type": "link_list",
+          "id": "menu_3",
+          "label": "Menu 3"
+        },
+        {
+          "type": "url",
+          "id": "menu_3_link",
+          "label": "Menu 3 link",
+          "info": "Add a link to the title of the menu."
+        },
+        {
+          "type": "link_list",
+          "id": "menu_4",
+          "label": "Menu 4"
+        },
+        {
+          "type": "url",
+          "id": "menu_4_link",
+          "label": "Menu 4 link",
+          "info": "Add a link to the title of the menu."
+        },
+        {
+          "type": "header",
+          "content": "Bottom content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_bottom",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_caption_bottom",
+          "label": "Image caption"
+        },
+        {
+          "type": "url",
+          "id": "image_link_bottom",
+          "label": "Image link"
+        },
+        {
+          "type": "html",
+          "id": "richtext_bottom",
+          "label": "Text area"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}

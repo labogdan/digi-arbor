@@ -1,0 +1,229 @@
+{% assign cart_count = cart.item_count %}
+
+<section data-section-id="{{ section.id }}" data-section-type="header">
+  <header>
+    <div class="top-bar {% unless section.settings.utility_display_mobile %}show-for-medium{% endunless %}" id="header-utility">
+      <div class="top-bar-left">
+        <ul class="menu">
+          {% if section.settings.top_bar_list != empty %}
+            {% for link in linklists[section.settings.top_bar_list].links %}
+              <li class="top-bar-list-link"><a href="{{link.url}}">{{link.title}}</a></li>
+            {% endfor %}
+          {% endif %}
+          {% if section.settings.promo != "" %}
+            <li class="promo">{{section.settings.promo}}</li>
+          {% endif %}          
+        </ul>
+      </div>
+      <div class="top-bar-right show-for-medium">
+        <ul class="menu">
+          {% if shop.customer_accounts_enabled %}
+          	{% if customer  %}
+    		  <li class="show-for-large-up wishlist-link">
+                <a href="/pages/wishlist">My Wishlist</a>
+          	  </li>
+          	{% endif %}
+            {% if customer %}
+              <li class="show-for-large-up">
+                <a href="/account">My Account</a>
+              </li>
+              <li class="show-for-large-up">
+                {{ 'layout.customer.log_out' | t | customer_logout_link }}
+              </li>
+            {% else %}
+              <li class="show-for-large-up">
+                <a href="/account/login">Login or Register</a>
+              </li>
+            {% endif %}
+          {% endif %}
+          {% if settings.show_multiple_currencies %}
+          <li class="show-for-large-up">
+            {% include 'currency-picker' %}
+          </li>
+          {% endif %}
+          {% if section.settings.utility_display_cart %}
+            <li class="show-for-large-up"><a href="/cart" class="cart-toggle cart-btn"><i class="fas fa-shopping-cart"></i> <div class="cart-count badge info">{{cart_count}}</div></a></li>      	
+          {% endif %}                 
+        </ul>
+      </div>
+    </div>
+
+    <div class="title-bar hide-for-medium" id="header-mobile" data-responsive-toggle="header-desktop" data-hide-for="medium">      
+      <div class="title-bar-left">
+        <button class="menu-icon" type="button" data-toggle="menu-drawer"><span class="hide" aria-hidden="false">Open Menu</span></button>       
+      </div>  
+      <div class="title-bar-title">
+        <a href="/" itemprop="url">
+          {% if section.settings.logo_mobile != blank %}
+            {% include 'image-tag',
+              image_tag_src : section.settings.logo_mobile
+              image_tag_alt: section.settings.logo_alt_mobile | default: shop.name,
+              image_tag_itemprop: "logo"
+              image_tag_classes: "site-logo" %}
+          {% else %}
+            {{ shop.name }}
+          {% endif %}
+        </a>
+      </div>
+      <div class="title-bar-right">        
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}          
+              <a href="/account"><i class="fas fa-user"></i></a>              
+          {% else %}            
+              <a href="/account/login"><i class="fas fa-user"></i></a>            
+          {% endif %}
+        {% endif %}
+        <a href="/cart" class="cart-toggle"><i class="fas fa-shopping-cart"></i></a>
+      </div>  
+    </div>    
+    <div class="top-bar {{section.settings.desktop_style}}" id="header-desktop">      
+      <ul class="menu head-logo-bar">
+        <li class="menu-text show-for-medium">
+          <a href="/" itemprop="url"> 
+            {% if section.settings.logo != blank %}
+              {% include 'image-tag',
+                image_tag_src : section.settings.logo
+                image_tag_alt: section.settings.logo_alt | default: shop.name,
+                image_tag_itemprop: "logo"
+                image_tag_classes: "site-logo" %}
+            {% else %}
+              {{ shop.name }}
+            {% endif %}
+          </a>
+        </li>
+        {% if section.settings.utility_display_search %}
+            <li class="head-search">
+              <form class="search_form" action="/collections/search-results">
+                <input type="search" id="top-search" class="search_text" placeholder="Search" name="q">
+                <i class="fas fa-search"></i>
+                <input type="submit" value="Search" class="button secondary" />
+              </form>
+            </li>
+          {% endif %}
+      </ul>
+      <ul class="parent-nav dropdown menu show-for-medium" data-dropdown-menu data-options="closeOnClick:true; closingTime: 5;hoverDelay: 5;hover: true; hoverPane: true;">
+        {% for link in linklists[section.settings.main_linklist].links %}
+          <li data-parent="{{ link.title | handleize }}">
+            {% if link.levels == 0 %}
+              <a class="nav-link" href="{{link.url}}">{{link.title}}</a>
+            {% else %}
+              <a class="nav-link nav-link-toggle" href="{{link.url}}">{{link.title}}</a>
+              <ul class="menu dom-style-remove" style="display:none;">
+                {% for link2 in link.links %}
+                  {% if link2.levels == 0 %}
+                    <li><a class="nav-link" href="{{link2.url}}">{{link2.title}}</a></li>
+                  {% else %}
+                    <li>
+                      <a class="nav-link nav-link-toggle" href="{{link2.url}}">{{link2.title}}</a>
+                      <ul class="menu">
+                        {% for link3 in link2.links %}
+                          <li><a class="nav-link" href="{{link3.url}}">{{link3.title}}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>       
+    </div>
+
+  </header>
+</section>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Logos"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Desktop Logo"
+      },
+      {
+        "type": "text",
+        "id": "logo_alt",
+        "label": "Desktop Logo Alt Text"
+      },      
+      {
+        "type": "image_picker",
+        "id": "logo_mobile",
+        "label": "Mobile Logo"
+      },
+      {
+        "type": "text",
+        "id": "logo_alt_mobile",
+        "label": "Mobile Logo Alt Text"
+      },
+      {
+        "type": "header",
+        "content": "Top Bar Settings"
+      },
+      {
+        "type": "link_list",
+        "id": "top_bar_list",
+        "label": "Top Bar List"
+      },
+      {
+        "type": "textarea",
+        "id": "promo",
+        "label": "Promotion Message"
+      },  
+      {
+        "type": "checkbox",
+        "id": "utility_display_mobile",
+        "label": "Display On Mobile",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "utility_display_cart",
+        "label": "Display Cart",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "utility_display_search",
+        "label": "Display Search",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Header Area Display Settings",
+        "info": "Mobile menu settings are available in the general Theme Settings area."
+      },
+      {
+        "type": "link_list",
+        "id": "main_linklist",
+        "label": "Main Navigation List",
+        "default": "main-menu"
+      },
+      {
+        "type": "select",
+        "id": "desktop_style",
+        "label": "Desktop Header Style",
+        "default": "",
+        "options": [
+          {
+            "value": "",
+            "label": "Horizontal"
+          },
+          {
+            "value": "header-centered",
+            "label": "Horizontal Centered"
+          },
+          {
+            "value": "header-vertical",
+            "label": "Vertical"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

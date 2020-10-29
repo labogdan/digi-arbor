@@ -1,0 +1,52 @@
+<ul class="social-media-icons menu">
+  {% if settings.social_twitter_link != blank %}
+    <li>
+        <a href="{{ settings.social_twitter_link }}" title="{{ shop.name }} on Twitter" rel="me" target="_blank" class="fab fa-twitter">
+                 
+            <span class="visually-hidden">{{shop.name}} on Twitter</span>
+        </a>
+    </li>
+  {% endif %}
+
+  {% if settings.social_facebook_link != blank %}
+    <li>
+        <a href="{{ settings.social_facebook_link }}" title="{{ shop.name }} on Facebook" rel="me" target="_blank" class="fab fa-facebook-f">
+                     
+            <span class="visually-hidden">{{shop.name}} on Facebook</span>
+        </a>
+    </li>
+  {% endif %}
+
+  {% if settings.social_google_link != blank %}
+    <li><a href="{{ settings.social_google_link }}" title="{{ shop.name }} on Google+" rel="publisher" target="_blank" class="icon-gplus"></a></li>
+  {% endif %}
+
+  {% if settings.social_youtube_link != blank %}
+    <li><a href="{{ settings.social_youtube_link }}" title="{{ shop.name }} on YouTube" rel="me" target="_blank" class="fab fa-youtube"></a></li>
+  {% endif %}
+
+  {% if settings.social_vimeo_link != blank %}
+    <li><a href="{{ settings.social_vimeo_link }}" title="{{ shop.name }} on Vimeo" rel="me" target="_blank" class="fab fa-vimeo-v"></a></li>
+  {% endif %}
+
+  {% if settings.social_pinterest_link != blank %}
+    <li><a href="{{ settings.social_pinterest_link }}" title="{{ shop.name }} on Pinterest" rel="me" target="_blank" class="fab fa-pinterest-p"></a></li>
+  {% endif %}
+
+  {% if settings.social_tumblr_link != blank %}
+    <li><a href="{{ settings.social_tumblr_link }}" title="{{ shop.name }} on Tumblr" rel="me" target="_blank" class="icon-tumblr"></a></li>
+  {% endif %}
+
+  {% if settings.social_instagram_link != blank %}
+    <li>
+        <a href="{{ settings.social_instagram_link }}" title="{{ shop.name }} on Instagram" rel="me" target="_blank" class="fab fa-instagram">
+                  
+            <span class="visually-hidden">{{shop.name}} on Instagram</span>
+        </a>
+    </li>
+  {% endif %}
+
+  {% if settings.social_snapchat_link != blank %}
+    <li><a href="{{ settings.social_snapchat_link }}" title="{{ shop.name }} on Snapchat" rel="me" target="_blank" class="icon-snapchat"></a></li>
+  {% endif %}
+</ul>

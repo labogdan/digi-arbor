@@ -1,0 +1,17 @@
+ul.custom-fields {
+  label {display:block;color:black;}
+  input {
+    background:#fff;
+    padding:10px;
+    width:30%;
+    border:1px solid #ccc;
+  }
+  .custom-fields-error {
+    display:none;
+    color:red;
+  }
+}
+
+.card-fields-container .custom-fields {
+  display: none;
+}

@@ -1,0 +1,467 @@
+{% include 'content-transformations', content_transform: collection.description %}
+{% if template.name == "collection" and template contains "unpack_0" %}
+  {% assign unpack_option = 0 %}
+{% elsif template.name == "collection" and template contains "unpack_1" %}
+  {% assign unpack_option = 1 %}
+{% elsif template.name == "collection" and template contains "unpack_2" %}
+  {% assign unpack_option = 2 %}
+{% elsif template.name == "collection" and template contains "unpack_3" %}
+  {% assign unpack_option = 3 %}
+{% else %}
+  {% assign unpack_option = section.settings.unpack | plus: 0 %}
+{% endif %}
+
+{% include 'opacity-inverse', transparency: section.settings.banner_opacity %}
+
+{% if section.settings.display_banner %}
+  <div class="bg-overlay-container {{section.settings.height}} {{section.settings.banner_text_align}} text-size-{{section.settings.banner_text_size}} {{section.settings.banner_text_position}}" {%- if section.settings.banner_color != "" -%}style="color:{{section.settings.banner_color}};"{% endif %}>
+    {%- if section.settings.banner_bgcolor != "" -%}
+        <div class="bg-overlay" style="background-color:{{section.settings.banner_bgcolor}};opacity:{{opacity}};"></div>
+    {%- endif -%}
+
+    {%- if collection.image != nil -%}
+        <div class="bg-img" style="background-image:url({%- include 'image-src', image_src: collection.image, image_src_sizing: "2048x" %});"></div>
+    {%- elsif section.settings.banner_image != nil -%}
+        <div class="bg-img" style="background-image:url({%- include 'image-src', image_src: section.settings.banner_image, image_src_sizing: "2048x" %});"></div>
+    {%- endif -%}
+    <div class="bg-overlay-content">
+      {% if section.settings.display_title and section.settings.display_title_img %}<div class="bg-overlay-text-header">{{collection.title}}</div>{% endif %}
+      {% if section.settings.display_description and section.settings.display_description_img %}<div class="bg-overlay-text-content">{{long_content}}</div>{% endif %}
+    </div>
+  </div>
+{% endif %}
+
+{% if section.settings.display_title_img == false or section.settings.display_description_img == false %}
+  <div class="large-12 small-12 columns text-center">
+    {% if section.settings.display_title and section.settings.display_title_img == false %}<h1>{{collection.title}}</h1>{% endif %}
+    {% if section.settings.display_description and section.settings.display_description_img == false %}<p>{{long_content}}</p>{% endif %}
+  </div>
+{% endif %}
+
+{% paginate collection.products by section.settings.product_count %}
+
+<div class="row" data-section-id="{{ section.id }}" data-section-type="collection" {% if section.settings.infinite_scroll %}data-infinite{% endif %}>
+
+  {% include 'breadcrumbs' %}
+  
+  <div class="small-12 large-3 columns">
+  {% if section.settings.sorting %}
+        <div class="small-12 large-12 columns">
+          <div class="side-heading">Sort By:</div>
+          {% include 'collection-sorting' %}
+        </div>
+      {% endif %}
+    </div>
+  <div class="small-12 {{section.settings.collection_canvas_classes}} columns {%- if settings.nxt_clent_id != blank %}nxt-content{% endif %}">
+  
+    {% if collection.products.size > 0 %}
+      <div class="row">
+        
+        
+        <div class="row {% if section.settings.infinite_scroll %}AjaxinateLoop{% endif %}">
+  
+          {% if collection.products.size == 0 %}
+            <p>{{ 'collections.general.no_matches' | t }}</p>
+          {% elsif unpack_option > 0 %}
+            {% include 'collection-grid-unpacked',
+              grid_collection: collection,
+              unpack_option: unpack_option,
+              grid_item_quick_view: section.settings.quick_view,
+              grid_item_quick_order: false,
+              grid_item_rowcount: section.settings.product_row_count,              
+              grid_item_display_badge: section.settings.product_display_badge,
+              grid_item_display_image: section.settings.product_display_image,
+              grid_item_display_title: section.settings.product_display_title,
+              grid_item_display_price: section.settings.product_display_price,
+              grid_item_add2cart: section.settings.display_addtocart_button,
+              grid_item_swatches: section.settings.display_addtocart_swatches  %}
+          {% else %} 
+            {% for grid_product in collection.products %}            
+              {% include 'product-grid-item',
+                grid_collection: collection,
+                grid_item_loop_index: forloop.index0,
+                grid_item_quick_view: section.settings.quick_view,
+                grid_item_quick_order: false,
+                grid_item_rowcount: section.settings.product_row_count,                
+                grid_item_display_badge: section.settings.product_display_badge,
+                grid_item_display_image: section.settings.product_display_image,
+                grid_item_display_title: section.settings.product_display_title,
+                grid_item_display_price: section.settings.product_display_price,
+                grid_item_add2cart: section.settings.display_addtocart_button,
+                grid_item_swatches: section.settings.display_addtocart_swatches %}
+          		
+            {% endfor %}
+          
+          {% endif %}
+        
+        </div>
+  
+        {% if paginate.pages > 1 and section.settings.infinite_scroll == false %}
+          <input type="hidden" id="paging-current" value="{{paginate.current_page}}">
+          <input type="hidden" id="paging-next" value="{{paginate.current_page | plus: 1}}">
+          <div class="small-12 columns text-center paginate-control">
+            {% include 'pagination' %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.infinite_scroll %}
+          <div class="AjaxinatePagination">
+            {% if paginate.next %}
+              <a href="{{ paginate.next.url }}">Loading More</a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    {% else %}
+      <div class="row">
+        {% for i in (1..6) %}          
+          {% include 'product-grid-item',
+            grid_item_loop_index: forloop.index0,
+            product_row_count: section.settings.product_row_count %}
+      	
+        {% endfor %}
+        
+      </div>
+    {% endif %}
+  </div>  
+  
+</div>
+{% endpaginate %}
+  
+{% schema %}
+  {
+    "name": "Collection Pages",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Banner Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "display_banner",
+        "label": "Display Banner",
+        "default": true
+      },
+      {
+          "type": "image_picker",
+          "id": "banner_image",
+          "label": "Default Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "display_title",
+        "label": "Display Collection Title",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "display_title_img",
+        "label": "Display Collection Title On Banner",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "display_description",
+        "label": "Display Collection Description",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "display_description_img",
+        "label": "Display Collection Description On Banner",
+        "default": true
+      }, 
+      {
+          "type": "color",
+          "id": "banner_bgcolor",
+          "label": "Overlay Color",
+          "default": "#EEEEEE"              
+      },
+      {
+          "type": "range",
+          "id": "banner_opacity",
+          "label": "Overlay Color Transparency",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30,
+          "unit": "%"        
+      },
+      {
+        "type": "select",
+        "id": "height",
+        "label": "Height",
+        "default": "height-small",
+        "options": [
+        {
+            "value": "height-small",
+            "label": "Small"
+        },
+        {
+            "value": "height-medium",
+            "label": "Medium"
+        },
+        {
+            "value": "height-large",
+            "label": "Large"
+        }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "banner_color",
+        "label": "Text Color"
+      },
+      {
+        "type": "range",
+        "id": "banner_text_size",
+        "label": "Text Size",                
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "default": 1
+      }, 
+      {
+        "type": "select",
+        "id": "banner_text_align",
+        "label": "Text alignment",
+        "default":"text-center",
+        "options": [
+        {
+            "value": "text-left",
+            "label": "Left"
+        },
+        {
+            "value": "text-center",
+            "label": "Center"
+        },
+        {
+            "value": "text-right",
+            "label": "Right"
+        }
+        ]
+      },
+      {
+      "type": "select",
+      "id": "banner_text_position",
+      "label": "Text position",
+      "default":"content-center-center",
+      "options": [
+          {
+              "value": "content-top-left",
+              "label": "Top Left"
+          },
+          {
+              "value": "content-top-center",
+              "label": "Top Center"
+          },
+          {
+              "value": "content-top-right",
+              "label": "Top Right"
+          },
+          {
+              "value": "content-center-left",
+              "label": "Center Left"
+          },
+          {
+              "value": "content-center-center",
+              "label": "Center Center"
+          },
+          {
+              "value": "content-center-right",
+              "label": "Center Right"
+          },
+          {
+              "value": "content-bottom-left",
+              "label": "Bottom Left"
+          },
+          {
+              "value": "content-bottom-center",
+              "label": "Bottom Center"
+          },
+          {
+              "value": "content-bottom-right",
+              "label": "Bottom Right"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Breadcrumb Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_breadcrumbs",
+        "label": "Enable Breadcrumbs",
+        "default": true
+      },
+      {
+        "type": "link_list",
+        "id": "breadcrumbs_search_list",
+        "label": "Breadcrumb Collection List",
+        "info": "Try and build more levels of breadcrumbs by searching through this navigation list."
+      },
+      {
+        "type": "header",
+        "content": "Infinite Scrolling"
+      },
+      {
+        "type": "checkbox",
+        "id": "infinite_scroll",
+        "label": "Enable Infinite Scrolling"
+      },
+      {
+        "type": "image_picker",
+        "id": "infinite_scroll_image",
+        "label": "Pre-Loader Image to Display for Infinite Scroll"
+      },
+      {
+        "type": "header",
+        "content": "Product Display Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_display_badge",
+        "label": "Display Product Badge",
+        "default": true
+      },      
+      {
+        "type": "text",
+        "id": "badge_bis_field",
+        "label": "Back In Stock Badge Field",
+        "info":"'namespace.key' of the metafield to display if out of stock"
+      },      
+      {
+        "type": "checkbox",
+        "id": "product_display_image",
+        "label": "Display Product Image",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_display_title",
+        "label": "Display Product Title",
+        "default": true
+      },      
+      {
+        "type": "checkbox",
+        "id": "product_display_price",
+        "label": "Display Product Price",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "quick_view",
+        "label": "Enable Quick View",
+        "default": true
+      },      
+      {
+        "type": "checkbox",
+        "id": "display_addtocart_button",
+        "label": "Display Add to Cart Button",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "display_addtocart_swatches",
+        "label": "Display Add to Cart Swatches",
+        "default": false
+      },
+      {
+        "type": "number",
+        "id": "product_count",
+        "label": "Products Per Page",
+        "default": 12
+      },
+      {
+          "type": "range",
+          "id": "product_row_count",
+          "label": "Products Per Row",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 4
+      },     
+      {
+        "type": "header",
+        "content": "Variant Unpacking Options"
+      },
+      {
+        "type": "select",
+        "id": "unpack",
+        "label": "Variants Unpacking Based On",
+        "default": "0",
+        "info": "If a 'collection.unpack_X' template is selected, that X will determine the setting for this. e.g. 'collection.unpack_2.liquid'",
+        "options": [
+          {
+            "value": "0",
+            "label": "Do Not Unpack"
+          },
+          {
+            "value": "1",
+            "label": "Option 1"
+          },
+          {
+            "value": "2",
+            "label": "Option 2"
+          },
+          {
+            "value": "3",
+            "label": "Option 3"
+          }        
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "unpack_hide_unavailable",
+        "label": "Hide unavailable unpacked variants"
+      },
+      {
+        "type": "header",
+        "content": "Sorting Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "sorting",
+        "label": "Enable Sorting",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sorting_featured",
+        "label": "Featured",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sorting_best_selling",
+        "label": "Best Selling",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sorting_az",
+        "label": "Alphabetical",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sorting_price",
+        "label": "Price",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "sorting_date",
+        "label": "Date",
+        "default": true
+      },      
+      {
+        "type": "textarea",
+        "id": "collection_canvas_classes",
+        "label": "Collection Area Classes",
+        "default": "small-12 medium-9 large-9"
+      }
+    ]
+  }
+{% endschema %}

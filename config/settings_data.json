@@ -1,0 +1,2525 @@
+{
+  "current": {
+    "logo_desktop": "shopify:\/\/shop_images\/logo_2.png",
+    "logo_mobile": "shopify:\/\/shop_images\/logo_2.png",
+    "logo_shortcut": "shopify:\/\/shop_images\/ed.png",
+    "logo_social": "",
+    "color_text_header_copy": "#000000",
+    "color_text_header_promo": "#ffffff",
+    "color_text_banner_heading": "#ffffff",
+    "color_text_banner_copy": "#000000",
+    "color_text_page_heading": "#000000",
+    "color_text_page_copy": "#063956",
+    "color_text_footer_heading": "#063956",
+    "color_text_footer_copy": "#063956",
+    "color_text_lines": "#888888",
+    "color_button_overlay": "#f6f6f6",
+    "color_button_copy": "#ec7224",
+    "color_button_primary": "#ec7224",
+    "color_button_secondary": "#a6be14",
+    "color_button_tertiary": "#0071b2",
+    "color_link_primary": "#ec7224",
+    "color_link_secondary": "#0071b2",
+    "color_link_header": "#004872",
+    "color_link_footer": "#0071b2",
+    "radius_button_primary": 32,
+    "radius_button_secondary": 0,
+    "radius_button_tertiary": 0,
+    "bgcolor_header": "#0071b2",
+    "bgcolor_header_top": "#d9edf7",
+    "bgcolor_banners": "#aaaaaa",
+    "bgcolor_nav": "#ffffff",
+    "bgcolor_cart_ribbon": "#c3db34",
+    "bgcolor_body": "#ffffff",
+    "bgcolor_footer": "#d9edf7",
+    "typography_scripts": "<link href=\"https:\/\/fonts.googleapis.com\/css?family=Lato:300,400,700,900\" rel=\"stylesheet\">",
+    "font_name_headings": "'Lato', sans-serif",
+    "font_weight_headings": 400,
+    "font_size_headings": 18,
+    "font_name_body": "'Lato', sans-serif",
+    "font_weight_body": 800,
+    "font_size_body": 12,
+    "font_name_accent": "'Lato', sans-serif",
+    "font_weight_accent": 900,
+    "font_size_accent": 18,
+    "mega_menu_1": true,
+    "mega_menu_2": false,
+    "mega_menu_3": false,
+    "mega_menu_4": false,
+    "mega_menu_5": false,
+    "mega_menu_6": false,
+    "mobile_menu_title": "Shop",
+    "mobile_menu": "main-menu",
+    "mobile_menu_direction": "left",
+    "mobile_menu_transition": "push",
+    "cart_type": "page",
+    "cart_direction": "right",
+    "cart_display_vendor": false,
+    "cart_notes_enable": true,
+    "cart_ribbon_enable": true,
+    "cart_ribbon_delay": 5000,
+    "cart_max_quantity": 1000,
+    "cart_shipping_calc": true,
+    "cart_shipping_calc_country": "United States",
+    "cart_upsell": false,
+    "cart_promo": false,
+    "cart_fields": true,
+    "cart_fields_top": false,
+    "social_sharing_blog": true,
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": true,
+    "social_twitter_link": "https:\/\/twitter.com\/arborsci",
+    "social_facebook_link": "https:\/\/www.facebook.com\/arborsci\/",
+    "social_pinterest_link": "https:\/\/www.pinterest.com\/arborsci",
+    "social_instagram_link": "https:\/\/www.instagram.com\/arborsci",
+    "social_snapchat_link": "",
+    "social_tumblr_link": "",
+    "social_youtube_link": "https:\/\/www.youtube.com\/user\/Arborscientific",
+    "social_vimeo_link": "",
+    "header_scripts": "",
+    "header_snippets_1": "",
+    "header_snippets_2": "",
+    "header_snippets_3": "",
+    "header_snippets_4": "",
+    "header_snippets_5": "",
+    "footer_scripts": "<script src=\"https:\/\/unpkg.com\/sweetalert\/dist\/sweetalert.min.js\"><\/script>",
+    "footer_snippets_1": "",
+    "footer_snippets_2": "",
+    "footer_snippets_3": "",
+    "footer_snippets_4": "",
+    "footer_snippets_5": "",
+    "display_breakpoint_medium": 640,
+    "display_breakpoint_large": 1024,
+    "display_site_width": 1860,
+    "display_content_width": 1860,
+    "display_text_width": 680,
+    "pricing_rules": true,
+    "nxt_client_id": "",
+    "nxt_recommendations": false,
+    "admin_bar": true,
+    "show_multiple_currencies": false,
+    "currency_format": "money_with_currency_format",
+    "supported_currencies": "INR GBP CAD USD AUD EUR JPY",
+    "default_currency": "USD",
+    "shipping_calculator": "Enabled",
+    "shipping_calculator_heading": "Estimate Shipping",
+    "shipping_calculator_default_country": "United States",
+    "shipping_calculator_submit_button_label": "Calculate Shipping",
+    "shipping_calculator_submit_button_label_disabled": "Calculating...",
+    "checkout_header_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/logo_2.png",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "large",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#ffffff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#e8f3f6",
+    "checkout_heading_font": "Roboto",
+    "checkout_body_font": "Source Sans Pro",
+    "checkout_accent_color": "#0071b2",
+    "checkout_button_color": "#ec7224",
+    "checkout_error_color": "#ec5324",
+    "pluginseo_pageTitleTruncateChars": "999",
+    "pluginseo_pageTitleEnableAppender": true,
+    "pluginseo_pageTitleAppenderTemplate": "| %% shop.name %%",
+    "pluginseo_pageTitleAppenderTargetLength": "70",
+    "pluginseo_pageTitleTemplateApplyToAll": false,
+    "pluginseo_pageTitleDefaultTemplate": "%% page_title %%",
+    "pluginseo_pageTitleIndexTemplate": "%% shop.name %%",
+    "pluginseo_pageTitlePageTemplate": "",
+    "pluginseo_pageTitleSearchTemplate": "Buy %% search.terms %% from %% shop.name %%",
+    "pluginseo_pageTitleProductTemplate": "",
+    "pluginseo_pageTitleCollectionTemplate": "",
+    "pluginseo_pageTitleCatalogTemplate": "",
+    "pluginseo_pageTitleBlogTemplate": "",
+    "pluginseo_pageTitleArticleTemplate": "",
+    "pluginseo_pageTitle404Template": "",
+    "pluginseo_metaDescriptionTruncateChars": "170",
+    "pluginseo_metaDescriptionTemplateApplyToAll": false,
+    "pluginseo_metaDescriptionDefaultTemplate": "%% page_description %%",
+    "pluginseo_metaDescriptionIndexTemplate": "",
+    "pluginseo_metaDescriptionPageTemplate": "",
+    "pluginseo_metaDescriptionSearchTemplate": "",
+    "pluginseo_metaDescriptionProductTemplate": "",
+    "pluginseo_metaDescriptionCollectionTemplate": "",
+    "pluginseo_metaDescriptionCatalogTemplate": "",
+    "pluginseo_metaDescriptionBlogTemplate": "",
+    "pluginseo_metaDescriptionArticleTemplate": "",
+    "pluginseo_metaDescription404Template": "",
+    "pluginseo_structuredDataDisplayLogo": true,
+    "pluginseo_structuredDataSocialProfileLinks": "https:\/\/www.facebook.com\/arborsci\/\nhttps:\/\/www.pinterest.com\/arborsci\nhttps:\/\/www.instagram.com\/arborsci\nhttps:\/\/twitter.com\/arborsci\nhttps:\/\/www.youtube.com\/user\/Arborscientific",
+    "app_wk_enabled": true,
+    "app_wk_login_required": false,
+    "app_wk_icon": "heart",
+    "app_wk_col_bg_shape": "square",
+    "app_wk_share_position": "top",
+    "app_wk_products_per_row": "4",
+    "color_primary": "#39a6c1",
+    "color_secondary": "#39c190",
+    "color_low_gray": "#e1e1e1",
+    "color_mid_gray": "#535353",
+    "color_high_gray": "#0d0d0d",
+    "type_base_size": "16px",
+    "font_headline": "\"Gibson\",sans-serif",
+    "font_accent": "\"cortado\",serif",
+    "font_paragraph": "\"proxima-nova\",sans-serif",
+    "logo_primary": "shopify:\/\/shop_images\/favicon_1.png",
+    "shortcut_icon": "shopify:\/\/shop_images\/favicon_1.png",
+    "social_image": "shopify:\/\/shop_images\/sunset-waves.jpg",
+    "body_classes": "left-align-header",
+    "header_positioning": "left-align-header",
+    "color_body_text": "#788188",
+    "color_text": "#3d4246",
+    "color_sale_text": "#7796A8",
+    "color_borders": "#e8e9eb",
+    "color_button": "#7796A8",
+    "color_button_text": "#fff",
+    "color_small_button": "#fff",
+    "color_small_button_text": "#3d4246",
+    "color_text_field": "#fff",
+    "color_text_field_text": "#000",
+    "color_image_overlay_text": "#fff",
+    "color_image_overlay": "#3d4246",
+    "image_overlay_opacity": 25,
+    "color_body_bg": "#fff",
+    "type_header_family": "Google_Work+Sans_600_sans",
+    "type_header_base_size": "26px",
+    "type_base_family": "Google_Work+Sans_400_sans",
+    "type_bold_product_titles": false,
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/arborscilogo_102de9cb-48e9-42ff-a240-7f7c029a67db.gif",
+          "logo_alt": "Arbor Scientific Logo",
+          "logo_mobile": "shopify:\/\/shop_images\/arborscilogo_102de9cb-48e9-42ff-a240-7f7c029a67db.gif",
+          "logo_alt_mobile": "Arbor Scientific Logo",
+          "top_bar_list": "utility-nav",
+          "promo": "",
+          "utility_display_mobile": true,
+          "utility_display_cart": true,
+          "utility_display_search": true,
+          "main_linklist": "main-menu",
+          "desktop_style": "header-vertical"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "1547066307252": {
+            "type": "text",
+            "settings": {
+              "title": "",
+              "content": "<img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0030\/6207\/1369\/files\/logo_2.png?13215415504726371169\" alt=\"Arbor Science\" style=\"width: 90%; max-width: 200px;\"><br><br><p>\"Every single customer contact provides us the opportunity to reach the goal of responding with consistency, fairness, grace and intelligence. \n We must appreciate that customers are individuals deserving of special attention and so give them that.\"<\/p>\n<p style=\"font-style:italic; text-align:right;\">- C. Peter Rea, President<\/p>",
+              "social_icons_footer": false
+            }
+          },
+          "1547072109300": {
+            "type": "link_list",
+            "settings": {
+              "menu": "support",
+              "social_icons_footer": false
+            }
+          },
+          "1536863939637": {
+            "type": "link_list",
+            "settings": {
+              "menu": "arbor-scientific",
+              "social_icons_footer": false
+            }
+          },
+          "1543468954682": {
+            "type": "link_list",
+            "settings": {
+              "menu": "resources",
+              "social_icons_footer": false
+            }
+          },
+          "1543469064446": {
+            "type": "text",
+            "settings": {
+              "title": "Contact us",
+              "content": "(800) 367-6695<br>\nhelpdesk@arborsci.com<br>\nP.O. Box 2750<br>\nAnn Arbor, MI 48106-2750",
+              "social_icons_footer": false
+            }
+          },
+          "1547073712236": {
+            "type": "news_letter",
+            "settings": {
+              "newsletter_text": "<h3>Subscribe to become a CoolStuff Insider!<\/h3><p>• You will be the first to receive our CoolStuff blog filled with new ideas for the classroom.  • Special Insider only promotions.  • Be selected to test and review new product. <\/p>",
+              "newsletter_text_classes": "small-12 large-expand medium-expand large-text-right small-text-center",
+              "newsletter_embed": "",
+              "newsletter_embed_classes": "small-12 large-expand medium-expand small-only-text-center"
+            }
+          }
+        },
+        "block_order": [
+          "1547066307252",
+          "1547072109300",
+          "1536863939637",
+          "1543468954682",
+          "1543469064446",
+          "1547073712236"
+        ],
+        "settings": {
+          "copyright_text": "All Rights Reserved",
+          "display_payment_methods": true,
+          "text_align": "left"
+        }
+      },
+      "article-template": {
+        "type": "article-template",
+        "settings": {
+          "article_img": "shopify:\/\/shop_images\/hero.png",
+          "banner_color": "#004872",
+          "banner_opacity": 14,
+          "display_title_img": true,
+          "enable_breadcrumbs": true,
+          "display_title": false,
+          "image_above_content": false,
+          "article_canvas_classes": "small-12 medium-12 large-12"
+        }
+      },
+      "page-template-faq": {
+        "type": "page-template-faq",
+        "blocks": {
+          "1533579426942": {
+            "type": "accordion_item",
+            "settings": {
+              "title": "Why is the sky blue?",
+              "content": "Cause it is!",
+              "open": false
+            }
+          },
+          "1533579442132": {
+            "type": "accordion_item",
+            "settings": {
+              "title": "Really?",
+              "content": "Definitely!",
+              "open": false
+            }
+          },
+          "1533579455437": {
+            "type": "accordion_break",
+            "settings": {
+              "title": "Title Break",
+              "content": "Content Break"
+            }
+          },
+          "1533579463683": {
+            "type": "accordion_item",
+            "settings": {
+              "title": "Question 3",
+              "content": "Ok then",
+              "open": false
+            }
+          }
+        },
+        "block_order": [
+          "1533579426942",
+          "1533579442132",
+          "1533579455437",
+          "1533579463683"
+        ],
+        "settings": {
+          "page_img": "",
+          "banner_color": "#eeeeee",
+          "banner_opacity": 30,
+          "display_title_img": true,
+          "enable_breadcrumbs": true,
+          "page_canvas_classes": "small-12 medium-9 large-9",
+          "multi_expand": true,
+          "all_closed": true
+        }
+      },
+      "page-template-contact": {
+        "type": "page-template-contact",
+        "settings": {
+          "page_img": "shopify:\/\/shop_images\/svs.png",
+          "banner_color": "#c3db34",
+          "banner_opacity": 30,
+          "display_title_img": true,
+          "enable_breadcrumbs": true,
+          "page_canvas_classes": "small-12 medium-9 large-9 contact-form"
+        }
+      },
+      "cart-upsell": {
+        "type": "cart-upsell",
+        "settings": {
+          "title": "",
+          "description": ""
+        }
+      },
+      "page-template-custom": {
+        "type": "page-template-custom",
+        "blocks": {
+          "1533583654600": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Newsletter",
+              "classes": "",
+              "bgimage": "",
+              "bgcolor": "",
+              "opacity": "",
+              "preheader": "",
+              "header": "",
+              "text": "",
+              "newsletter_text": "",
+              "newsletter_text_classes": "small-12 large-expand medium-expand large-text-right small-text-center",
+              "newsletter_embed": "<!---->",
+              "newsletter_embed_classes": "small-12 large-expand medium-expand small-only-text-center"
+            }
+          }
+        },
+        "block_order": [
+          "1533583654600"
+        ],
+        "settings": {
+          "page_img": "",
+          "banner_color": "#abd42f",
+          "banner_opacity": 0,
+          "display_title_img": true,
+          "enable_breadcrumbs": true,
+          "page_canvas_classes": "small-12 medium-9 large-9"
+        }
+      },
+      "mega-menu-1": {
+        "type": "mega-menu-1",
+        "blocks": {
+          "1543251868883": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": false,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": false,
+              "product_display_vendor": false,
+              "product_display_price": false,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "mechanics",
+              "menu_1_link": "",
+              "menu_2": "waves-sound",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          },
+          "1543251866786": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": false,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": false,
+              "product_display_vendor": false,
+              "product_display_price": false,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "electricity-magnetism",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          },
+          "1543857316658": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": true,
+              "product_display_vendor": false,
+              "product_display_price": true,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "light-optics",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          },
+          "1544128238192": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": true,
+              "product_display_vendor": false,
+              "product_display_price": true,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "heat-thermodynamics",
+              "menu_1_link": "",
+              "menu_2": "physics-physical-science-properties-of-matter",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          },
+          "1543474642208": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": false,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": false,
+              "product_display_vendor": false,
+              "product_display_price": false,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "conceptual-physics",
+              "menu_1_link": "",
+              "menu_2": "alternative-energy",
+              "menu_2_link": "",
+              "menu_3": "cool-tools",
+              "menu_3_link": "",
+              "menu_4": "custom-imprinted-products",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          }
+        },
+        "block_order": [
+          "1543251868883",
+          "1543251866786",
+          "1543857316658",
+          "1544128238192",
+          "1543474642208"
+        ],
+        "settings": {
+          "parent": "Physics\/Physical Science",
+          "parent_menus": false
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "blocks": {
+          "1544646904507": {
+            "type": "related-metafield",
+            "settings": {
+              "title": "Recommended Products",
+              "mf": "gsrelated.recommended",
+              "object_type": "product",
+              "quick_view": false,
+              "slider": false,
+              "arrows": true,
+              "dots": false,
+              "infinite": false,
+              "slides_to_show": 4,
+              "slides_to_show_small": 2,
+              "slides_to_show_medium": 2,
+              "slides_to_scroll": 1,
+              "slider_autoplay": false,
+              "slider_autoplay_secs": 2
+            }
+          }
+        },
+        "block_order": [
+          "1544646904507"
+        ],
+        "settings": {
+          "ajax": true,
+          "max_quantity": 1000,
+          "quick_view_description_max": 250,
+          "show_share_buttons": true,
+          "badge_bis_field": "arbor.ExpectedInStockDate",
+          "swatches": true,
+          "lazyload": false,
+          "swatches_link": false,
+          "variant_images": true,
+          "enable_dynamic_checkout": false,
+          "enable_breadcrumbs": true,
+          "breadcrumbs_search_list": "main-menu",
+          "breadcrumbs_all_products": false,
+          "image_slider": "none",
+          "slider_thumbnails": "all",
+          "arrows": false,
+          "dots": false,
+          "infinite": true,
+          "slides_to_show": 1,
+          "slides_to_show_small": 1,
+          "slides_to_show_medium": 2,
+          "slides_to_scroll": 1,
+          "slider_autoplay": false,
+          "slider_autoplay_secs": 2,
+          "image_zoom_icon": false,
+          "image_zoom": true,
+          "image_zoom_mobile": false,
+          "image_zoom_trigger": "mouseover",
+          "image_zoom_magnification": "1.0",
+          "product_canvas_classes": "small-12 medium-12 large-12",
+          "display_related": true,
+          "display_extended": true,
+          "extended_type": "tabs"
+        }
+      },
+      "pricing-rules": {
+        "type": "pricing-rules",
+        "blocks": {
+          "1538074020377": {
+            "type": "customer",
+            "settings": {
+              "title": "Wholesale 10 - Global",
+              "active": false,
+              "tags": "wholesale10",
+              "emails": "",
+              "percentage": 5,
+              "dollars": 0
+            }
+          }
+        },
+        "block_order": [
+          "1538074020377"
+        ],
+        "settings": {
+          "display_type": "strikethrough"
+        }
+      },
+      "cart-promo-widget": {
+        "type": "cart-promo-widget",
+        "settings": {
+          "title": "",
+          "promo_earned": "",
+          "amount": "500"
+        }
+      },
+      "list-collections-template": {
+        "type": "list-collections-template",
+        "settings": {
+          "banner": "shopify:\/\/shop_images\/wrist-watches.jpg",
+          "banner_color": "#c3db34",
+          "banner_opacity": 30,
+          "title": "Our Collections",
+          "description": "Check out our collections below and enjoy.",
+          "display_title_img": true,
+          "display_description_img": true,
+          "enable_breadcrumbs": true,
+          "list": "",
+          "link_title": false,
+          "display_title": true,
+          "display_description": false,
+          "display_image": true,
+          "classes": "small-12 medium-4 large-4"
+        }
+      },
+      "page-template": {
+        "type": "page-template",
+        "blocks": {
+          "1536779688418": {
+            "type": "page_header",
+            "settings": {
+              "title": "Test",
+              "page": "",
+              "page_img": "shopify:\/\/shop_images\/making-a-budget-tracking-finances.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "1536779688418"
+        ],
+        "settings": {
+          "page_img": "",
+          "banner_color": "#739cbd",
+          "banner_opacity": 0,
+          "display_title_img": true,
+          "enable_breadcrumbs": true,
+          "page_canvas_classes": "small-12 medium-12 large-12"
+        }
+      },
+      "1536866083107": {
+        "type": "promotion-tiles",
+        "blocks": {
+          "1536866083107-0": {
+            "type": "tile",
+            "settings": {
+              "title": "At Home Physics",
+              "bgimage": "",
+              "image_position": "background",
+              "bgcolor": "#af58ff",
+              "opacity": 0,
+              "image": "shopify:\/\/shop_images\/At_Home_Physics_-_350_x_234_077e3cb8-85fe-43e5-acc4-6df55b234d1a.jpg",
+              "preheader": "",
+              "header": "AT HOME PHYSICS<br>FOR YOUR STUDENTS",
+              "content": "",
+              "button1_text": "TRY THESE AT HOME",
+              "button1_link": "shopify:\/\/pages\/at-home-physics",
+              "button1_color": "white",
+              "button1_style": "hollow",
+              "button1_full_width": true,
+              "button2_text": "",
+              "button2_link": "",
+              "button2_color": "primary",
+              "button2_style": "fill",
+              "button2_full_width": false,
+              "button3_text": "",
+              "button3_link": "",
+              "button3_color": "primary",
+              "button3_style": "fill",
+              "button3_full_width": false,
+              "width": "large-3",
+              "width_mobile": "small-12",
+              "height": "height-medium",
+              "color": "#ffffff",
+              "text_size": 1,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": "image-top-full"
+            }
+          },
+          "1539733836341": {
+            "type": "tile",
+            "settings": {
+              "title": "Lab Lists",
+              "bgimage": "",
+              "image_position": "background",
+              "bgcolor": "#afca10",
+              "opacity": 0,
+              "image": "shopify:\/\/shop_images\/block3.jpg",
+              "preheader": "",
+              "header": "STOCK AN<br>ENTIRE LAB",
+              "content": "<div class=\"sub-text\">Lab Builder Tool<\/div>",
+              "button1_text": "GET STARTED",
+              "button1_link": "shopify:\/\/pages\/equipment-list",
+              "button1_color": "white",
+              "button1_style": "hollow",
+              "button1_full_width": true,
+              "button2_text": "",
+              "button2_link": "",
+              "button2_color": "primary",
+              "button2_style": "fill",
+              "button2_full_width": false,
+              "button3_text": "",
+              "button3_link": "",
+              "button3_color": "primary",
+              "button3_style": "fill",
+              "button3_full_width": false,
+              "width": "large-3",
+              "width_mobile": "small-12",
+              "height": "height-medium",
+              "color": "#063956",
+              "text_size": 2,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": "image-top-full"
+            }
+          },
+          "1539733662178": {
+            "type": "tile",
+            "settings": {
+              "title": "Print Quote",
+              "bgimage": "",
+              "image_position": "background",
+              "bgcolor": "#77bef0",
+              "opacity": 0,
+              "image": "shopify:\/\/shop_images\/block2.jpg",
+              "preheader": "",
+              "header": "WE MADE IT EASY<br>TO PRINT A QUOTE",
+              "content": "",
+              "button1_text": "PRINT QUOTE",
+              "button1_link": "shopify:\/\/pages\/printquote",
+              "button1_color": "white",
+              "button1_style": "hollow",
+              "button1_full_width": true,
+              "button2_text": "",
+              "button2_link": "",
+              "button2_color": "primary",
+              "button2_style": "fill",
+              "button2_full_width": false,
+              "button3_text": "",
+              "button3_link": "",
+              "button3_color": "primary",
+              "button3_style": "fill",
+              "button3_full_width": false,
+              "width": "large-3",
+              "width_mobile": "small-12",
+              "height": "height-small",
+              "color": "#ffffff",
+              "text_size": 2,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": "image-top-full"
+            }
+          },
+          "1536866083107-1": {
+            "type": "tile",
+            "settings": {
+              "title": "Catalog",
+              "bgimage": "",
+              "image_position": "background",
+              "bgcolor": "#005383",
+              "opacity": 0,
+              "image": "shopify:\/\/shop_images\/2020_Arbor_E_catalog.png",
+              "preheader": "",
+              "header": "FLIP THROUGH<br>OUR CATALOG",
+              "content": "",
+              "button1_text": "SEE IT",
+              "button1_link": "https:\/\/view.epageview.com\/?docid=411d04d6-2ffa-4691-8c90-18e3b2dcb8d8#pub\/page1",
+              "button1_color": "white",
+              "button1_style": "hollow",
+              "button1_full_width": true,
+              "button2_text": "",
+              "button2_link": "",
+              "button2_color": "primary",
+              "button2_style": "fill",
+              "button2_full_width": false,
+              "button3_text": "",
+              "button3_link": "",
+              "button3_color": "primary",
+              "button3_style": "fill",
+              "button3_full_width": false,
+              "width": "large-3",
+              "width_mobile": "small-12",
+              "height": "height-small",
+              "color": "#ffffff",
+              "text_size": 2,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": "image-top-full"
+            }
+          }
+        },
+        "block_order": [
+          "1536866083107-0",
+          "1539733836341",
+          "1539733662178",
+          "1536866083107-1"
+        ],
+        "settings": {
+          "title": "",
+          "slider_start": 0,
+          "slider_end": 3,
+          "arrows": true,
+          "dots": true,
+          "infinite": false,
+          "slides_to_show": 1,
+          "slides_to_show_small": 1,
+          "slides_to_show_medium": 2,
+          "slides_to_scroll": 1,
+          "slider_autoplay": false,
+          "slider_autoplay_secs": 6,
+          "wide": true
+        }
+      },
+      "1536866598303": {
+        "type": "featured-collection",
+        "settings": {
+          "title": "WHAT'S NEW!",
+          "collection": "new-products",
+          "max_cols": 12,
+          "quick_view": false,
+          "display_title": true,
+          "display_price": true,
+          "display_addtocart_button": true,
+          "display_addtocart_swatches": false,
+          "callout_btn_text": "CHECK OUT WHAT ELSE IS NEW!",
+          "button1_link": "shopify:\/\/collections\/new-products",
+          "display_callout_btn_text": true,
+          "display_type": "grid",
+          "wide": true,
+          "classes": "new-products",
+          "cols": 6,
+          "arrows": true,
+          "dots": true,
+          "infinite": true,
+          "slides_to_show": 5,
+          "slides_to_show_small": 1,
+          "slides_to_show_medium": 3,
+          "slides_to_scroll": 1,
+          "slider_autoplay": true,
+          "slider_autoplay_secs": 3
+        }
+      },
+      "blog-template": {
+        "type": "blog-template",
+        "blocks": {
+          "1539723258310": {
+            "type": "blog_header",
+            "settings": {
+              "title": "",
+              "blog": "",
+              "blog_img": ""
+            }
+          }
+        },
+        "block_order": [
+          "1539723258310"
+        ],
+        "settings": {
+          "blog_img": "shopify:\/\/shop_images\/2-maths-formula-on-chalkboard-setsiri-silapasuwanchai.jpg",
+          "banner_color": "#6a6a6a",
+          "banner_opacity": 48,
+          "display_title_img": true,
+          "enable_breadcrumbs": true,
+          "blog_canvas_classes": "small-12 medium-12 large-12"
+        }
+      },
+      "search-template": {
+        "type": "search-template",
+        "settings": {
+          "header_text": "Search",
+          "header_img": "shopify:\/\/shop_images\/science-beakers-blue-light.jpg",
+          "banner_color": "#0071b2",
+          "banner_opacity": 30,
+          "display_title_img": true,
+          "enable_breadcrumbs": true,
+          "quick_view": false,
+          "products_only": false,
+          "grid_item_classes": "small-6 medium-3 large-3",
+          "search_canvas_classes": "small-12 medium-12 large-12"
+        }
+      },
+      "mega-menu-2": {
+        "type": "mega-menu-2",
+        "blocks": {
+          "1543251949004": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": false,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": true,
+              "product_display_vendor": false,
+              "product_display_price": true,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "atomic-structure-periodic-table",
+              "menu_1_link": "",
+              "menu_2": "chemistry-properties-of-matter",
+              "menu_2_link": "",
+              "menu_3": "chemistry-kits",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          },
+          "1543251953379": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "1-inch-wooden-ball",
+              "product_display_title": true,
+              "product_display_vendor": false,
+              "product_display_price": true,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          },
+          "1544128781579": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "1-inch-steel-ball",
+              "product_display_title": true,
+              "product_display_vendor": false,
+              "product_display_price": true,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          },
+          "1544128798806": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "1-inch-glass-ball",
+              "product_display_title": true,
+              "product_display_vendor": false,
+              "product_display_price": true,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          }
+        },
+        "block_order": [
+          "1543251949004",
+          "1543251953379",
+          "1544128781579",
+          "1544128798806"
+        ],
+        "settings": {
+          "parent": "",
+          "parent_menus": false
+        }
+      },
+      "collection-template-quickorder": {
+        "type": "collection-template-quickorder",
+        "settings": {
+          "display_banner": true,
+          "banner_image": "",
+          "display_title": true,
+          "display_title_img": true,
+          "display_description": true,
+          "display_description_img": true,
+          "banner_bgcolor": "#eeeeee",
+          "banner_opacity": 30,
+          "height": "height-small",
+          "banner_color": "",
+          "banner_text_size": 1,
+          "banner_text_align": "text-center",
+          "banner_text_position": "content-center-center",
+          "enable_breadcrumbs": true,
+          "breadcrumbs_search_list": "",
+          "display_quantity": true,
+          "cart_direct": false,
+          "product_display_badge": true,
+          "quick_view": true,
+          "product_count": 50,
+          "unpack": "0",
+          "unpack_hide_unavailable": true,
+          "sorting": true,
+          "sorting_featured": true,
+          "sorting_best_selling": true,
+          "sorting_az": true,
+          "sorting_price": true,
+          "sorting_date": true,
+          "collection_canvas_classes": "small-12 medium-9 large-9"
+        }
+      },
+      "1540322243688": {
+        "type": "featured-collection",
+        "settings": {
+          "title": "Best Sellers",
+          "collection": "best-sellers",
+          "max_cols": 12,
+          "quick_view": false,
+          "display_title": true,
+          "display_price": true,
+          "display_addtocart_button": true,
+          "display_addtocart_swatches": false,
+          "callout_btn_text": "MORE BEST SELLERS",
+          "button1_link": "shopify:\/\/collections\/best-sellers",
+          "display_callout_btn_text": true,
+          "display_type": "grid",
+          "wide": true,
+          "classes": "best-selling-products",
+          "cols": 6,
+          "arrows": true,
+          "dots": true,
+          "infinite": false,
+          "slides_to_show": 5,
+          "slides_to_show_small": 1,
+          "slides_to_show_medium": 3,
+          "slides_to_scroll": 1,
+          "slider_autoplay": true,
+          "slider_autoplay_secs": 3
+        }
+      },
+      "featured-collection": {
+        "type": "featured-collection",
+        "settings": {
+          "title": "Related\/Recommended Products",
+          "collection": "chemistry",
+          "max_cols": 4,
+          "quick_view": true,
+          "display_title": true,
+          "display_price": true,
+          "display_addtocart_button": false,
+          "display_addtocart_swatches": false,
+          "callout_btn_text": "",
+          "button1_link": "",
+          "display_callout_btn_text": false,
+          "display_type": "grid",
+          "wide": true,
+          "classes": "",
+          "cols": 4,
+          "arrows": true,
+          "dots": true,
+          "infinite": true,
+          "slides_to_show": 4,
+          "slides_to_show_small": 1,
+          "slides_to_show_medium": 3,
+          "slides_to_scroll": 1,
+          "slider_autoplay": false,
+          "slider_autoplay_secs": 2
+        }
+      },
+      "1540404637534": {
+        "type": "featured-collection",
+        "disabled": true,
+        "settings": {
+          "title": "Featured collection",
+          "collection": "chemistry",
+          "max_cols": 12,
+          "quick_view": true,
+          "display_title": true,
+          "display_price": true,
+          "display_addtocart_button": false,
+          "display_addtocart_swatches": false,
+          "callout_btn_text": "",
+          "button1_link": "",
+          "display_callout_btn_text": false,
+          "display_type": "slider",
+          "wide": false,
+          "classes": "",
+          "cols": 3,
+          "arrows": true,
+          "dots": false,
+          "infinite": false,
+          "slides_to_show": 4,
+          "slides_to_show_small": 1,
+          "slides_to_show_medium": 3,
+          "slides_to_scroll": 1,
+          "slider_autoplay": false,
+          "slider_autoplay_secs": 2
+        }
+      },
+      "featured-articles": {
+        "type": "featured-articles",
+        "blocks": {
+          "1540409774921": {
+            "type": "article",
+            "settings": {
+              "width": "large-6",
+              "article": "",
+              "display_title": true,
+              "display_excerpt": false,
+              "button_label": "Read More",
+              "button_color": "primary",
+              "button_style": "fill",
+              "button_full_width": false,
+              "bgcolor": "",
+              "opacity": 30,
+              "height": "height-small",
+              "color": "",
+              "text_size": 1,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": ""
+            }
+          },
+          "1540409800721": {
+            "type": "article",
+            "settings": {
+              "width": "large-6",
+              "article": "",
+              "display_title": true,
+              "display_excerpt": false,
+              "button_label": "Read More",
+              "button_color": "primary",
+              "button_style": "fill",
+              "button_full_width": false,
+              "bgcolor": "",
+              "opacity": 30,
+              "height": "height-small",
+              "color": "",
+              "text_size": 1,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": ""
+            }
+          },
+          "1540409804450": {
+            "type": "article",
+            "settings": {
+              "width": "large-6",
+              "article": "",
+              "display_title": true,
+              "display_excerpt": false,
+              "button_label": "Read More",
+              "button_color": "primary",
+              "button_style": "fill",
+              "button_full_width": false,
+              "bgcolor": "",
+              "opacity": 30,
+              "height": "height-small",
+              "color": "",
+              "text_size": 1,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": ""
+            }
+          }
+        },
+        "block_order": [
+          "1540409774921",
+          "1540409800721",
+          "1540409804450"
+        ],
+        "settings": {
+          "pairs_per_row": "2",
+          "wide": true,
+          "margins": true,
+          "image_position": "left"
+        }
+      },
+      "featured-blog": {
+        "type": "featured-blog",
+        "settings": {
+          "title": "Labs",
+          "blog": "cool",
+          "max_cols": 6,
+          "display_title": true,
+          "display_excerpt": true,
+          "display_type": "grid",
+          "wide": false,
+          "classes": "",
+          "cols": 3,
+          "arrows": true,
+          "dots": false,
+          "infinite": false,
+          "slides_to_show": 4,
+          "slides_to_show_small": 1,
+          "slides_to_show_medium": 3,
+          "slides_to_scroll": 1,
+          "slider_autoplay": false,
+          "slider_autoplay_secs": 2
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "display_banner": true,
+          "banner_image": "",
+          "display_title": true,
+          "display_title_img": true,
+          "display_description": true,
+          "display_description_img": false,
+          "banner_bgcolor": "#ffffff",
+          "banner_opacity": 26,
+          "height": "height-small",
+          "banner_color": "",
+          "banner_text_size": 6,
+          "banner_text_align": "text-center",
+          "banner_text_position": "content-center-center",
+          "enable_breadcrumbs": true,
+          "breadcrumbs_search_list": "",
+          "infinite_scroll": false,
+          "infinite_scroll_image": "",
+          "product_display_badge": false,
+          "badge_bis_field": "arbor.ExpectedInStockDate",
+          "product_display_image": true,
+          "product_display_title": true,
+          "product_display_price": true,
+          "quick_view": false,
+          "display_addtocart_button": true,
+          "display_addtocart_swatches": false,
+          "product_count": 500,
+          "product_row_count": 4,
+          "unpack": "0",
+          "unpack_hide_unavailable": false,
+          "sorting": false,
+          "sorting_featured": false,
+          "sorting_best_selling": false,
+          "sorting_az": false,
+          "sorting_price": false,
+          "sorting_date": false,
+          "collection_canvas_classes": "small-12 medium-9 large-9"
+        }
+      },
+      "cart-fields": {
+        "type": "cart-fields",
+        "blocks": {
+          "1543516146015": {
+            "type": "select",
+            "settings": {
+              "title": "I am a...",
+              "default": "",
+              "options": ",Teacher\/Professor,Purchasing\/Administrative,Lab Supervisor,Student,Homeschool,Science Enthusiast,Other",
+              "required": true,
+              "check_field_number": 0,
+              "check_field_value": ""
+            }
+          },
+          "1543516333002": {
+            "type": "select",
+            "settings": {
+              "title": "My main interest is...",
+              "default": "",
+              "options": ",Physics,Chemistry,Physical Science,STEM,Other",
+              "required": true,
+              "check_field_number": 1,
+              "check_field_value": "Teacher\/Professor"
+            }
+          },
+          "1543516523644": {
+            "type": "select",
+            "settings": {
+              "title": "My main interest is...",
+              "default": "",
+              "options": ",Physics,Chemistry,Physical Science,Other",
+              "required": true,
+              "check_field_number": 1,
+              "check_field_value": "Lab Supervisor"
+            }
+          },
+          "1543516616981": {
+            "type": "text",
+            "settings": {
+              "title": "Teacher\/Professor\/Lab Supervisor Name",
+              "placeholder": "",
+              "required": true,
+              "check_field_number": 1,
+              "check_field_value": "Purchasing\/Administrative"
+            }
+          }
+        },
+        "block_order": [
+          "1543516146015",
+          "1543516333002",
+          "1543516523644",
+          "1543516616981"
+        ],
+        "settings": {
+          "title": "",
+          "description": "",
+          "error_msg": "Please complete all required fields."
+        }
+      },
+      "1542069794887": {
+        "type": "promotion-tiles",
+        "disabled": true,
+        "blocks": {
+          "1542069794887-0": {
+            "type": "tile",
+            "settings": {
+              "title": "Want to Print a Quote?",
+              "bgimage": "shopify:\/\/shop_images\/science-beakers-blue-light.jpg",
+              "image_position": "background",
+              "bgcolor": "#c3db34",
+              "opacity": 15,
+              "image": "",
+              "preheader": "",
+              "header": "Want to Print a Quote?",
+              "content": "With our online printing quote services, you would know what to expect. We would provide the details for you.",
+              "button1_text": "Learn More",
+              "button1_link": "shopify:\/\/pages\/printquote",
+              "button1_color": "white",
+              "button1_style": "hollow",
+              "button1_full_width": false,
+              "button2_text": "",
+              "button2_link": "",
+              "button2_color": "primary",
+              "button2_style": "fill",
+              "button2_full_width": false,
+              "button3_text": "",
+              "button3_link": "",
+              "button3_color": "primary",
+              "button3_style": "fill",
+              "button3_full_width": false,
+              "width": "",
+              "width_mobile": "small-12",
+              "height": "height-small",
+              "color": "#ffffff",
+              "text_size": 2,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": ""
+            }
+          }
+        },
+        "block_order": [
+          "1542069794887-0"
+        ],
+        "settings": {
+          "title": "print to quote",
+          "slider_start": 0,
+          "slider_end": 4,
+          "arrows": true,
+          "dots": false,
+          "infinite": false,
+          "slides_to_show": 1,
+          "slides_to_show_small": 1,
+          "slides_to_show_medium": 2,
+          "slides_to_scroll": 1,
+          "slider_autoplay": false,
+          "slider_autoplay_secs": 6,
+          "wide": true
+        }
+      },
+      "product-template-grouped": {
+        "type": "product-template-grouped",
+        "blocks": {
+          "1546447905717": {
+            "type": "related-metafield",
+            "settings": {
+              "title": "Recommended Products",
+              "mf": "gsrelated.recommended",
+              "object_type": "product",
+              "quick_view": false,
+              "slider": false,
+              "arrows": true,
+              "dots": false,
+              "infinite": false,
+              "slides_to_show": 4,
+              "slides_to_show_small": 2,
+              "slides_to_show_medium": 2,
+              "slides_to_scroll": 1,
+              "slider_autoplay": false,
+              "slider_autoplay_secs": 2
+            }
+          }
+        },
+        "block_order": [
+          "1546447905717"
+        ],
+        "settings": {
+          "ajax": false,
+          "max_quantity": 1000,
+          "quick_view_description_max": 250,
+          "show_share_buttons": true,
+          "badge_bis_field": "arbor.ExpectedInStockDate",
+          "swatches": true,
+          "lazyload": false,
+          "swatches_link": false,
+          "variant_images": false,
+          "enable_dynamic_checkout": false,
+          "enable_breadcrumbs": true,
+          "breadcrumbs_search_list": "main-menu",
+          "breadcrumbs_all_products": true,
+          "image_slider": "none",
+          "slider_thumbnails": "none",
+          "arrows": true,
+          "dots": false,
+          "infinite": false,
+          "slides_to_show": 1,
+          "slides_to_show_small": 1,
+          "slides_to_show_medium": 2,
+          "slides_to_scroll": 1,
+          "slider_autoplay": false,
+          "slider_autoplay_secs": 2,
+          "image_zoom_icon": false,
+          "image_zoom": false,
+          "image_zoom_mobile": false,
+          "image_zoom_trigger": "mouseover",
+          "image_zoom_magnification": ".70",
+          "product_canvas_classes": "small-12 medium-12 large-12",
+          "display_related": true,
+          "display_extended": true,
+          "extended_type": "tabs"
+        }
+      },
+      "mega-menu-3": {
+        "type": "mega-menu-3",
+        "blocks": {
+          "1547050188574": {
+            "type": "column",
+            "settings": {
+              "column_classes": "image-text",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": false,
+              "product_display_vendor": false,
+              "product_display_price": false,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "shopify:\/\/shop_images\/PocketLab_Voyager_in_case_500x.progressive_7788e463-4bdf-4aea-8b8d-d7f29859cba3.jpg",
+              "image_caption_bottom": "",
+              "image_link_bottom": "shopify:\/\/pages\/pocketlab-voyager",
+              "richtext_bottom": "PocketLab Voyager"
+            }
+          },
+          "1547050367310": {
+            "type": "column",
+            "settings": {
+              "column_classes": "image-text",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": false,
+              "product_display_vendor": false,
+              "product_display_price": false,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "shopify:\/\/shop_images\/PocketLab_Voyager_in_case_500x.progressive_7788e463-4bdf-4aea-8b8d-d7f29859cba3.jpg",
+              "image_caption_bottom": "",
+              "image_link_bottom": "shopify:\/\/pages\/onecar",
+              "richtext_bottom": "ONECAR"
+            }
+          },
+          "1547050372563": {
+            "type": "column",
+            "settings": {
+              "column_classes": "image-text",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": false,
+              "product_display_vendor": false,
+              "product_display_price": false,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "shopify:\/\/shop_images\/PocketLab_Voyager_in_case_500x.progressive_7788e463-4bdf-4aea-8b8d-d7f29859cba3.jpg",
+              "image_caption_bottom": "",
+              "image_link_bottom": "shopify:\/\/pages\/lab4physics",
+              "richtext_bottom": "Lab4Physics"
+            }
+          },
+          "1547050435144": {
+            "type": "column",
+            "settings": {
+              "column_classes": "image-text",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": false,
+              "product_display_vendor": false,
+              "product_display_price": false,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "shopify:\/\/shop_images\/PocketLab_Voyager_in_case_500x.progressive_7788e463-4bdf-4aea-8b8d-d7f29859cba3.jpg",
+              "image_caption_bottom": "",
+              "image_link_bottom": "shopify:\/\/collections\/nanotechnology",
+              "richtext_bottom": "Nanotechnology"
+            }
+          },
+          "1547243092960": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": false,
+              "product_display_vendor": false,
+              "product_display_price": false,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "shopify:\/\/shop_images\/PocketLab_Voyager_in_case_500x.progressive_7788e463-4bdf-4aea-8b8d-d7f29859cba3.jpg",
+              "image_caption_bottom": "",
+              "image_link_bottom": "shopify:\/\/collections\/more-stem-products",
+              "richtext_bottom": "More Stem Products"
+            }
+          }
+        },
+        "block_order": [
+          "1547050188574",
+          "1547050367310",
+          "1547050372563",
+          "1547050435144",
+          "1547243092960"
+        ],
+        "settings": {
+          "parent": "STEM",
+          "parent_menus": false
+        }
+      },
+      "mega-menu-4": {
+        "type": "mega-menu-4",
+        "blocks": {
+          "1543262244498": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": false,
+              "product_display_vendor": false,
+              "product_display_price": false,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "measurement",
+              "menu_1_link": "",
+              "menu_2": "containers",
+              "menu_2_link": "",
+              "menu_3": "miscellaneous",
+              "menu_3_link": "",
+              "menu_4": "electrical-components",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          },
+          "1543262249280": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": false,
+              "product_display_vendor": false,
+              "product_display_price": false,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "sensors",
+              "menu_1_link": "",
+              "menu_2": "accessories",
+              "menu_2_link": "",
+              "menu_3": "safety",
+              "menu_3_link": "",
+              "menu_4": "charts-and-posters",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          },
+          "1543262253314": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "power-supply",
+              "product_display_title": true,
+              "product_display_vendor": false,
+              "product_display_price": true,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          },
+          "1543262256608": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "safety-goggles",
+              "product_display_title": true,
+              "product_display_vendor": false,
+              "product_display_price": true,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          },
+          "1544130287497": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "periodic-table-of-the-elements-poster-size",
+              "product_display_title": true,
+              "product_display_vendor": false,
+              "product_display_price": true,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "",
+              "image_caption_bottom": "",
+              "image_link_bottom": "",
+              "richtext_bottom": ""
+            }
+          }
+        },
+        "block_order": [
+          "1543262244498",
+          "1543262249280",
+          "1543262253314",
+          "1543262256608",
+          "1544130287497"
+        ],
+        "settings": {
+          "parent": "Lab Supplies & Equipment",
+          "parent_menus": true
+        }
+      },
+      "mega-menu-5": {
+        "type": "mega-menu-5",
+        "blocks": {
+          "1544131495154": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": true,
+              "product_display_vendor": false,
+              "product_display_price": true,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "shopify:\/\/shop_images\/PocketLab_Voyager_in_case_500x.progressive_7788e463-4bdf-4aea-8b8d-d7f29859cba3.jpg",
+              "image_caption_bottom": "",
+              "image_link_bottom": "shopify:\/\/collections\/books",
+              "richtext_bottom": "Books"
+            }
+          },
+          "1544131525213": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": true,
+              "product_display_vendor": false,
+              "product_display_price": true,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "shopify:\/\/shop_images\/PocketLab_Voyager_in_case_500x.progressive_7788e463-4bdf-4aea-8b8d-d7f29859cba3.jpg",
+              "image_caption_bottom": "",
+              "image_link_bottom": "shopify:\/\/collections\/software",
+              "richtext_bottom": "Software"
+            }
+          },
+          "1547050943432": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": false,
+              "product_display_vendor": false,
+              "product_display_price": false,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "shopify:\/\/shop_images\/PocketLab_Voyager_in_case_500x.progressive_7788e463-4bdf-4aea-8b8d-d7f29859cba3.jpg",
+              "image_caption_bottom": "",
+              "image_link_bottom": "shopify:\/\/collections\/video",
+              "richtext_bottom": "Video"
+            }
+          }
+        },
+        "block_order": [
+          "1544131495154",
+          "1544131525213",
+          "1547050943432"
+        ],
+        "settings": {
+          "parent": "Multimedia",
+          "parent_menus": false
+        }
+      },
+      "mega-menu-6": {
+        "type": "mega-menu-6",
+        "blocks": {
+          "1544131856988": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": true,
+              "product_display_vendor": false,
+              "product_display_price": true,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "shopify:\/\/shop_images\/PocketLab_Voyager_in_case_500x.progressive_7788e463-4bdf-4aea-8b8d-d7f29859cba3.jpg",
+              "image_caption_bottom": "",
+              "image_link_bottom": "shopify:\/\/collections\/clothing",
+              "richtext_bottom": "Clothing"
+            }
+          },
+          "1544132925888": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": true,
+              "product_display_vendor": false,
+              "product_display_price": true,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "shopify:\/\/shop_images\/PocketLab_Voyager_in_case_500x.progressive_7788e463-4bdf-4aea-8b8d-d7f29859cba3.jpg",
+              "image_caption_bottom": "",
+              "image_link_bottom": "shopify:\/\/collections\/dvds-books",
+              "richtext_bottom": "DVD's &amp; Books"
+            }
+          },
+          "1547051169790": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": false,
+              "product_display_vendor": false,
+              "product_display_price": false,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "shopify:\/\/shop_images\/PocketLab_Voyager_in_case_500x.progressive_7788e463-4bdf-4aea-8b8d-d7f29859cba3.jpg",
+              "image_caption_bottom": "",
+              "image_link_bottom": "shopify:\/\/collections\/executive-gifts",
+              "richtext_bottom": "Executive Gifts"
+            }
+          },
+          "1547051206123": {
+            "type": "column",
+            "settings": {
+              "column_classes": "",
+              "parent_menus_prepend": true,
+              "richtext_top": "",
+              "product": "",
+              "product_display_title": false,
+              "product_display_vendor": false,
+              "product_display_price": false,
+              "product_display_text": "",
+              "image_top": "",
+              "image_caption_top": "",
+              "image_link_top": "",
+              "menu_1": "",
+              "menu_1_link": "",
+              "menu_2": "",
+              "menu_2_link": "",
+              "menu_3": "",
+              "menu_3_link": "",
+              "menu_4": "",
+              "menu_4_link": "",
+              "image_bottom": "shopify:\/\/shop_images\/PocketLab_Voyager_in_case_500x.progressive_7788e463-4bdf-4aea-8b8d-d7f29859cba3.jpg",
+              "image_caption_bottom": "",
+              "image_link_bottom": "shopify:\/\/collections\/games-toys",
+              "richtext_bottom": "Games &amp; Toys"
+            }
+          }
+        },
+        "block_order": [
+          "1544131856988",
+          "1544132925888",
+          "1547051169790",
+          "1547051206123"
+        ],
+        "settings": {
+          "parent": "Science Gifts",
+          "parent_menus": false
+        }
+      },
+      "page-blogs": {
+        "type": "page-blogs",
+        "blocks": {
+          "1545400697438": {
+            "type": "page_header",
+            "settings": {
+              "title": "",
+              "page": "",
+              "page_img": ""
+            }
+          }
+        },
+        "block_order": [
+          "1545400697438"
+        ],
+        "settings": {
+          "page_img": "shopify:\/\/shop_images\/2-maths-formula-on-chalkboard-setsiri-silapasuwanchai.jpg",
+          "banner_color": "#393c38",
+          "banner_opacity": 45,
+          "display_title_img": true,
+          "enable_breadcrumbs": true,
+          "page_canvas_classes": "small-12"
+        }
+      },
+      "login-alert": {
+        "type": "login-alert",
+        "settings": {
+          "content": "<p><span style=\"font-family: arial, helvetica, sans-serif; color: #ff0000;\">Welcome to our new website!<\/span><\/p>\n<p><span style=\"font-family: arial, helvetica, sans-serif; color: #ff0000;\"><strong>Note:<\/strong> If the last time you logged into your account was February 12<sup>th<\/sup>, 2019 or prior, you are required to reset your password.  Please click ‘forgot your password’ to proceed.<\/span><\/p>",
+          "color": "#ff0000"
+        }
+      },
+      "1540321462798": {
+        "type": "slideshow",
+        "disabled": true,
+        "blocks": {
+          "1579105040435": {
+            "type": "slide",
+            "settings": {
+              "bgimage": "shopify:\/\/shop_images\/Banners_1_402af729-5484-48c5-88ed-41bf7d0abc85.jpg",
+              "image_position": "background",
+              "bgcolor": "#eeeeee",
+              "opacity": 96,
+              "image": "",
+              "preheader": "",
+              "header": "Check out our new COOLSTUFF!",
+              "content": "We have the COOLEST toys that make learning fun and engaging for students.",
+              "button1_text": "VIEW NEW PRODUCTS",
+              "button1_link": "shopify:\/\/collections\/new-products",
+              "button1_color": "secondary",
+              "button1_style": "fill",
+              "button1_full_width": false,
+              "button2_text": "",
+              "button2_link": "",
+              "button2_color": "primary",
+              "button2_style": "fill",
+              "button2_full_width": false,
+              "button3_text": "",
+              "button3_link": "",
+              "button3_color": "primary",
+              "button3_style": "fill",
+              "button3_full_width": false,
+              "height": "height-large",
+              "color": "#003868",
+              "text_size": 4,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": ""
+            }
+          },
+          "1579036351411": {
+            "type": "slide",
+            "settings": {
+              "bgimage": "shopify:\/\/shop_images\/Optics_Set_1_1500_x_1000.jpg",
+              "image_position": "background",
+              "bgcolor": "#eeeeee",
+              "opacity": 97,
+              "image": "",
+              "preheader": "",
+              "header": "A Simple But Elegant Optical System",
+              "content": "No More Electrical Cords, and No More Lamps To Break!",
+              "button1_text": "LEARN MORE",
+              "button1_link": "shopify:\/\/products\/introductory-optics-set",
+              "button1_color": "tertiary",
+              "button1_style": "fill",
+              "button1_full_width": false,
+              "button2_text": "",
+              "button2_link": "",
+              "button2_color": "primary",
+              "button2_style": "fill",
+              "button2_full_width": false,
+              "button3_text": "",
+              "button3_link": "",
+              "button3_color": "primary",
+              "button3_style": "hollow",
+              "button3_full_width": false,
+              "height": "height-large",
+              "color": "#003868",
+              "text_size": 4,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": ""
+            }
+          },
+          "1579638352472": {
+            "type": "slide",
+            "settings": {
+              "bgimage": "shopify:\/\/shop_images\/Final.jpg",
+              "image_position": "background",
+              "bgcolor": "#eeeeee",
+              "opacity": 95,
+              "image": "",
+              "preheader": "",
+              "header": "A Better Bell Jar and Ringer",
+              "content": "Our Piezo Buzzer in Vacuum Chamber is the modern replacement for the Bell Jar and Ringer!",
+              "button1_text": "LEARN MORE",
+              "button1_link": "shopify:\/\/products\/space-tube-a-better-bell-jar-and-ringer",
+              "button1_color": "primary",
+              "button1_style": "fill",
+              "button1_full_width": false,
+              "button2_text": "",
+              "button2_link": "",
+              "button2_color": "primary",
+              "button2_style": "fill",
+              "button2_full_width": false,
+              "button3_text": "",
+              "button3_link": "",
+              "button3_color": "primary",
+              "button3_style": "fill",
+              "button3_full_width": false,
+              "height": "height-large",
+              "color": "#003868",
+              "text_size": 4,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": ""
+            }
+          },
+          "1581369828008": {
+            "type": "slide",
+            "settings": {
+              "bgimage": "shopify:\/\/shop_images\/Investigating_Electrical_Circuits_Kit_1500_x_1000.jpg",
+              "image_position": "background",
+              "bgcolor": "#eeeeee",
+              "opacity": 96,
+              "image": "",
+              "preheader": "",
+              "header": "A Better Way to Investigate Circuits",
+              "content": "Make learning the fundamentals of electricity fun and engaging with our Investigating Electrical Circuits Kit!",
+              "button1_text": "LEARN MORE",
+              "button1_link": "shopify:\/\/products\/investigating-electrical-circuits-kit",
+              "button1_color": "secondary",
+              "button1_style": "fill",
+              "button1_full_width": true,
+              "button2_text": "",
+              "button2_link": "",
+              "button2_color": "primary",
+              "button2_style": "fill",
+              "button2_full_width": false,
+              "button3_text": "",
+              "button3_link": "",
+              "button3_color": "primary",
+              "button3_style": "fill",
+              "button3_full_width": false,
+              "height": "height-large",
+              "color": "#004872",
+              "text_size": 4,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": ""
+            }
+          },
+          "1565704984136": {
+            "type": "slide",
+            "settings": {
+              "bgimage": "shopify:\/\/shop_images\/Conceptual_Academy_Banner_3.png",
+              "image_position": "background",
+              "bgcolor": "#9c9c9c",
+              "opacity": 63,
+              "image": "",
+              "preheader": "",
+              "header": "COOL NEW VIDEOS",
+              "content": "Difficult concepts made easier to understand with these \"COOL\" Video Vignettes!",
+              "button1_text": "VIEW VIDEOS",
+              "button1_link": "shopify:\/\/pages\/conceptual-academy",
+              "button1_color": "white",
+              "button1_style": "hollow",
+              "button1_full_width": true,
+              "button2_text": "",
+              "button2_link": "",
+              "button2_color": "primary",
+              "button2_style": "hollow",
+              "button2_full_width": false,
+              "button3_text": "",
+              "button3_link": "",
+              "button3_color": "white",
+              "button3_style": "fill",
+              "button3_full_width": false,
+              "height": "height-large",
+              "color": "#fafafa",
+              "text_size": 6,
+              "text_align": "text-center",
+              "text_position": "content-top-center",
+              "classes": ""
+            }
+          }
+        },
+        "block_order": [
+          "1579105040435",
+          "1579036351411",
+          "1579638352472",
+          "1581369828008",
+          "1565704984136"
+        ],
+        "settings": {
+          "arrows": false,
+          "dots": true,
+          "infinite": true,
+          "slides_to_show": 1,
+          "slides_to_show_small": 1,
+          "slides_to_show_medium": 1,
+          "slides_to_scroll": 1,
+          "slider_autoplay": true,
+          "slider_autoplay_secs": 4
+        }
+      },
+      "1593016596095": {
+        "type": "image-with-text-overlay",
+        "settings": {
+          "bgimage": "shopify:\/\/shop_images\/Arbor_Scientific_Distance_Learning.jpg",
+          "image_position": "background",
+          "bgcolor": "#000000",
+          "opacity": 67,
+          "image": "",
+          "preheader": "",
+          "header": "Teacher Resources",
+          "content": "",
+          "button1_text": "Click Here For Resources That Help Support Teachers",
+          "button1_link": "shopify:\/\/pages\/at-home-learning-resources",
+          "button1_color": "white",
+          "button1_style": "hollow",
+          "button1_full_width": true,
+          "button2_text": "",
+          "button2_link": "",
+          "button2_color": "primary",
+          "button2_style": "fill",
+          "button2_full_width": false,
+          "button3_text": "",
+          "button3_link": "",
+          "button3_color": "primary",
+          "button3_style": "fill",
+          "button3_full_width": false,
+          "height": "height-small",
+          "color": "#ffffff",
+          "text_size": 3,
+          "text_align": "text-center",
+          "text_position": "content-center-center",
+          "classes": ""
+        }
+      },
+      "1598542716801": {
+        "type": "image-with-text-overlay",
+        "disabled": true,
+        "settings": {
+          "bgimage": "shopify:\/\/shop_images\/paul_hewitt_main_extended_2.jpg",
+          "image_position": "background",
+          "bgcolor": "#eeeeee",
+          "opacity": 32,
+          "image": "",
+          "preheader": "",
+          "header": "Take the Classroom Wherever Your Students Are!",
+          "content": "Watch renowned physics teacher Paul Hewitt bring the classroom alive in this complete series from the comfort of your home or in your classroom. Download the Conceptual Physics Alive: Introduction video for FREE! Simply add this video to your cart and use discount code CPAINTRO at checkout.",
+          "button1_text": "VIEW ALL DIGITAL DOWNLOADS",
+          "button1_link": "shopify:\/\/products\/conceptual-physics-alive-digital-downloads-group",
+          "button1_color": "tertiary",
+          "button1_style": "fill",
+          "button1_full_width": true,
+          "button2_text": "",
+          "button2_link": "",
+          "button2_color": "primary",
+          "button2_style": "fill",
+          "button2_full_width": false,
+          "button3_text": "",
+          "button3_link": "",
+          "button3_color": "primary",
+          "button3_style": "fill",
+          "button3_full_width": false,
+          "height": "height-small",
+          "color": "#063956",
+          "text_size": 3,
+          "text_align": "text-center",
+          "text_position": "content-center-center",
+          "classes": ""
+        }
+      },
+      "1599244930170": {
+        "type": "slideshow",
+        "blocks": {
+          "1599244930170-0": {
+            "type": "slide",
+            "settings": {
+              "bgimage": "shopify:\/\/shop_images\/paul_hewitt_main_extended_2.jpg",
+              "image_position": "background",
+              "bgcolor": "#eeeeee",
+              "opacity": 30,
+              "image": "",
+              "preheader": "",
+              "header": "Take the Classroom Wherever Your Students Are!",
+              "content": "Watch renowned physics teacher Paul Hewitt bring the classroom alive in this complete series from the comfort of your home or in your classroom. Download the Conceptual Physics Alive: Introduction video for FREE! Simply add this video to your cart and use discount code CPAINTRO at checkout.",
+              "button1_text": "VIEW ALL DIGITAL DOWNLOADS",
+              "button1_link": "shopify:\/\/products\/conceptual-physics-alive-digital-downloads-group",
+              "button1_color": "tertiary",
+              "button1_style": "fill",
+              "button1_full_width": true,
+              "button2_text": "",
+              "button2_link": "",
+              "button2_color": "primary",
+              "button2_style": "fill",
+              "button2_full_width": false,
+              "button3_text": "",
+              "button3_link": "",
+              "button3_color": "primary",
+              "button3_style": "fill",
+              "button3_full_width": false,
+              "height": "height-small",
+              "color": "",
+              "text_size": 3,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": ""
+            }
+          },
+          "1599244930170-1": {
+            "type": "slide",
+            "settings": {
+              "bgimage": "shopify:\/\/shop_images\/At_Home_Physics_Learning_Kit_1500_x_1000.jpg",
+              "image_position": "background",
+              "bgcolor": "#eeeeee",
+              "opacity": 15,
+              "image": "",
+              "preheader": "",
+              "header": "Bring Science Exploration Home & Spark Your Student's Curiosity!",
+              "content": "The Physics AT HOME Experience Kit is designed with students in mind. With instructional guides to accompany each tool in the kit, us it as a supplement to hybrid or distance-learning.",
+              "button1_text": "CLICK HERE TO LEARN MORE",
+              "button1_link": "shopify:\/\/products\/physics-at-home-experience-kit",
+              "button1_color": "secondary",
+              "button1_style": "fill",
+              "button1_full_width": true,
+              "button2_text": "",
+              "button2_link": "",
+              "button2_color": "primary",
+              "button2_style": "fill",
+              "button2_full_width": false,
+              "button3_text": "",
+              "button3_link": "",
+              "button3_color": "primary",
+              "button3_style": "fill",
+              "button3_full_width": false,
+              "height": "height-small",
+              "color": "",
+              "text_size": 4,
+              "text_align": "text-center",
+              "text_position": "content-center-center",
+              "classes": ""
+            }
+          }
+        },
+        "block_order": [
+          "1599244930170-0",
+          "1599244930170-1"
+        ],
+        "settings": {
+          "arrows": true,
+          "dots": true,
+          "infinite": true,
+          "slides_to_show": 1,
+          "slides_to_show_small": 1,
+          "slides_to_show_medium": 1,
+          "slides_to_scroll": 1,
+          "slider_autoplay": true,
+          "slider_autoplay_secs": 4
+        }
+      }
+    },
+    "content_for_index": [
+      "1599244930170",
+      "1598542716801",
+      "1540321462798",
+      "1536866083107",
+      "1536866598303",
+      "1540322243688",
+      "1593016596095",
+      "1542069794887",
+      "1540404637534"
+    ]
+  },
+  "presets": {
+    "Default": {
+      "color_text": "#3d4246",
+      "color_body_text": "#788188",
+      "color_sale_text": "#7796A8",
+      "color_borders": "#e8e9eb",
+      "color_button": "#7796A8",
+      "color_button_text": "#fff",
+      "color_small_button": "#fff",
+      "color_small_button_text": "#3d4246",
+      "color_text_field": "#fff",
+      "color_text_field_text": "#000",
+      "color_image_overlay_text": "#fff",
+      "color_image_overlay": "#3d4246",
+      "image_overlay_opacity": 25,
+      "color_body_bg": "#fff",
+      "type_header_family": "Google_Work+Sans_600_sans",
+      "type_header_base_size": "26px",
+      "type_base_family": "Google_Work+Sans_400_sans",
+      "type_base_size": "16px",
+      "type_bold_product_titles": false,
+      "share_facebook": true,
+      "share_twitter": true,
+      "share_pinterest": true,
+      "sections": {
+        "header": {
+          "type": "header",
+          "settings": {}
+        },
+        "footer": {
+          "type": "footer",
+          "settings": {}
+        }
+      },
+      "content_for_index": []
+    },
+    "Light": {
+      "color_text": "#162950",
+      "color_body_text": "#757575",
+      "color_sale_text": "#ff574f",
+      "color_borders": "#e4e4e4",
+      "color_button": "#ff574f",
+      "color_button_text": "#ffffff",
+      "color_small_button": "#eaeaea",
+      "color_small_button_text": "#162950",
+      "color_text_field": "#ffffff",
+      "color_text_field_text": "#162950",
+      "color_image_overlay_text": "#ffffff",
+      "color_image_overlay": "#3d3d3d",
+      "image_overlay_opacity": 30,
+      "color_body_bg": "#f8f8f8",
+      "type_header_family": "Google_Muli_600_sans",
+      "type_header_base_size": "26px",
+      "type_base_family": "Google_Muli_600_sans",
+      "type_base_size": "18px",
+      "type_bold_product_titles": true,
+      "share_facebook": true,
+      "share_twitter": true,
+      "share_pinterest": true,
+      "social_twitter_link": "",
+      "social_facebook_link": "",
+      "social_pinterest_link": "",
+      "social_instagram_link": "",
+      "social_tumblr_link": "",
+      "social_snapchat_link": "",
+      "social_youtube_link": "",
+      "social_vimeo_link": "",
+      "favicon": "",
+      "checkout_header_image": "",
+      "checkout_logo_image": "",
+      "checkout_logo_position": "left",
+      "checkout_logo_size": "small",
+      "checkout_body_background_image": "",
+      "checkout_body_background_color": "#ffffff",
+      "checkout_input_background_color_mode": "white",
+      "checkout_sidebar_background_image": "",
+      "checkout_sidebar_background_color": "#e8f3f6",
+      "checkout_heading_font": "Roboto",
+      "checkout_body_font": "Source Sans Pro",
+      "checkout_accent_color": "#1990c6",
+      "checkout_button_color": "#23314e",
+      "checkout_error_color": "#ff6d6d",
+      "sections": {
+        "header": {
+          "type": "header",
+          "settings": {
+            "logo": "",
+            "main_linklist": "main-menu"
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "settings": {}
+        }
+      },
+      "content_for_index": []
+    }
+  }
+}

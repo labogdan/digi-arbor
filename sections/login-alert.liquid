@@ -1,0 +1,26 @@
+<div style="color:{{ section.settings.color }}">{{section.settings.content}}</div>
+
+{% schema %}
+  {
+    "name": "Login Page Alert Settings",
+    "settings": [
+	  {
+        "type": "html",
+        "id": "content",
+        "label": "Content"
+      },
+	  {
+		"type": "color",
+        "id": "color",
+        "label": "Alert Text Color",
+        "default": "#FF0000"              
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

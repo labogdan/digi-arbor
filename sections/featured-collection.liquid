@@ -1,0 +1,244 @@
+{%- assign section_collection = collections[section.settings.collection] -%}
+
+{% assign cols_css = 12 | divided_by: section.settings.cols %}
+{% if section_collection != empty and section_collection.products_count < section.settings.cols %}
+  {% assign cols_css = 12 | divided_by: section_collection.products_count %}
+{% endif %}
+
+<div class="row featured-collection {{section.settings.classes}}" data-section-id="{{section.id}}" data-section-type="dyno">
+  <div class="{% if section.settings.wide %}wide small-12{% else %}small-10 small-offset-1{% endif %}">
+    {% if section.settings.title != blank %}
+        <h2 class="title text-center">{{ section.settings.title | escape }}</h2>        
+    {% endif %}
+    
+    {% if section.settings.display_type == "slider" %}
+      {% assign slider = true %}
+      {% capture grid_item_classes %}columns{% endcapture %}
+      <div
+        id="{{section.id}}"
+        class="dyno-slider"
+        data-slider-arrows="{{section.settings.arrows}}"
+        data-slider-dots="{{section.settings.dots}}"
+        data-slider-infinite="{{section.settings.infinite}}"
+        data-slider-slides-to-show="{{section.settings.slides_to_show}}"
+        data-slider-slides-to-show-small="{{section.settings.slides_to_show_small}}"
+        data-slider-slides-to-show-medium="{{section.settings.slides_to_show_medium}}"
+        data-slider-slides-to-scroll="{{section.settings.slides_to_scroll}}"
+        data-slider-autoplay="{{section.settings.slider_autoplay}}"
+        data-slider-autoplay-secs="{{section.settings.slider_autoplay_secs}}">
+        
+    {% else %}
+      {% assign slider = false %}
+      {% capture grid_item_classes %}large-{{cols_css}}{% endcapture %}
+      <div class="row product-grid-items {% if section.settings.centered %}centered{% endif %}">
+    {% endif %}
+
+      {% if section_collection %}
+        {% for grid_product in section_collection.products limit: section.settings.max_cols %}
+          {% include 'product-grid-item', slider: slider, grid_item_display_title: section.settings.display_title, grid_item_display_price: section.settings.display_price, grid_item_classes: grid_item_classes, grid_item_loop_index: forloop.index0, quick_view: section.settings.quick_view, grid_item_add2cart: section.settings.display_addtocart_button, grid_item_swatches: section.settings.display_addtocart_swatches %} 
+      {% endfor %}
+   
+      {% else %}
+        {% for i in (1..section.settings.max_cols) %}          
+          {% include 'product-grid-item', slider: slider, grid_item_classes: grid_item_classes %} 
+  
+        {% endfor %}
+      {% endif %}
+    </div>              
+        
+        {%if section.settings.display_callout_btn_text != false%}
+            <div class="bg-overlay-buttons">                                                        
+               <a href="{{section.settings.button1_link}}" class="button tertiary fill center" tabindex="-1">{{section.settings.callout_btn_text}}</a>
+            </div>
+        {%endif%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Featured Collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured collection"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      },
+      {
+        "type": "range",
+        "id": "max_cols",
+        "label": "Maximum Products",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "default": 12
+      },                  
+      {
+        "type": "header",
+        "content": "Product Display Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "quick_view",
+        "label": "Enable Quick View",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "display_title",
+        "label": "Display Title",
+        "default": true
+      },  
+      {
+        "type": "checkbox",
+        "id": "display_price",
+        "label": "Display Price",
+        "default": true
+      },                 
+      {
+        "type": "checkbox",
+        "id": "display_addtocart_button",
+        "label": "Display Add to Cart Button",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "display_addtocart_swatches",
+        "label": "Display Add to Cart Swatches",
+        "default": false
+      },
+  
+  
+  		{
+        "type": "header",
+        "content": "Buttons"          
+    },
+    {
+        "type": "text",
+        "id": "callout_btn_text",
+        "label": "Button 1 Text"
+    },
+    {
+        "type": "url",
+        "id": "button1_link",
+        "label": "Button 1 Link"
+    },
+  
+  	 {
+            "type": "checkbox",
+            "id": "display_callout_btn_text",
+            "label": "Show Button",
+            "default": false
+        },
+      {
+        "type": "header",
+        "content": "Display Settings",
+        "info":"More options for each below."
+      },      
+      {
+         "type":      "radio",
+         "id":        "display_type",
+         "label":     "Choose:",
+         "options": [
+           { "value": "grid", "label": "Grid" },
+           { "value": "slider", "label": "Slider" }           
+         ],
+         "default":   "grid"
+      },
+      {
+        "type": "checkbox",
+        "id": "wide",
+        "label": "Wide Display",
+        "default": false
+      },
+      {
+          "type": "text",
+          "id": "classes",
+          "label": "CSS Classes",
+          "info":"Advanced"
+      },
+      {
+        "type": "header",
+        "content": "Grid Settings"
+      },
+      {
+        "type": "range",
+        "id": "cols",
+        "label": "Products Per Row",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "default": 3
+      },      
+      {
+          "type": "header",
+          "content": "Slider Settings"
+      },      
+      {
+          "type": "checkbox",
+          "id": "arrows",
+          "label": "Show Navigation Arrows?",
+          "default":true
+      },
+      {
+          "type": "checkbox",
+          "id": "dots",
+          "label": "Show Navigation Dots?"
+      },
+      {
+          "type": "checkbox",
+          "id": "infinite",
+          "label": "Infinite Scrolling?"
+      },
+      {
+          "type": "number",
+          "id": "slides_to_show",
+          "label": "Slides To Show",
+          "default": 4
+      },
+      {
+          "type": "number",
+          "id": "slides_to_show_small",
+          "label": "Slides To Show On Mobile",
+          "default": 1
+      },
+      {
+          "type": "number",
+          "id": "slides_to_show_medium",
+          "label": "Slides To Show On Tablet",
+          "default": 3
+      },
+      {
+          "type": "number",
+          "id": "slides_to_scroll",
+          "label": "Slides To Scroll",
+          "default":1
+      },
+      {
+        "type": "checkbox",
+        "id": "slider_autoplay",
+        "label": "Auto Play",
+        "default":false
+      },
+      {
+        "type": "number",
+        "id": "slider_autoplay_secs",
+        "label": "Auto Play Delay",
+        "default":2,
+        "info": "Number of seconds before scrolling"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Collection",
+        "category": "Products"
+      }
+    ]
+  }
+
+{% endschema %}

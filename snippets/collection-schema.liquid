@@ -1,0 +1,30 @@
+<script type="application/ld+json">
+        [
+            {
+                "@context" : "http://schema.org",
+                "@type": "ItemList",
+                "name": "{{ collection.title}}",
+                "url": "{{ shop.url | append: collection.url }}",
+                "image": "{{ collection.image | img_url: "master" }}",
+                "mainEntityOfPage":{
+                    "@type":"CollectionPage",
+                    "@id":"{{ collection.url }}"
+                 }
+            {% if collection.products.count != 0 %}
+            ,"itemListElement":[
+      		
+
+              {% for product in collection.products %}
+                {
+                    "@context" : "http://schema.org",
+                    "@type" : "ListItem",
+                    "position" : "{{ forloop.index }}",
+                    "url" : "{{ product.url }}"
+                }{% unless forloop.last %}, {% endunless %}
+              {% endfor %}
+              
+            ]
+            {% endif %}
+            }
+        ]
+</script>

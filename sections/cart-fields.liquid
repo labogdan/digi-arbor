@@ -1,0 +1,235 @@
+{% comment %}
+    Section displayed on the cart to display additional fields for order attributes
+
+    <h2>Current Attributes</h2>
+    <ul>
+      {% for attr in cart.attributes %}
+      <li><strong>{{attr.first}}</strong> - {{attr.last}}
+      {% endfor %}
+    </ul>
+
+{% endcomment %}
+
+
+{% if section.blocks.size > 0 %}  
+  {% assign field_rules = false %}
+  <div id="cart-fields">
+    {% if section.settings.title != "" %}<h4>{{section.settings.title}}</h4>{% endif %}
+    {% if section.settings.description != "" %}<p>{{section.settings.description}}</p>{% endif %}
+    {% for block in section.blocks %}
+        <div id="field-container-{{block.id}}" class="cart-field-container {% if block.settings.check_field_number > 0 %}hide{% endif %}" {{ block.shopify_attributes }}>
+            <label for="{{block.id}}" class="text-left">{{block.settings.title}} {% if block.settings.required %}<span class="text-danger">*</span>{% endif %}
+            {% if block.type == "select" %}
+                {% assign options = block.settings.options | split: "," %}
+                <select data-cart-field="{{forloop.index}}" class="{% if block.settings.required %}required{% endif %} data-cart-field-{{forloop.index}} cart-field-input" name="attributes[{{block.settings.title}}]" id="field-{{block.id}}" {% if block.settings.required %}required{% endif %} {% if block.settings.check_field_number > 0 %}disabled{% endif %}>
+                    {% unless block.settings.default == "" or options contains block.settings.default %}
+                        <option value="{{block.settings.default}}" {% if cart.attributes[block.settings.title] == block.settings.default %}selected{% endif %}>{{block.settings.default}}</option>
+                    {% endunless %}
+                    {% for opt in options %}
+                        <option value="{{opt}}" {% if cart.attributes[block.settings.title] == opt %}selected{% endif %}>{{opt}}</option>
+                    {% endfor %}
+                </select>
+            {% elsif block.type == "text" %}
+                <input data-cart-field="{{forloop.index}}" class="{% if block.settings.required %}required{% endif %} cart-field-input" type="text" name="attributes[{{block.settings.title}}]" id="field-{{block.id}}" placeholder="{{block.settings.placeholder}}" {% if block.settings.required %}required{% endif %} {% if block.settings.check_field_number > 0 %}disabled{% endif %} value="{{cart.attributes[block.settings.title] | escape}}">
+            {% else %}
+                <textarea data-cart-field="{{forloop.index}}" class="{% if block.settings.required %}required{% endif %} cart-field-input" name="attributes[{{block.settings.title}}]" id="field-{{block.id}}" placeholder="{{block.settings.placeholder}}" {% if block.settings.required %}required{% endif %} {% if block.settings.check_field_number > 0 %}disabled{% endif %}>{{cart.attributes[block.settings.title] | escape}}</textarea>
+            {% endif %}
+            </label>
+        </div>
+        {% if block.settings.check_field_number > 0 %}
+            {% assign field_rules = true %}
+            <script>
+                if(typeof cart_field_rules === "undefined")
+                    var cart_field_rules = [];
+                cart_field_rules.push({"id":{{block.id}},"chk_field":{{block.settings.check_field_number}},"chk_val":"{{block.settings.check_field_value | escape}}" });
+            </script>
+        {% endif %}
+    {% endfor %}    
+    <div class="cart-fields-error text-danger">{{section.settings.error_msg}}</div>
+  </div>
+  {% if field_rules %}
+    <script>
+        (function() {
+            var inputs = document.querySelectorAll('.cart-field-input');
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].addEventListener('change', function(event) {
+                    for(cart_field_rule of cart_field_rules) {
+                        if(parseInt(this.getAttribute('data-cart-field')) == cart_field_rule.chk_field) {
+                            let elem_container = document.getElementById("field-container-" + cart_field_rule.id);
+                            let elem = document.getElementById("field-" + cart_field_rule.id);
+                            if(this.value == cart_field_rule.chk_val) {
+                                elem.disabled = false;
+                                elem_container.classList.remove('hide');         
+                            }
+                            else {
+                                elem.disabled = true;
+                                elem_container.classList.add('hide');                                
+                            }            
+                        }
+                    }
+                });
+            }
+        })();  
+        {% for block in section.blocks %}
+            {% if block.settings.check_field_number > 0 %}
+                var el = document.getElementsByClassName("data-cart-field-{{block.settings.check_field_number}}")[0];
+                el.dispatchEvent(new Event('change'));
+            {% endif %}        
+        {% endfor %}
+    </script>
+  {% endif %}
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Cart Fields",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Fields Title"
+      },
+      {
+        "type": "html",
+        "id": "description",
+        "label": "Fields Description"
+      },
+      {
+        "type": "html",
+        "id": "error_msg",
+        "label": "Required Fields Error Message",
+        "info":"Displays when required fields are not populated.",
+        "default":"Please complete all required fields."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "text",
+        "name": "Simple Text",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Field Name"
+            },
+            {
+                "type": "text",
+                "id": "placeholder",
+                "label": "Field Placeholder"
+            },
+            {
+                "type": "checkbox",
+                "id": "required",
+                "label": "Required"
+            },
+            {
+                "type": "header",
+                "content":"Display Requirements",
+                "info":"Simple display rule based on checking a specified field number's value."
+            },
+            {
+                "type": "number",
+                "id": "check_field_number",
+                "label": "Field Number",
+                "info": "Fields start from 1 and progress based on the order you have specified."
+            },
+            {
+                "type": "text",
+                "id": "check_field_value",
+                "label": "Field Value",
+                "info": "The value to check against of the specified field."
+            }
+        ]
+      },
+      {
+        "type": "textarea",
+        "name": "Multi-Line Text",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Field Name"
+            },
+            {
+                "type": "text",
+                "id": "placeholder",
+                "label": "Field Placeholder"
+            },
+            {
+                "type": "checkbox",
+                "id": "required",
+                "label": "Required"
+            },
+            {
+                "type": "header",
+                "content":"Display Requirements",
+                "info":"Simple display rule based on checking a specified field number's value."
+            },
+            {
+                "type": "number",
+                "id": "check_field_number",
+                "label": "Field Number",
+                "info": "Fields start from 1 and progress based on the order you have specified."
+            },
+            {
+                "type": "text",
+                "id": "check_field_value",
+                "label": "Field Value",
+                "info": "The value to check against of the specified field."
+            }
+        ]
+      },
+      {
+        "type": "select",
+        "name": "Dropdown",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Field Name"
+            },            
+            {
+                "type": "text",
+                "id": "default",
+                "label": "Default Option"
+            },            
+            {
+                "type": "textarea",
+                "id": "options",
+                "label": "Possible Options",
+                "info":"Comma separated list of possible values."
+            },
+            {
+                "type": "checkbox",
+                "id": "required",
+                "label": "Required"
+            },
+            {
+                "type": "header",
+                "content":"Display Requirements",
+                "info":"Simple display rule based on checking a specified field number's value."
+            },
+            {
+                "type": "number",
+                "id": "check_field_number",
+                "label": "Field Number",
+                "info": "Fields start from 1 and progress based on the order you have specified."
+            },
+            {
+                "type": "text",
+                "id": "check_field_value",
+                "label": "Field Value",
+                "info": "The value to check against of the specified field."
+            }
+        ]
+      }            
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+
+{% endjavascript %}

@@ -1,0 +1,51 @@
+<div class="bg-overlay-container">
+  {%- if section.settings.banner_color != "" -%}
+      <div class="bg-overlay" style="background-color:{{section.settings.banner_color}};opacity:{{opacity}};"></div>
+  {%- endif -%}
+
+  {%- if page_img != nil -%}
+      <div class="bg-img" style="background-image:url({%- include 'image-src', image_src: page_img, image_src_sizing: "2048x" %});"></div>
+  {%- endif -%}
+
+  <div class="bg-overlay-content text-center">
+    {% if section.settings.display_title_img %}<h1>{{ page.title }}</h1>{% endif %}
+  </div>
+</div>
+
+{% unless section.settings.display_title_img %}
+  <div class="large-12 small-12 columns text-center">
+    <h1>{{page.title}}</h1>
+  </div>
+{% endunless %}
+
+<div class="row max-width" data-section-id="{{ section.id }}" data-section-type="page">
+
+  {% include 'breadcrumbs' %}
+  
+  <div class="small-12 {{section.settings.page_canvas_classes}} columns  page-container">
+
+    <div class="rte">
+      {{ page.content }}
+      
+      
+
+<div id="ZoomyWishlistPage"></div>
+<script src="https://zooomyapps.com/wishlist/ListWishlist.js" data-shop-id="{{shop.permanent_domain}}" data-customer-id="{{customer.id}}"></script>
+    </div>
+    
+  </div>
+  
+</div>
+
+{% schema %}
+  {
+    "name": "Section name",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
