@@ -898,7 +898,7 @@ window.onload = function() {
                             } else {
                                 this.$province.find("option").remove(), (!e || 0 != e.length) && (this.setOptions(this.$province, e), this.$provinceContainer.show(), this.$cityContainer.show(), this.$zipContainer.show(), this.$calcButton.show());
                             }
-                            
+
                         } else {
                             if((0, r.default)('.input-province').length === 0) {
                                 this.$province.hide().removeClass('ship-calc-province required');
@@ -1385,10 +1385,10 @@ window.onload = function() {
           }
         });
       }
-  
+
       var options = { threshold: [0.5] };
       var observer = new IntersectionObserver(onEntry, options);
-  
+
       items.forEach(function(item, index) {
         observer.observe(item);
       });
@@ -1400,7 +1400,7 @@ window.onload = function() {
             item.dataset.bg_src
           }); background-size: cover; background-position: 100% 80%;`;
         }
-  
+
         if (item.dataset.src) {
           item.classList.add("is-showing");
           item.src = `${item.dataset["src"]}`;

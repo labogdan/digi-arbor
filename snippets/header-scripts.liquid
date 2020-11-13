@@ -14,5 +14,8 @@
     {%- endif %}
 {%- endif %}
 
-{{ '//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css' | stylesheet_tag }}
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" defer="defer"></script>
+{%- if template == 'cart.quote' -%}
+    {{ '//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css' | stylesheet_tag }}
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" type="text/javascript" defer="defer"></script>
+{%- endif -%}
+

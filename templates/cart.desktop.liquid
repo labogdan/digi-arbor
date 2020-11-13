@@ -1,2 +1,49 @@
 {% layout none %}
 {% include 'cart' %}
+
+<script>
+    (function() {
+        var items = document.querySelectorAll(".lazy-image");
+        if (window.IntersectionObserver) {
+            function onEntry(entries, index) {
+                entries.forEach(function(entry, index) {
+                    if (entry.isIntersecting === true) {
+                        if (entry.target.dataset.bg_src) {
+                            entry.target.classList.add("is-showing");
+                            entry.target.style = `background-image: url(${
+                                entry.target.dataset.bg_src
+                            }); background-size: cover; background-position: 100% 80%;`;
+                            observer.unobserve(entry.target);
+                        }
+                        if (entry.target.dataset.src) {
+                            entry.target.classList.add("is-showing");
+                            entry.target.src = `${entry.target.dataset["src"]}`;
+                            observer.unobserve(entry.target);
+                        }
+                    }
+                });
+            }
+
+            var options = { threshold: [0.5] };
+            var observer = new IntersectionObserver(onEntry, options);
+
+            items.forEach(function(item, index) {
+                observer.observe(item);
+            });
+        } else {
+            items.forEach(function(item, index) {
+                if (item.dataset.bg_src) {
+                    item.classList.add("is-showing");
+                    item.style = `background-image: url(${
+                        item.dataset.bg_src
+                    }); background-size: cover; background-position: 100% 80%;`;
+                }
+
+                if (item.dataset.src) {
+                    item.classList.add("is-showing");
+                    item.src = `${item.dataset["src"]}`;
+                }
+            });
+        }
+    })();
+</script>

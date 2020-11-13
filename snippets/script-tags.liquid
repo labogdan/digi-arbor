@@ -1,43 +1,147 @@
 
-{%- if layout == 'theme' -%}
-<script type="text/javascript" src="{{ 'vendors@layout.theme.js' | asset_url }}" defer="defer"></script>
-{%- else -%}
-<link rel="prefetch" href="{{ 'vendors@layout.theme.js' | asset_url }}" as="script">
-{%- endif -%} {%- if layout == 'theme' -%}
-<script type="text/javascript" src="{{ 'layout.theme.js' | asset_url }}" defer="defer"></script>
-{%- else -%}
-<link rel="prefetch" href="{{ 'layout.theme.js' | asset_url }}" as="script">
-{%- endif -%} {%- if template.name == 'collection' or template.name == 'index' or template.name == 'product' -%}
-<script type="text/javascript" src="{{ 'vendors@template.collection@template.index@template.product.js' | asset_url }}" defer="defer"></script>
-{%- else -%}
-<link rel="prefetch" href="{{ 'vendors@template.collection@template.index@template.product.js' | asset_url }}" as="script">
-{%- endif -%} {%- if template.name == 'collection' -%}
-<script type="text/javascript" src="{{ 'template.collection.js' | asset_url }}" defer="defer"></script>
-{%- else -%}
-<link rel="prefetch" href="{{ 'template.collection.js' | asset_url }}" as="script">
-{%- endif -%} {%- if template.name == 'gift_card' -%}
-<script type="text/javascript" src="{{ 'template.gift_card.js' | asset_url }}" defer="defer"></script>
-{%- else -%}
-<link rel="prefetch" href="{{ 'template.gift_card.js' | asset_url }}" as="script">
-{%- endif -%} {%- if template.name == 'index' -%}
-<script type="text/javascript" src="{{ 'template.index.js' | asset_url }}" defer="defer"></script>
-{%- else -%}
-<link rel="prefetch" href="{{ 'template.index.js' | asset_url }}" as="script">
-{%- endif -%} {%- if template.name == 'product' -%}
-<script type="text/javascript" src="{{ 'template.product.js' | asset_url }}" defer="defer"></script>
-{%- else -%}
-<link rel="prefetch" href="{{ 'template.product.js' | asset_url }}" as="script">
-{%- endif -%} {%- if template.name == 'addresses' -%}
-<script type="text/javascript" src="{{ 'template.addresses.js' | asset_url }}" defer="defer"></script>
-{%- else -%}
-<link rel="prefetch" href="{{ 'template.addresses.js' | asset_url }}" as="script">
-{%- endif -%} {%- if template.name == 'login' -%}
-<script type="text/javascript" src="{{ 'template.login.js' | asset_url }}" defer="defer"></script>
-{%- else -%}
-<link rel="prefetch" href="{{ 'template.login.js' | asset_url }}" as="script">
-{%- endif -%}
+<script>
+
+    function loadJs(url, callback) {
+        var e = document.createElement("script");
+        e.src = url;
+        e.type="text/javascript";
+        e.addEventListener('load', callback);
+        document.getElementsByTagName("head")[0].appendChild(e);
+    }
+
+    {%- if template == 'collection.quickorder' -%}
+        load20(100);
+        load21(100);
+    {%- elsif template == 'article' -%}
+        load20(200);
+        load21(200);
+    {%- elsif layout == 'theme' and template != 'cart' -%}
+		load20(100);
+        load21(1700);
+    {%- elsif template == 'cart' -%}
+        load20(100);
+        load21(650);
+    {%- elsif template == 'cart.quote' -%}
+        load20(100);
+        load21(650);
+	{%- endif -%}
+
+	{%- if template.name == 'collection' or template.name == 'index' -%}
+		load22(4000);
+    {%- elsif template.name == 'product' -%}
+        load22(1000);
+    {%- endif -%}
+
+	{%- if template.name == 'collection' -%}
+		load23(3000);
+	{%- endif -%}
+
+	{%- if template.name == 'gift_card' -%}
+		load24(100);
+	{%- endif -%}
+
+	{%- if template.name == 'index' -%}
+		/load25(3000);
+	{%- endif -%}
+
+	{%- if template.name == 'product' -%}
+		load26(750);
+	{%- endif -%}
+
+	{%- if template.name == 'addresses' -%}
+		load27(300);
+	{%- endif -%}
+
+	{%- if template.name == 'login' -%}
+		load28(10);
+	{%- endif -%}
+
+	{% if template contains "quickorder" %}
+		load29(10);
+	{%- endif -%}
+
+	function load20(time) {
+		setTimeout(function() {
+			loadJs("{{ 'vendors@layout.theme.js' | asset_url }}", function() {
+				console.log('loaded 20');
+			});
+		}, time);
+	}
+
+	function load21(time) {
+		setTimeout(function() {
+			loadJs("{{ 'layout.theme.js' | asset_url }}", function() {
+				console.log('loaded 21');
+			});
+		}, time);
+	}
+
+	function load22(time) {
+		setTimeout(function() {
+			loadJs("{{ 'vendors@template.collection@template.index@template.product.js' | asset_url }}", function() {
+				console.log('loaded 22');
+			});
+		}, time);
+	}
+
+	function load23(time) {
+		setTimeout(function() {
+			loadJs("{{ 'template.collection.js' | asset_url }}", function() {
+				console.log('loaded 23');
+			});
+		}, time);
+	}
+
+	function load24(time) {
+		setTimeout(function() {
+			loadJs("{{ 'template.gift_card.js' | asset_url }}", function() {
+				console.log('loaded 24');
+			});
+		}, time);
+	}
+
+	function load25(time) {
+		setTimeout(function() {
+			loadJs("{{ 'template.index.js' | asset_url }}", function() {
+				console.log('loaded 25');
+			});
+		}, time);
+	}
+
+	function load26(time) {
+		setTimeout(function() {
+			loadJs("{{ 'template.product.js' | asset_url }}", function() {
+				console.log('loaded 26');
+			});
+		}, time);
+	}
+
+	function load27(time) {
+		setTimeout(function() {
+			loadJs("{{ 'template.addresses.js' | asset_url }}", function() {
+				console.log('loaded 27');
+			});
+		}, time);
+	}
+
+	function load28(time) {
+		setTimeout(function() {
+			loadJs("{{ 'template.login.js' | asset_url }}", function() {
+				console.log('loaded 28');
+			});
+		}, time);
+	}
+
+	function load29(time) {
+		setTimeout(function() {
+			loadJs("{{ 'dropzone.js' | asset_url }}", function() {
+				console.log('loaded 29');
+			});
+		}, time);
+	}
+
+</script>
 
 
-{% if template contains "quickorder" %}
-	<script type="text/javascript" src="{{ 'dropzone.js' | asset_url }}" defer="defer"></script>
-{% endif %}
+
+

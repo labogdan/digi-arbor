@@ -14,6 +14,7 @@ This file can accept liquid varaibles.
   $(".image-thumb-gallery [data-product-single-thumbnail]").click(function() {
     $("#pdp-video").hide();
     $("[data-product-featured-image]").show();
+    $("[data-product-featured-image]").show();
     $(".zoomImg").css('visibility', 'visible');
   });
   
@@ -27,23 +28,30 @@ This file can accept liquid varaibles.
       createImageThumbnails: false,
       timeout: null,      
       init: function() {
+          console.log('***********init***********');
         this.on("processing", function() {
+            console.log('loading');
           $(".dropzone-loading").show();
         });   
         this.on("error", function() {
+            console.log('error');
           $(".dropzone-loading").hide();
           this.removeAllFiles();
           swal("SKU Upload","Sorry, we experienced an error reading that file. Please try again or choose a different file.","error");
         }); 
         this.on("queuecomplete", function() {
+            console.log('queuecomplete');
           this.removeAllFiles();
           $(".dropzone-loading").hide();
         });
         this.on("success", function(file,resp,event) {
+            console.log('here - success');
           if(resp.success) {
+              console.log('success');
             quickOrderPopulate(resp.skus);
           }
           else {
+              console.log('swal');
             swal("SKU Upload","Sorry, we experienced an error reading that file. Please try again or choose a different file.","error");
           }
         });
@@ -284,7 +292,7 @@ function cartSkusMerge() {
         
         if (ci.sku in cartSkus)
         {
-          priceCheck = GS.price_evaluate(ci.price,ci.product_id,window.theme.pSettings,cartSkus[ci.sku].qty);          
+          priceCheck = GS.price_evaluate(ci.price,ci.product_id,window.theme.pSettings,cartSkus[ci.sku].qty);
           if(ci.price != priceCheck)
           {
             price_prop = "_pr_" + ci.product_id;

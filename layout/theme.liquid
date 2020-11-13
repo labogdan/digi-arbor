@@ -4,16 +4,251 @@
 <head>
   {% include 'elevar-head' %}
   {% include 'site-head' %}
-  {{ content_for_header }}
-  {% include 'header-scripts' %
+  {% capture h_content %}
+    {{ content_for_header }}
+  {% endcapture %}
+<style>
+  #search-results .placeholder-svg {display: none !important}
+</style>
+
+  {{ h_content
+  | remove: "previewBarInjector.init();",
+  | remove: "https:\/\/d2badvwg0mti9p.cloudfront.net\/script.js?shop=\u0026shop=arbor-scientific.myshopify.com",
+  | remove: "https:\/\/analytics.getshogun.com\/collector.js?shop=arbor-scientific.myshopify.com",
+  | remove: "https:\/\/storage.googleapis.com\/gsf-scripts\/global-remarketing\/arbor-scientific.js?1560492807\u0026shop=arbor-scientific.myshopify.com",
+  | remove: "https:\/\/static.klaviyo.com\/onsite\/js\/klaviyo.js?company_id=PP6W73\u0026shop=arbor-scientific.myshopify.com",
+  | remove: "https:\/\/static.klaviyo.com\/onsite\/js\/klaviyo.js?company_id=PP6W73\u0026shop=arbor-scientific.myshopify.com",
+  | remove: "https:\/\/static.klaviyo.com\/onsite\/js\/klaviyo.js?company_id=PP6W73\u0026shop=arbor-scientific.myshopify.com",
+  | remove: "https:\/\/d2badvwg0mti9p.cloudfront.net\/script.js?shop=arbor-scientific.myshopify.com\u0026shop=arbor-scientific.myshopify.com",
+  | remove: "https://cdn.shopify.com/s/javascripts/tricorder/trekkie.storefront.min.js?v=2020.07.13.1",
+  | remove: "https://cdn.shopify.com/shopifycloud/boomerang/shopify-boomerang-1.0.0.min.js",
+  | remove: "/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+  | remove: "https://cdn.shopify.com/shopifycloud/storefront-recaptcha-v3/v0.1/index.js",
+  | remove: "//cdn.shopify.com/shopifycloud/shopify/assets/storefront/load_feature-24ff1222c9aa13bb217653c0d3ea28c40a796a280e6da29ad421eec2a6075c86.js",
+  | remove: "//cdn.shopify.com/shopifycloud/shopify/assets/shopify_pay/storefront-21b5dddfc8b64c1ad68cee3ba7448d1ffa15c24e969ebc1fbccf1a3784b659ad.js?v=20190107",
+  | remove: "//cdn.shopify.com/shopifycloud/shopify/assets/storefront/features-87e8399988880142f2c62771b9d8f2ff6c290b3ff745dd426eb0dfe0db9d1dae.js",
+  | remove: "//cdn.shopify.com/shopifycloud/shopify/assets/themes_support/ga_urchin_forms-99e991855b3d8ddc69e625c68ab0579dd9927b611c2ec4943d396c72e3af0849.js",
+  | remove: "//cdn.shopify.com/shopifycloud/shopify/assets/storefront/bars/preview_bar_injector-1e3a713add37dacb26a2846054e5bf73c968340c06cb4dbaa8b985dce031f4cd.js"
+  }}
+
+  <script>
+
+    {%- if template == 'article' -%}
+      load01(0);
+      load02(10);
+      load03(20);
+      load04(30);
+      load05(40);
+    {%- else -%}
+      load01(450);
+      load02(4500);
+      load03(850);
+      load04(1000);
+      load05(1200);
+    {%- endif -%}
+
+
+    /*load06(4000);*/
+
+    {%- if template == 'article' -%}
+      load07(50);
+      load08(60);
+      load09(70);
+      load10(80);
+    {%- else -%}
+      load07(1450);
+      load08(4650);
+      load09(2000);
+      load10(2250);
+    {%- endif -%}
+
+
+    {%- if template == 'page' or template == 'article' -%}
+      load11(100);
+    {%- else -%}
+      load11(2500);
+    {%- endif -%}
+
+    {%- if template == 'article' -%}
+      load12(110);
+      load13(120);
+    {%- else -%}
+      load12(2750);
+      load13(3000);
+    {%- endif -%}
+
+
+
+    console.log('template: {{template}}');
+    console.log('layout: {{layout}}');
+
+
+    {%- if template == 'collection.quickorder' or template == 'cart.quote' or template == 'article' or template == 'cart' -%}
+      load19(600);
+    {%- else -%}
+      load19(4250);
+    {%- endif -%}
+
+    function loadJs(url, callback) {
+      var e = document.createElement("script");
+      e.src = url;
+      e.type="text/javascript";
+      e.addEventListener('load', callback);
+      document.getElementsByTagName("head")[0].appendChild(e);
+    }
+
+    function load01(time) {
+      setTimeout(function() {
+        loadJs("//cdn.shopify.com/shopifycloud/shopify/assets/storefront/bars/preview_bar_injector-1e3a713add37dacb26a2846054e5bf73c968340c06cb4dbaa8b985dce031f4cd.js", function() {
+          document.addEventListener('DOMContentLoaded', function() {
+            const previewBarInjector = new Shopify.PreviewBarInjector({
+              targetNode: document.body,
+              iframeRoot: 'https://www.arborsci.com',
+              iframeSrc: 'https://www.arborsci.com/preview_bar',
+              previewToken: '71mz1vm7guu6o08m',
+              themeStoreId: '',
+              permanentDomain: 'arbor-scientific.myshopify.com',
+            });
+            previewBarInjector.init();
+          });
+          console.log('loaded 01');
+        });
+      }, time);
+    }
+
+    function load02(time) {
+      setTimeout(function() {
+        loadJs("//cdn.shopify.com/shopifycloud/shopify/assets/themes_support/ga_urchin_forms-99e991855b3d8ddc69e625c68ab0579dd9927b611c2ec4943d396c72e3af0849.js", function() {
+          console.log('loaded 02');
+        });
+      }, time);
+    }
+
+    function load03(time) {
+      setTimeout(function() {
+        loadJs("//cdn.shopify.com/shopifycloud/shopify/assets/storefront/features-87e8399988880142f2c62771b9d8f2ff6c290b3ff745dd426eb0dfe0db9d1dae.js", function() {
+          console.log('loaded 03');
+        });
+      }, time);
+    }
+
+    function load04(time) {
+      setTimeout(function() {
+        loadJs("//cdn.shopify.com/shopifycloud/shopify/assets/shopify_pay/storefront-21b5dddfc8b64c1ad68cee3ba7448d1ffa15c24e969ebc1fbccf1a3784b659ad.js?v=20190107", function() {
+          console.log('loaded 04');
+        });
+      }, time);
+    }
+
+    function load05(time) {
+      setTimeout(function() {
+        loadJs("//cdn.shopify.com/shopifycloud/shopify/assets/storefront/load_feature-24ff1222c9aa13bb217653c0d3ea28c40a796a280e6da29ad421eec2a6075c86.js", function() {
+          console.log('loaded 05');
+        });
+      }, time);
+    }
+
+    function load06(time) {
+      setTimeout(function() {
+        loadJs("https://cdn.shopify.com/shopifycloud/storefront-recaptcha-v3/v0.1/index.js", function() {
+
+          !function(e){e.addEventListener("DOMContentLoaded",function(){var t;null!==e.querySelector('form[action^="x/contact"] input[name="form_type"][value="contact"]')&&(window.Shopify=window.Shopify||{},window.Shopify.recaptchaV3=window.Shopify.recaptchaV3||{siteKey:"6LcCR2cUAAAAANS1Gpq_mDIJ2pQuJphsSQaUEuc9"},(t=e.createElement("script")).setAttribute("src",""),e.body.appendChild(t))})}(document);
+
+
+          console.log('loaded 06');
+        });
+      }, time);
+    }
+
+    function load07(time) {
+      setTimeout(function() {
+        loadJs("/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js", function() {
+          console.log('loaded 07');
+        });
+      }, time);
+    }
+
+    function load08(time) {
+      setTimeout(function() {
+        loadJs("https://cdn.shopify.com/shopifycloud/boomerang/shopify-boomerang-1.0.0.min.js", function() {
+          console.log('loaded 08');
+        });
+      }, time);
+    }
+
+    function load09(time) {
+      setTimeout(function() {
+        loadJs("https://cdn.shopify.com/s/javascripts/tricorder/trekkie.storefront.min.js?v=2020.07.13.1", function() {
+          console.log('loaded 09');
+        });
+      }, time);
+    }
+
+    function load10(time) {
+      setTimeout(function() {
+        loadJs("https://d2badvwg0mti9p.cloudfront.net/script.js?shop=arbor-scientific.myshopify.com", function() {
+          console.log('loaded 10');
+        });
+      }, time);
+    }
+
+    function load11(time) {
+      setTimeout(function() {
+        loadJs("https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=PP6W73&shop=arbor-scientific.myshopify.com", function() {
+          console.log('loaded 11');
+        });
+      }, time);
+    }
+
+    function load12(time) {
+      setTimeout(function() {
+        loadJs("https://storage.googleapis.com/gsf-scripts/global-remarketing/arbor-scientific.js?1560492807&shop=arbor-scientific.myshopify.com", function() {
+          console.log('loaded 12');
+        });
+      }, time);
+    }
+
+    function load13(time) {
+      setTimeout(function() {
+        loadJs("https://analytics.getshogun.com/collector.js?shop=arbor-scientific.myshopify.com", function() {
+          console.log('loaded 13');
+        });
+      }, time);
+    }
+
+
+    function load15(time) {
+      setTimeout(function() {
+        loadJs("https://s3-us-west-2.amazonaws.com/files.getemails.com/account/4X0HW4E/source/getemails.js", function() {
+          console.log('loaded 15');
+          console.log('why is this forbidden??? is it this way on prod?');
+        });
+      }, time);
+    }
+
+    function load19(time) {
+      setTimeout(function() {
+        loadJs("{{'customer.js' | asset_url}}", function() {
+          console.log('loaded 19');
+
+        });
+      }, time);
+    }
+
+
+  </script>
+
+
+
+  {% include 'header-scripts' %}
 
   {% include 'shogun-head' %}
-  
+
   {% if template contains 'customers' %}
-      {{ "shopify_common.js" | shopify_asset_url | script_tag }}
-      {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+    {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+    {{ "customer_area.js"  | shopify_asset_url | script_tag }}
   {% endif %}
-  
+
   <meta name="google-site-verification" content="5EPkmlwa3SJ04TWE-P9vq0VDLzS-vuM_ikoyHe5Ci8s" />
   <!-- Hotjar Tracking Code for www.arborsci.com -->
   <script>
@@ -39,22 +274,22 @@
   {%- endif -%}
 
   {% render 'gsf-conversion-pixels' %}
-  {% include 'scapp-customerinfo' %} 
-  
+  {% include 'scapp-customerinfo' %}
+
   {% include 'website-schema' %}
   {% if template == "index" %}{% include 'localbusiness-schema' %}{% endif %}
   {% include 'organization-schema' %}
   {% comment %}{% include 'prof-service-schema' %}{% endcomment %}
   {% include 'breadcrumb-schema' %}
 
-  <!--- Start of [GetEmails.com|http://GetEmails.com] Code ---><script async src="https://s3-us-west-2.amazonaws.com/files.getemails.com/account/4X0HW4E/source/getemails.js"></script><!--- End of [GetEmails.com|http://GetEmails.com] Code --->
+
 </head>
 
 <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }} {{ settings.body_classes }}">
   
 <!-- Aftership Code -->
 <div id="as-root"></div><script>(function(e,t,n){var r,i=e.getElementsByTagName(t)[0];if(e.getElementById(n))return;
-r=e.createElement(t);r.id=n;r.src="//button.aftership.com/all.js";i.parentNode.insertBefore(r,i)})(document,"script","aftership-jssdk")</script>
+    r=e.createElement(t);r.id=n;r.src="//button.aftership.com/all.js";i.parentNode.insertBefore(r,i)})(document,"script","aftership-jssdk")</script>
 <!-- End Aftership Code -->
 
     {% comment %}off-canvas UI drawers{% endcomment %}
@@ -116,12 +351,63 @@ r=e.createElement(t);r.id=n;r.src="//button.aftership.com/all.js";i.parentNode.i
     </div>
       {% endunless %}
       
-    {% include 'footer-scripts' %} 
+    {% include 'footer-scripts' %}
 	
-	{% include 'iwish_v2' with 'iwishfooter' %}
+
 
 
   {% include 'elevar-body-end' %}
 <!-- This line added automatically by JSON-LD for SEO. -->{% include 'jsonld-for-seo' %}
+
+
+
+<script>
+
+  (function() {
+    var items = document.querySelectorAll(".lazy-image");
+    if (window.IntersectionObserver) {
+      function onEntry(entries, index) {
+        entries.forEach(function(entry, index) {
+          if (entry.isIntersecting === true) {
+            if (entry.target.dataset.bg_src) {
+              entry.target.classList.add("is-showing");
+              entry.target.style = `background-image: url(${
+                      entry.target.dataset.bg_src
+              }); background-size: cover; background-position: 100% 80%;`;
+              observer.unobserve(entry.target);
+            }
+            if (entry.target.dataset.src) {
+              entry.target.classList.add("is-showing");
+              entry.target.src = `${entry.target.dataset["src"]}`;
+              observer.unobserve(entry.target);
+            }
+          }
+        });
+      }
+
+      var options = { threshold: [0.5] };
+      var observer = new IntersectionObserver(onEntry, options);
+
+      items.forEach(function(item, index) {
+        observer.observe(item);
+      });
+    } else {
+      items.forEach(function(item, index) {
+        if (item.dataset.bg_src) {
+          item.classList.add("is-showing");
+          item.style = `background-image: url(${
+                  item.dataset.bg_src
+          }); background-size: cover; background-position: 100% 80%;`;
+        }
+
+        if (item.dataset.src) {
+          item.classList.add("is-showing");
+          item.src = `${item.dataset["src"]}`;
+        }
+      });
+    }
+  })();
+
+</script>
 </body>
 </html>

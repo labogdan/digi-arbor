@@ -17,5 +17,18 @@
   SCAPPShop.customer.addresses = {{customer.addresses|json}};
   {% endif %}
   </script>
-{{ 'sca-pp-initial.js' | asset_url | script_tag }}
-  
+
+<script>
+
+ function load14(time) {
+  setTimeout(function() {
+   loadJs("{{ 'sca-pp-initial.js' | asset_url }}", function() {
+    console.log('loaded 14');
+   });
+  }, time);
+ }
+
+ load14(3250);
+
+</script>
+
