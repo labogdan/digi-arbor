@@ -9,9 +9,15 @@
         document.getElementsByTagName("head")[0].appendChild(e);
     }
 
-    {%- if template == 'collection.quickorder' -%}
-        load20(100);
-        load21(100);
+	{%- if template.name == 'product' -%}
+		load20(100);
+		load21(100);
+	{%- elsif template == 'cart.quote' -%}
+		load20(100);
+		load21(150);
+    {%- elsif template == 'collection.quickorder' -%}
+        /*load20(100);
+        load21(100);*/
     {%- elsif template == 'article' -%}
         load20(200);
         load21(200);
@@ -20,11 +26,9 @@
         load21(1700);
     {%- elsif template == 'cart' -%}
         load20(100);
-        load21(650);
-    {%- elsif template == 'cart.quote' -%}
-        load20(100);
-        load21(650);
+        load21(150);
 	{%- endif -%}
+
 
 	{%- if template.name == 'collection' or template.name == 'index' -%}
 		load22(4000);
@@ -41,7 +45,7 @@
 	{%- endif -%}
 
 	{%- if template.name == 'index' -%}
-		/load25(3000);
+		load25(3000);
 	{%- endif -%}
 
 	{%- if template.name == 'product' -%}
@@ -56,9 +60,6 @@
 		load28(10);
 	{%- endif -%}
 
-	{% if template contains "quickorder" %}
-		load29(10);
-	{%- endif -%}
 
 	function load20(time) {
 		setTimeout(function() {
@@ -132,16 +133,16 @@
 		}, time);
 	}
 
-	function load29(time) {
-		setTimeout(function() {
-			loadJs("{{ 'dropzone.js' | asset_url }}", function() {
-				console.log('loaded 29');
-			});
-		}, time);
-	}
 
 </script>
 
 
+{% if template contains "quickorder" %}
+	<script type="text/javascript" src="{{ 'layout.theme.js' | asset_url }}" defer="defer"></script>
+	<script type="text/javascript" src="{{ 'vendors@layout.theme.js' | asset_url }}" defer="defer"></script>
+
+
+	<script type="text/javascript" src="{{ 'dropzone.js' | asset_url }}" defer="defer"></script>
+{% endif %}
 
 

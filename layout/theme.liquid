@@ -12,7 +12,7 @@
 </style>
 
   {{ h_content
-  | remove: "previewBarInjector.init();",
+
   | remove: "https:\/\/d2badvwg0mti9p.cloudfront.net\/script.js?shop=\u0026shop=arbor-scientific.myshopify.com",
   | remove: "https:\/\/analytics.getshogun.com\/collector.js?shop=arbor-scientific.myshopify.com",
   | remove: "https:\/\/storage.googleapis.com\/gsf-scripts\/global-remarketing\/arbor-scientific.js?1560492807\u0026shop=arbor-scientific.myshopify.com",
@@ -27,20 +27,20 @@
   | remove: "//cdn.shopify.com/shopifycloud/shopify/assets/storefront/load_feature-24ff1222c9aa13bb217653c0d3ea28c40a796a280e6da29ad421eec2a6075c86.js",
   | remove: "//cdn.shopify.com/shopifycloud/shopify/assets/shopify_pay/storefront-21b5dddfc8b64c1ad68cee3ba7448d1ffa15c24e969ebc1fbccf1a3784b659ad.js?v=20190107",
   | remove: "//cdn.shopify.com/shopifycloud/shopify/assets/storefront/features-87e8399988880142f2c62771b9d8f2ff6c290b3ff745dd426eb0dfe0db9d1dae.js",
-  | remove: "//cdn.shopify.com/shopifycloud/shopify/assets/themes_support/ga_urchin_forms-99e991855b3d8ddc69e625c68ab0579dd9927b611c2ec4943d396c72e3af0849.js",
-  | remove: "//cdn.shopify.com/shopifycloud/shopify/assets/storefront/bars/preview_bar_injector-1e3a713add37dacb26a2846054e5bf73c968340c06cb4dbaa8b985dce031f4cd.js"
+  | remove: "//cdn.shopify.com/shopifycloud/shopify/assets/themes_support/ga_urchin_forms-99e991855b3d8ddc69e625c68ab0579dd9927b611c2ec4943d396c72e3af0849.js"
+
   }}
 
   <script>
 
     {%- if template == 'article' -%}
-      load01(0);
+
       load02(10);
       load03(20);
       load04(30);
       load05(40);
     {%- else -%}
-      load01(450);
+
       load02(4500);
       load03(850);
       load04(1000);
@@ -83,8 +83,9 @@
     console.log('layout: {{layout}}');
 
 
-    {%- if template == 'collection.quickorder' or template == 'cart.quote' or template == 'article' or template == 'cart' -%}
+    {%- if template == 'cart.quote' or template == 'article' or template == 'cart' -%}
       load19(600);
+    {%- elsif template == 'collection.quickorder' -%}
     {%- else -%}
       load19(4250);
     {%- endif -%}
